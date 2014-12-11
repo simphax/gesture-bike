@@ -22,12 +22,11 @@ int leftGestureCount = 0;
 //Right arm
 int rightGestureCount = 0;
 
+//blinkLeft: the gesture is recognized. blinkedLeft: the gesture function has been fired, false when function is finished
 bool blinkLeft, blinkedLeft, blinkRight, blinkedRight;
 
 #define GESTURE_HOLD_FRAMES_THRESHOLD 20
 #define GESTURE_DELTA_Y -30
-
-
 
 char ReadLastCharOfLine()
 {
@@ -270,47 +269,45 @@ void gl_DisplayCallback()
                             }
                         }
                     }
-                    /** Detect right arm gesture
-                    float leftElbowX, leftElbowY, leftShoulderX, leftShoulderY;
+                    /** Detect right arm gesture **/
+                    float rightElbowX, rightElbowY, rightShoulderX, rightShoulderY;
                     status = uTracker.convertJointCoordinatesToDepth(
-                                                                     user_skel.getJoint(nite::JointType::JOINT_LEFT_ELBOW).getPosition().x,
-                                                                     user_skel.getJoint(nite::JointType::JOINT_LEFT_ELBOW).getPosition().y,
-                                                                     user_skel.getJoint(nite::JointType::JOINT_LEFT_ELBOW).getPosition().z,
-                                                                     &leftElbowX, &leftElbowY);
+                                                                     user_skel.getJoint(nite::JointType::JOINT_RIGHT_ELBOW).getPosition().x,
+                                                                     user_skel.getJoint(nite::JointType::JOINT_RIGHT_ELBOW).getPosition().y,
+                                                                     user_skel.getJoint(nite::JointType::JOINT_RIGHT_ELBOW).getPosition().z,
+                                                                     &rightElbowX, &rightElbowY);
                     if(HandleStatus(status)) {
                         //printf("Left elbow: %f\n",leftElbowY);
                         
                         status = uTracker.convertJointCoordinatesToDepth(
-                                                                         user_skel.getJoint(nite::JointType::JOINT_LEFT_SHOULDER).getPosition().x,
-                                                                         user_skel.getJoint(nite::JointType::JOINT_LEFT_SHOULDER).getPosition().y,
-                                                                         user_skel.getJoint(nite::JointType::JOINT_LEFT_SHOULDER).getPosition().z,
-                                                                         &leftShoulderX, &leftShoulderY);
+                                                                         user_skel.getJoint(nite::JointType::JOINT_RIGHT_SHOULDER).getPosition().x,
+                                                                         user_skel.getJoint(nite::JointType::JOINT_RIGHT_SHOULDER).getPosition().y,
+                                                                         user_skel.getJoint(nite::JointType::JOINT_RIGHT_SHOULDER).getPosition().z,
+                                                                         &rightShoulderX, &rightShoulderY);
                         
                         if(HandleStatus(status)) {
                             //printf("Left shoulder: %f\n",leftShoulderY);
                             
-                            float leftDeltaY = leftShoulderY-leftElbowY;
+                            float rightDeltaY = rightShoulderY-rightElbowY;
                             //printf("DeltaY: %f\n", leftDeltaY);
                             
-                            if(leftDeltaY > GESTURE_DELTA_Y) {
-                                leftGestureCount++;
+                            if(rightDeltaY > GESTURE_DELTA_Y) {
+                                rightGestureCount++;
                                 
-                                if(leftGestureCount > GESTURE_HOLD_FRAMES_THRESHOLD) {
-                                    blinkLeft = true;
-                                    if(!blinkedLeft) {
-                                        blinkedLeft = true;
-                                        printf("BLINK LEFT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-                                        
+                                if(rightGestureCount > GESTURE_HOLD_FRAMES_THRESHOLD) {
+                                    blinkRight = true;
+                                    if(!blinkedRight) {
+                                        blinkedRight = true;
+                                        printf("BLINK RIGHT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                                     }
                                 }
                             } else {
-                                blinkLeft = false;
-                                blinkedLeft = false;
+                                blinkRight = false;
+                                blinkedRight = false;
                                 leftGestureCount = 0;
                             }
                         }
                     }
-                     */
 				}
 			}
 			glEnd();
