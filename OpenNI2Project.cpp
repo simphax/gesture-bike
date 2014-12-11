@@ -210,7 +210,15 @@ void gl_DisplayCallback()
                 glEnd();
             }
             
+            glBegin(GL_QUADS);
             
+            glColor3f(0, 0, 0);
+            glVertex3f(0.0f, 0.0f, 0.0f);
+            glVertex3f(0.0f, (float)window_h, 0.0f);
+            glVertex3f((float)window_w,
+                       (float)window_h, 0.0f);
+            glVertex3f((float)window_w, 0.0f, 0.0f);
+            glEnd();
             /* Right arrow */
             if(blinkRight) {
                 glBegin( GL_POLYGON );
