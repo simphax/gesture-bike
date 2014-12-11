@@ -23,9 +23,13 @@ int leftGestureCount = 0;
 int rightGestureCount = 0;
 
 //blinkLeft: the gesture is recognized. blinkedLeft: the gesture function has been fired, false when function is finished
-bool blinkLeft, blinkedLeft, blinkRight, blinkedRight;
+bool blinkLeft, blinkRight;
 
-#define GESTURE_HOLD_FRAMES_THRESHOLD 20
+int gestureStartTime = 0;
+
+bool showDebug = false;
+
+#define GESTURE_HOLD_FRAMES_THRESHOLD 10
 #define GESTURE_DELTA_Y -30
 
 char ReadLastCharOfLine()
@@ -57,15 +61,28 @@ void gl_KeyboardCallback(unsigned char key, int x, int y)
 {
 	if (key == 27) // ESC Key
 	{
+        //printf("esc key pressed");
 		uTracker.destroy();
 		nite::NiTE::shutdown();
 		exit(0);
 	}
+    if (key == 68) {
+        //printf("debug key pressed");
+        showDebug = !showDebug;
+    }
 }
 
 void gl_IdleCallback()
 {
 	glutPostRedisplay();
+}
+
+void blinkLeftEnd(int value) {
+    blinkLeft = false;
+}
+
+void blinkRightEnd(int value) {
+    blinkRight = false;
 }
 
 void gl_DisplayCallback()
@@ -171,27 +188,50 @@ void gl_DisplayCallback()
 				}
 			}
 
-			// Create the OpenGL texture map
-			glTexParameteri(GL_TEXTURE_2D,
-				0x8191, GL_TRUE); // 0x8191 = GL_GENERATE_MIPMAP
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB,
-				window_w, window_h,	0, GL_RGB,
-				GL_UNSIGNED_BYTE, gl_texture);
-						
-			glBegin(GL_QUADS);
-			glTexCoord2f(0.0f, 0.0f);
-			glVertex3f(0.0f, 0.0f, 0.0f);
-			glTexCoord2f(0.0f, 1.0f);
-			glVertex3f(0.0f, (float)window_h, 0.0f);
-			glTexCoord2f(1.0f, 1.0f);
-			glVertex3f((float)window_w,
-				(float)window_h, 0.0f);
-			glTexCoord2f(1.0f, 0.0f);
-			glVertex3f((float)window_w, 0.0f, 0.0f);
-			glEnd();
-
+            if(showDebug) {
+                // Create the OpenGL texture map
+                glTexParameteri(GL_TEXTURE_2D,
+                    0x8191, GL_TRUE); // 0x8191 = GL_GENERATE_MIPMAP
+                glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB,
+                    window_w, window_h,	0, GL_RGB,
+                    GL_UNSIGNED_BYTE, gl_texture);
+                
+                
+                glBegin(GL_QUADS);
+                glTexCoord2f(0.0f, 0.0f);
+                glVertex3f(0.0f, 0.0f, 0.0f);
+                glTexCoord2f(0.0f, 1.0f);
+                glVertex3f(0.0f, (float)window_h, 0.0f);
+                glTexCoord2f(1.0f, 1.0f);
+                glVertex3f((float)window_w,
+                    (float)window_h, 0.0f);
+                glTexCoord2f(1.0f, 0.0f);
+                glVertex3f((float)window_w, 0.0f, 0.0f);
+                glEnd();
+            }
+            
+            
+            /* Right arrow */
+            if(blinkRight) {
+                glBegin( GL_POLYGON );
+                glColor3f(1, 1, 0);
+                glVertex3f(640.0f, 245.0f, 0.0f);
+                glVertex3f(540.0f, 150.0f, 0.0f);
+                glVertex3f(540.0f, 350.0f, 0.0f);
+                glEnd();
+            }
+            /* Left arrow */
+            if(blinkLeft) {
+                glBegin( GL_POLYGON );
+                glColor3f(1, 1, 0);
+                glVertex3f(100.0f, 245.0f, 0.0f);
+                glVertex3f(0.0f, 150.0f, 0.0f);
+                glVertex3f(0.0f, 350.0f, 0.0f);
+                glEnd();
+            }
 			const nite::Array<nite::UserData>& users =
 				usersFrame.getUsers();
+
 			glBegin( GL_POINTS );
 			glColor3f( 1.f, 0.f, 0.f );
 			for (int i = 0; i < users.getSize(); ++i)
@@ -205,28 +245,28 @@ void gl_DisplayCallback()
 				if (user_skel.getState() == 
 					nite::SKELETON_TRACKED)
 				{
-                    
-                    //Draw all joints
-					for (int joint_Id = 0; joint_Id < 15;
-						++joint_Id)
-					{
-						float posX, posY;
-						status = 
-						uTracker.convertJointCoordinatesToDepth(
-							user_skel.getJoint((nite::JointType)
-								joint_Id).getPosition().x,
-							user_skel.getJoint((nite::JointType)
-								joint_Id).getPosition().y,
-							user_skel.getJoint((nite::JointType)
-								joint_Id).getPosition().z,
-							&posX, &posY);
-						if (HandleStatus(status)){
-							glVertex2f(
-								(posX * resizeFactor) + texture_x,
-								(posY * resizeFactor) + texture_y);
-						}
-					}
-                    
+                    if(showDebug) {
+                        //Draw all joints
+                        for (int joint_Id = 0; joint_Id < 15;
+                            ++joint_Id)
+                        {
+                            float posX, posY;
+                            status = 
+                            uTracker.convertJointCoordinatesToDepth(
+                                user_skel.getJoint((nite::JointType)
+                                    joint_Id).getPosition().x,
+                                user_skel.getJoint((nite::JointType)
+                                    joint_Id).getPosition().y,
+                                user_skel.getJoint((nite::JointType)
+                                    joint_Id).getPosition().z,
+                                &posX, &posY);
+                            if (HandleStatus(status)){
+                                glVertex2f(
+                                    (posX * resizeFactor) + texture_x,
+                                    (posY * resizeFactor) + texture_y);
+                            }
+                        }
+                    }
                     
                     
                     /** Detect Left arm gesture **/
@@ -256,15 +296,9 @@ void gl_DisplayCallback()
                                 
                                 if(leftGestureCount > GESTURE_HOLD_FRAMES_THRESHOLD) {
                                     blinkLeft = true;
-                                    if(!blinkedLeft) {
-                                        blinkedLeft = true;
-                                        printf("BLINK LEFT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-                                        
-                                    }
+                                    glutTimerFunc(2000,blinkLeftEnd,0);
                                 }
                             } else {
-                                blinkLeft = false;
-                                blinkedLeft = false;
                                 leftGestureCount = 0;
                             }
                         }
@@ -296,15 +330,10 @@ void gl_DisplayCallback()
                                 
                                 if(rightGestureCount > GESTURE_HOLD_FRAMES_THRESHOLD) {
                                     blinkRight = true;
-                                    if(!blinkedRight) {
-                                        blinkedRight = true;
-                                        printf("BLINK RIGHT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-                                    }
+                                    glutTimerFunc(2000,blinkRightEnd,0);
                                 }
                             } else {
-                                blinkRight = false;
-                                blinkedRight = false;
-                                leftGestureCount = 0;
+                                rightGestureCount = 0;
                             }
                         }
                     }
