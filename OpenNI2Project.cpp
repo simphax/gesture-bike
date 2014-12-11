@@ -16,6 +16,19 @@ int window_h = 480;
 OniRGB888Pixel* gl_texture;
 nite::UserTracker uTracker;
 
+
+//Counts the amount of frames that the user holds up the left arm
+int leftGestureCount = 0;
+//Right arm
+int rightGestureCount = 0;
+
+bool blinkLeft, blinkedLeft, blinkRight, blinkedRight;
+
+#define GESTURE_HOLD_FRAMES_THRESHOLD 20
+#define GESTURE_DELTA_Y -30
+
+
+
 char ReadLastCharOfLine()
 {
 	int newChar = 0;
@@ -193,6 +206,8 @@ void gl_DisplayCallback()
 				if (user_skel.getState() == 
 					nite::SKELETON_TRACKED)
 				{
+                    
+                    //Draw all joints
 					for (int joint_Id = 0; joint_Id < 15;
 						++joint_Id)
 					{
@@ -212,6 +227,90 @@ void gl_DisplayCallback()
 								(posY * resizeFactor) + texture_y);
 						}
 					}
+                    
+                    
+                    
+                    /** Detect Left arm gesture **/
+                    float leftElbowX, leftElbowY, leftShoulderX, leftShoulderY;
+                    status = uTracker.convertJointCoordinatesToDepth(
+                                                                     user_skel.getJoint(nite::JointType::JOINT_LEFT_ELBOW).getPosition().x,
+                                                                     user_skel.getJoint(nite::JointType::JOINT_LEFT_ELBOW).getPosition().y,
+                                                                     user_skel.getJoint(nite::JointType::JOINT_LEFT_ELBOW).getPosition().z,
+                                                                     &leftElbowX, &leftElbowY);
+                    if(HandleStatus(status)) {
+                        //printf("Left elbow: %f\n",leftElbowY);
+                        
+                        status = uTracker.convertJointCoordinatesToDepth(
+                                                                         user_skel.getJoint(nite::JointType::JOINT_LEFT_SHOULDER).getPosition().x,
+                                                                         user_skel.getJoint(nite::JointType::JOINT_LEFT_SHOULDER).getPosition().y,
+                                                                         user_skel.getJoint(nite::JointType::JOINT_LEFT_SHOULDER).getPosition().z,
+                                                                         &leftShoulderX, &leftShoulderY);
+                        
+                        if(HandleStatus(status)) {
+                            //printf("Left shoulder: %f\n",leftShoulderY);
+                            
+                            float leftDeltaY = leftShoulderY-leftElbowY;
+                            //printf("DeltaY: %f\n", leftDeltaY);
+                            
+                            if(leftDeltaY > GESTURE_DELTA_Y) {
+                                leftGestureCount++;
+                                
+                                if(leftGestureCount > GESTURE_HOLD_FRAMES_THRESHOLD) {
+                                    blinkLeft = true;
+                                    if(!blinkedLeft) {
+                                        blinkedLeft = true;
+                                        printf("BLINK LEFT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                                        
+                                    }
+                                }
+                            } else {
+                                blinkLeft = false;
+                                blinkedLeft = false;
+                                leftGestureCount = 0;
+                            }
+                        }
+                    }
+                    /** Detect right arm gesture
+                    float leftElbowX, leftElbowY, leftShoulderX, leftShoulderY;
+                    status = uTracker.convertJointCoordinatesToDepth(
+                                                                     user_skel.getJoint(nite::JointType::JOINT_LEFT_ELBOW).getPosition().x,
+                                                                     user_skel.getJoint(nite::JointType::JOINT_LEFT_ELBOW).getPosition().y,
+                                                                     user_skel.getJoint(nite::JointType::JOINT_LEFT_ELBOW).getPosition().z,
+                                                                     &leftElbowX, &leftElbowY);
+                    if(HandleStatus(status)) {
+                        //printf("Left elbow: %f\n",leftElbowY);
+                        
+                        status = uTracker.convertJointCoordinatesToDepth(
+                                                                         user_skel.getJoint(nite::JointType::JOINT_LEFT_SHOULDER).getPosition().x,
+                                                                         user_skel.getJoint(nite::JointType::JOINT_LEFT_SHOULDER).getPosition().y,
+                                                                         user_skel.getJoint(nite::JointType::JOINT_LEFT_SHOULDER).getPosition().z,
+                                                                         &leftShoulderX, &leftShoulderY);
+                        
+                        if(HandleStatus(status)) {
+                            //printf("Left shoulder: %f\n",leftShoulderY);
+                            
+                            float leftDeltaY = leftShoulderY-leftElbowY;
+                            //printf("DeltaY: %f\n", leftDeltaY);
+                            
+                            if(leftDeltaY > GESTURE_DELTA_Y) {
+                                leftGestureCount++;
+                                
+                                if(leftGestureCount > GESTURE_HOLD_FRAMES_THRESHOLD) {
+                                    blinkLeft = true;
+                                    if(!blinkedLeft) {
+                                        blinkedLeft = true;
+                                        printf("BLINK LEFT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                                        
+                                    }
+                                }
+                            } else {
+                                blinkLeft = false;
+                                blinkedLeft = false;
+                                leftGestureCount = 0;
+                            }
+                        }
+                    }
+                     */
 				}
 			}
 			glEnd();
