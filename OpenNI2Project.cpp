@@ -27,10 +27,14 @@ bool blinkLeft, blinkRight;
 
 int gestureStartTime = 0;
 
-bool showDebug = false;
+bool showDebug = true;
 
 #define GESTURE_HOLD_FRAMES_THRESHOLD 10
 #define GESTURE_DELTA_Y -30
+
+
+
+
 
 char ReadLastCharOfLine()
 {
@@ -61,13 +65,11 @@ void gl_KeyboardCallback(unsigned char key, int x, int y)
 {
 	if (key == 27) // ESC Key
 	{
-        //printf("esc key pressed");
 		uTracker.destroy();
 		nite::NiTE::shutdown();
 		exit(0);
 	}
-    if (key == 68) {
-        //printf("debug key pressed");
+    if (key == 'd') {
         showDebug = !showDebug;
     }
 }
@@ -85,6 +87,8 @@ void blinkRightEnd(int value) {
     blinkRight = false;
 }
 
+
+
 void gl_DisplayCallback()
 {
 	if (uTracker.isValid())
@@ -99,11 +103,7 @@ void gl_DisplayCallback()
 			glClear (
 				GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	
-			// Setup the OpenGL viewpoint
-			glMatrixMode(GL_PROJECTION);
-			glPushMatrix();
-			glLoadIdentity();
-			glOrtho(0, window_w, window_h, 0, -1.0, 1.0);
+			
 
 			// UPDATING TEXTURE (DEPTH 1MM TO RGB888)
 			VideoFrameRef depthFrame = usersFrame.getDepthFrame();
@@ -189,6 +189,9 @@ void gl_DisplayCallback()
 			}
 
             if(showDebug) {
+                
+                glEnable(GL_TEXTURE_2D);
+                
                 // Create the OpenGL texture map
                 glTexParameteri(GL_TEXTURE_2D,
                     0x8191, GL_TRUE); // 0x8191 = GL_GENERATE_MIPMAP
@@ -198,17 +201,24 @@ void gl_DisplayCallback()
                 
                 
                 glBegin(GL_QUADS);
+                
                 glTexCoord2f(0.0f, 0.0f);
                 glVertex3f(0.0f, 0.0f, 0.0f);
+                
                 glTexCoord2f(0.0f, 1.0f);
                 glVertex3f(0.0f, (float)window_h, 0.0f);
+                
                 glTexCoord2f(1.0f, 1.0f);
-                glVertex3f((float)window_w,
-                    (float)window_h, 0.0f);
+                glVertex3f((float)window_w,(float)window_h, 0.0f);
+                
                 glTexCoord2f(1.0f, 0.0f);
                 glVertex3f((float)window_w, 0.0f, 0.0f);
+                
                 glEnd();
+                
+                glDisable(GL_TEXTURE_2D);
             }
+            
             
             
             /* Right arrow */
@@ -229,23 +239,27 @@ void gl_DisplayCallback()
                 glVertex3f(0.0f, 350.0f, 0.0f);
                 glEnd();
             }
-			const nite::Array<nite::UserData>& users =
-				usersFrame.getUsers();
+            
 
-			glBegin( GL_POINTS );
-			glColor3f( 1.f, 0.f, 0.f );
+            
+			const nite::Array<nite::UserData>& users = usersFrame.getUsers();
+
+
 			for (int i = 0; i < users.getSize(); ++i)
 			{
 				if (users[i].isNew())
 				{
-					uTracker.startSkeletonTracking(
-						users[i].getId());
+					uTracker.startSkeletonTracking(users[i].getId());
 				}
 				nite::Skeleton user_skel = users[i].getSkeleton();
-				if (user_skel.getState() == 
-					nite::SKELETON_TRACKED)
+				if (user_skel.getState() == nite::SKELETON_TRACKED)
 				{
+                    
                     if(showDebug) {
+                        
+                        glBegin( GL_POINTS );
+                        glColor3f( 1.f, 0.f, 0.f );
+                        
                         //Draw all joints
                         for (int joint_Id = 0; joint_Id < 15;
                             ++joint_Id)
@@ -266,6 +280,7 @@ void gl_DisplayCallback()
                                     (posY * resizeFactor) + texture_y);
                             }
                         }
+                        glEnd();
                     }
                     
                     
@@ -339,12 +354,40 @@ void gl_DisplayCallback()
                     }
 				}
 			}
-			glEnd();
+			
 			glColor3f( 1.f, 1.f, 1.f );
 			glutSwapBuffers();
 		}
 	}
 }
+
+
+void gl_Setup(void) {
+    
+    //Allocate memory for depth sensor texture
+    gl_texture = (OniRGB888Pixel*)malloc(window_w * window_h * sizeof(OniRGB888Pixel));
+    
+    glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
+    glutInitWindowSize(window_w, window_h);
+    glutCreateWindow ("Gesture Bike App");
+    
+    //Skeleton tracking point sizes
+    glPointSize(10.0);
+    glutKeyboardFunc(gl_KeyboardCallback);
+    glutDisplayFunc(gl_DisplayCallback);
+    glutIdleFunc(gl_IdleCallback);
+    
+    //Z object tracking. We are not usign this
+    glDisable(GL_DEPTH_TEST);
+    glEnable(GL_COLOR_MATERIAL);
+    
+    // Setup the OpenGL viewpoint
+    glMatrixMode(GL_PROJECTION);
+    glPushMatrix();
+    glLoadIdentity();
+    glOrtho(0, window_w, window_h, 0, -1.0, 1.0);
+}
+
 
 int main(int argc, char* argv[])
 {
@@ -360,19 +403,10 @@ int main(int argc, char* argv[])
 	
 	printf("\r\n---------------------- OpenGL -------------------------\r\n");
 	printf("Initializing OpenGL ...\r\n");
-	gl_texture = (OniRGB888Pixel*)malloc(
-		window_w * window_h * sizeof(OniRGB888Pixel));
-	glutInit(&argc, (char**)argv);
-	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
-	glutInitWindowSize(window_w, window_h);
-	glutCreateWindow ("OpenGL | OpenNI 2.x Skeleton");
-	glPointSize(10.0);
-	glutKeyboardFunc(gl_KeyboardCallback);
-	glutDisplayFunc(gl_DisplayCallback);
-	glutIdleFunc(gl_IdleCallback);
-	glDisable(GL_DEPTH_TEST);
-	glEnable(GL_TEXTURE_2D);
-	glEnable(GL_COLOR_MATERIAL);
+    
+    glutInit(&argc, (char**)argv);
+    gl_Setup();
+    
 	printf("Starting OpenGL rendering process ...\r\n");
 	glutMainLoop();
 
