@@ -190,11 +190,7 @@
 		0AB8EC9018A9341600F145E5 = {
 			isa = PBXGroup;
 			children = (
-				F4779DAB1A3DBD4200A7CD88 /* TurnRightGesture.cpp */,
-				F4779DAC1A3DBD4200A7CD88 /* TurnRightGesture.h */,
-				F4779DA81A3DABDC00A7CD88 /* TurnLeftGesture.cpp */,
-				F4779DA91A3DABDC00A7CD88 /* TurnLeftGesture.h */,
-				F4779DA71A3DAB0A00A7CD88 /* IGesture.h */,
+				F4779DAE1A3DC03C00A7CD88 /* Gestures */,
 				0A7F8A9B18A94E00008567DC /* OpenNI2Project.cpp */,
 				0A7F8A9C18A94E00008567DC /* stdafx.cpp */,
 				0A7F8A9D18A94E00008567DC /* stdafx.h */,
@@ -385,6 +381,18 @@
 				0AB8ED0718A9384C00F145E5 /* OniPlatformWin32.h */,
 			);
 			path = Win32;
+			sourceTree = "<group>";
+		};
+		F4779DAE1A3DC03C00A7CD88 /* Gestures */ = {
+			isa = PBXGroup;
+			children = (
+				F4779DAB1A3DBD4200A7CD88 /* TurnRightGesture.cpp */,
+				F4779DAC1A3DBD4200A7CD88 /* TurnRightGesture.h */,
+				F4779DA81A3DABDC00A7CD88 /* TurnLeftGesture.cpp */,
+				F4779DA91A3DABDC00A7CD88 /* TurnLeftGesture.h */,
+				F4779DA71A3DAB0A00A7CD88 /* IGesture.h */,
+			);
+			name = Gestures;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
