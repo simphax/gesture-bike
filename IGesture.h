@@ -10,7 +10,8 @@
 #define Skeleton_IGesture_h
 
 //Frame Rate
-#define FRAMERATE 30
+//1000ms / Framerate (30)
+#define FRAMETIME 33.33
 
 #include "NiTE.h"
 
@@ -31,6 +32,10 @@ public:
      @brief Animates graphics properties
      */
     virtual void resetDraw() = 0;
+    /**
+     @brief Gets gesture priority
+     */
+    virtual int getPriority() = 0;
 
 };
 

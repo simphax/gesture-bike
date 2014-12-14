@@ -64,12 +64,16 @@ bool TurnLeftGesture::gestureDetect(nite::Skeleton *skeleton, nite::UserTracker 
 void TurnLeftGesture::draw()
 {
     
+    //glLineWidth(20.0);
+    //glEnable(GL_LINE_SMOOTH);
+    
     /* Left arrow */
     glBegin( GL_POLYGON );
-    glColor3f(1, 1, 0);
-    glVertex3f(100.0f + xTranslation, 245.0f, 0.0f);
+    glColor3f(1.0 * opacityTotal, 1 * opacityTotal, 0 * opacityTotal);
     glVertex3f(0.0f + xTranslation, 150.0f, 0.0f);
-    glVertex3f(0.0f + xTranslation, 350.0f, 0.0f);
+    glVertex3f(0.0f + xTranslation, 0.0f, 0.0f);
+    glVertex3f(150.0f + xTranslation, 0.0f, 0.0f);
+    
     glEnd();
     
     this->animate();
@@ -79,15 +83,32 @@ void TurnLeftGesture::draw()
 void TurnLeftGesture::resetDraw()
 {
     xTranslation = 0;
+    opacityDelta = 1;
+    opacityTotal = 0;
+    
 }
 
 void TurnLeftGesture::animate()
 {
-    if(lastFrameTime + FRAMERATE < glutGet(GLUT_ELAPSED_TIME) ) {
-        xTranslation ++;
+    if(lastFrameTime + FRAMETIME < glutGet(GLUT_ELAPSED_TIME) ) {
+        
+        
+        if(opacityTotal <= 0.1) {
+            opacityDelta = 1;
+        }
+        if(opacityTotal >= 0.9) {
+            opacityDelta = -opacityDelta;
+        }
+        
+        opacityTotal += opacityDelta * 0.1;
+        
         lastFrameTime = glutGet(GLUT_ELAPSED_TIME);
     }
 }
 
+int TurnLeftGesture::getPriority()
+{
+    return priority;
+}
 
 

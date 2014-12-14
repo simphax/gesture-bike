@@ -62,22 +62,42 @@ void TurnRightGesture::draw()
 {
     /* Right arrow */
     glBegin( GL_POLYGON );
-    glColor3f(1, 1, 0);
-    glVertex3f(640.0f, 245.0f, 0.0f);
-    glVertex3f(540.0f, 150.0f, 0.0f);
-    glVertex3f(540.0f, 350.0f, 0.0f);
+    glColor3f(1.0 * opacityTotal, 1 * opacityTotal, 0 * opacityTotal);
+    glVertex3f(640.0f, 0.0f, 0.0f);
+    glVertex3f(640.0f, 150.0f, 0.0f);
+    glVertex3f(490.0f, 0.0f, 0.0f);
     glEnd();
+    
+    this->animate();
 }
 
 void TurnRightGesture::resetDraw()
 {
     xTranslation = 0;
+    opacityDelta = 1;
+    opacityTotal = 0;
+    
 }
 
 void TurnRightGesture::animate()
 {
-    if(lastFrameTime + FRAMERATE < glutGet(GLUT_ELAPSED_TIME) ) {
-        xTranslation ++;
+    if(lastFrameTime + FRAMETIME < glutGet(GLUT_ELAPSED_TIME) ) {
+        
+        
+        if(opacityTotal <= 0.1) {
+            opacityDelta = 1;
+        }
+        if(opacityTotal >= 0.9) {
+            opacityDelta = -opacityDelta;
+        }
+        
+        opacityTotal += opacityDelta * 0.1;
+        
         lastFrameTime = glutGet(GLUT_ELAPSED_TIME);
     }
+}
+
+int TurnRightGesture::getPriority()
+{
+    return priority;
 }

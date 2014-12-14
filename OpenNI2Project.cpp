@@ -15,6 +15,8 @@ using namespace openni;
 #include "IGesture.h"
 #include "TurnLeftGesture.h"
 #include "TurnRightGesture.h"
+#include "HUD.h"
+
 int window_w = 640;
 int window_h = 480;
 OniRGB888Pixel* gl_texture;
@@ -31,15 +33,24 @@ unsigned int texture_y;
 
 long double gestureStartTime = 0;
 
-bool showDebug = true;
+//Debug help
+bool debugSkeleton = true;
+bool debugGestures = true;
+
+//Confirm to user when their body is being tracked
+bool userDetected = false;
 
 //Time to consider a gesture active
 #define GESTURE_DRAW_TIME 2
 
 //List of all available gestures
 std::list<IGesture*> gestures;
+
 //The last detected gesture
 IGesture *activeGesture;
+
+//Heads up display class
+HUD *hud = new HUD();
 
 
 char ReadLastCharOfLine()
@@ -76,7 +87,14 @@ void gl_KeyboardCallback(unsigned char key, int x, int y)
 		exit(0);
 	}
     if (key == 'd') {
-        showDebug = !showDebug;
+        debugSkeleton = !debugSkeleton;
+    }
+    if (key == 'g') {
+        for(IGesture *gesture : gestures)
+        {
+            gesture->resetDraw();
+        }
+        debugGestures = !debugGestures;
     }
 }
 
@@ -85,7 +103,7 @@ void gl_IdleCallback()
 	glutPostRedisplay();
 }
 
-void drawSkeletonDebug(nite::Skeleton user_skel){
+void drawSkeleton(nite::Skeleton user_skel){
     
     glBegin( GL_POINTS );
     glColor3f( 1.f, 0.f, 0.f );
@@ -242,6 +260,9 @@ void gl_DisplayCallback()
     
     glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
+    
+
+    
 	if (uTracker.isValid())
 	{
 
@@ -251,11 +272,20 @@ void gl_DisplayCallback()
 		{
 			// Clear the OpenGL buffers
 
+                
 	
             gl_depthTextureSetup(usersFrame);
 
-            if(showDebug) {
+            if(debugSkeleton) {
                 drawDepthTexture();
+            }
+            
+            
+            if(debugGestures){
+                for(IGesture *gesture : gestures)
+                {
+                    gesture->draw();
+                }
             }
             
 			const nite::Array<nite::UserData>& users = usersFrame.getUsers();
@@ -271,8 +301,13 @@ void gl_DisplayCallback()
 				if (user_skel.getState() == nite::SKELETON_TRACKED)
 				{
                     
-                    if(showDebug) {
-                        drawSkeletonDebug(user_skel);
+                    userDetected = true;
+                    hud->displayMessage("User Detected");
+                    
+                    //showDetectionMessage();
+                    
+                    if(debugSkeleton) {
+                        drawSkeleton(user_skel);
                     }
                     
                     //Loop through all available gestures
@@ -280,9 +315,16 @@ void gl_DisplayCallback()
                     {
                         
                         if(gesture->gestureDetect(&user_skel, &uTracker)) {
+                            
+                            //Reset draw parameters when switching gestures
+                            if(gesture != activeGesture){
+                                gesture->resetDraw();
+                            }
+                            
+                            //Activate gesture
                             activeGesture = gesture;
                             gestureStartTime = time(0);
-                            activeGesture->resetDraw();
+
                         }
                     }
                     
