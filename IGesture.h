@@ -9,6 +9,9 @@
 #ifndef Skeleton_IGesture_h
 #define Skeleton_IGesture_h
 
+//Frame Rate
+#define FRAMERATE 30
+
 #include "NiTE.h"
 
 class IGesture
@@ -24,6 +27,11 @@ public:
      @brief Draws the graphics that indicate the gesture function 
      */
     virtual void draw() = 0;
+    /**
+     @brief Animates graphics properties
+     */
+    virtual void resetDraw() = 0;
+
 };
 
 #endif

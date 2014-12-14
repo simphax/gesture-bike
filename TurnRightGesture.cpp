@@ -68,3 +68,16 @@ void TurnRightGesture::draw()
     glVertex3f(540.0f, 350.0f, 0.0f);
     glEnd();
 }
+
+void TurnRightGesture::resetDraw()
+{
+    xTranslation = 0;
+}
+
+void TurnRightGesture::animate()
+{
+    if(lastFrameTime + FRAMERATE < glutGet(GLUT_ELAPSED_TIME) ) {
+        xTranslation ++;
+        lastFrameTime = glutGet(GLUT_ELAPSED_TIME);
+    }
+}

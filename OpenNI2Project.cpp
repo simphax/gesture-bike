@@ -278,9 +278,11 @@ void gl_DisplayCallback()
                     //Loop through all available gestures
                     for(IGesture *gesture : gestures)
                     {
+                        
                         if(gesture->gestureDetect(&user_skel, &uTracker)) {
                             activeGesture = gesture;
                             gestureStartTime = time(0);
+                            activeGesture->resetDraw();
                         }
                     }
                     
