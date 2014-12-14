@@ -36,6 +36,8 @@
 		0AB8ED1E18A93ADC00F145E5 /* OpenNI.ini in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0AB8ECA818A9349400F145E5 /* OpenNI.ini */; };
 		0AB8ED1F18A93ADC00F145E5 /* org.openni.jar in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0AB8ECB318A9349400F145E5 /* org.openni.jar */; };
 		0AB8ED2318A93DE300F145E5 /* libOniFile.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0AB8ECAE18A9349400F145E5 /* libOniFile.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		F4779DAA1A3DABDC00A7CD88 /* TurnLeftGesture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F4779DA81A3DABDC00A7CD88 /* TurnLeftGesture.cpp */; };
+		F4779DAD1A3DBD4200A7CD88 /* TurnRightGesture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F4779DAB1A3DBD4200A7CD88 /* TurnRightGesture.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -161,6 +163,11 @@
 		0AB8ED0D18A9385B00F145E5 /* NiteVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NiteVersion.h; sourceTree = "<group>"; };
 		0AB8ED0E18A938AB00F145E5 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		0AB8ED1018A938B200F145E5 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
+		F4779DA71A3DAB0A00A7CD88 /* IGesture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IGesture.h; sourceTree = "<group>"; };
+		F4779DA81A3DABDC00A7CD88 /* TurnLeftGesture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TurnLeftGesture.cpp; sourceTree = "<group>"; };
+		F4779DA91A3DABDC00A7CD88 /* TurnLeftGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TurnLeftGesture.h; sourceTree = "<group>"; };
+		F4779DAB1A3DBD4200A7CD88 /* TurnRightGesture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TurnRightGesture.cpp; sourceTree = "<group>"; };
+		F4779DAC1A3DBD4200A7CD88 /* TurnRightGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TurnRightGesture.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,6 +190,11 @@
 		0AB8EC9018A9341600F145E5 = {
 			isa = PBXGroup;
 			children = (
+				F4779DAB1A3DBD4200A7CD88 /* TurnRightGesture.cpp */,
+				F4779DAC1A3DBD4200A7CD88 /* TurnRightGesture.h */,
+				F4779DA81A3DABDC00A7CD88 /* TurnLeftGesture.cpp */,
+				F4779DA91A3DABDC00A7CD88 /* TurnLeftGesture.h */,
+				F4779DA71A3DAB0A00A7CD88 /* IGesture.h */,
 				0A7F8A9B18A94E00008567DC /* OpenNI2Project.cpp */,
 				0A7F8A9C18A94E00008567DC /* stdafx.cpp */,
 				0A7F8A9D18A94E00008567DC /* stdafx.h */,
@@ -432,6 +444,8 @@
 			files = (
 				0A7F8A9F18A94E00008567DC /* OpenNI2Project.cpp in Sources */,
 				0A7F8AA018A94E00008567DC /* stdafx.cpp in Sources */,
+				F4779DAA1A3DABDC00A7CD88 /* TurnLeftGesture.cpp in Sources */,
+				F4779DAD1A3DBD4200A7CD88 /* TurnRightGesture.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -4,6 +4,7 @@
 #include "stdafx.h"
 // General headers
 #include <stdio.h>
+#include <list>
 // OpenNI2 headers
 #include "OpenNI.h"
 #include "NiTE.h"
@@ -11,6 +12,9 @@ using namespace openni;
 // GLUT headers
 #include <GLUT/GLUT.h>
 #include <algorithm>
+#include "IGesture.h"
+#include "TurnLeftGesture.h"
+#include "TurnRightGesture.h"
 int window_w = 640;
 int window_h = 480;
 OniRGB888Pixel* gl_texture;
@@ -25,22 +29,17 @@ double resizeFactor;
 unsigned int texture_x;
 unsigned int texture_y;
 
-//Counts the amount of frames that the user holds up the left arm
-int leftGestureCount = 0;
-//Right arm
-int rightGestureCount = 0;
-
-//blinkLeft: the gesture is recognized. blinkedLeft: the gesture function has been fired, false when function is finished
-bool blinkLeft, blinkRight;
-
-int gestureStartTime = 0;
+long double gestureStartTime = 0;
 
 bool showDebug = true;
 
-#define GESTURE_HOLD_FRAMES_THRESHOLD 10
-#define GESTURE_DELTA_Y -30
+//Time to consider a gesture active
+#define GESTURE_DRAW_TIME 2
 
-
+//List of all available gestures
+std::list<IGesture*> gestures;
+//The last detected gesture
+IGesture *activeGesture;
 
 
 char ReadLastCharOfLine()
@@ -86,16 +85,7 @@ void gl_IdleCallback()
 	glutPostRedisplay();
 }
 
-void blinkLeftEnd(int value) {
-    blinkLeft = false;
-}
-
-void blinkRightEnd(int value) {
-    blinkRight = false;
-}
-
-
-void drawSkeleton(nite::Skeleton user_skel){
+void drawSkeletonDebug(nite::Skeleton user_skel){
     
     glBegin( GL_POINTS );
     glColor3f( 1.f, 0.f, 0.f );
@@ -268,32 +258,9 @@ void gl_DisplayCallback()
                 drawDepthTexture();
             }
             
-            
-            
-            /* Right arrow */
-            if(blinkRight) {
-                glBegin( GL_POLYGON );
-                glColor3f(1, 1, 0);
-                glVertex3f(640.0f, 245.0f, 0.0f);
-                glVertex3f(540.0f, 150.0f, 0.0f);
-                glVertex3f(540.0f, 350.0f, 0.0f);
-                glEnd();
-            }
-            /* Left arrow */
-            if(blinkLeft) {
-                glBegin( GL_POLYGON );
-                glColor3f(1, 1, 0);
-                glVertex3f(100.0f, 245.0f, 0.0f);
-                glVertex3f(0.0f, 150.0f, 0.0f);
-                glVertex3f(0.0f, 350.0f, 0.0f);
-                glEnd();
-            }
-            
-
-            
 			const nite::Array<nite::UserData>& users = usersFrame.getUsers();
 
-
+            //Loop through all detected users
 			for (int i = 0; i < users.getSize(); ++i)
 			{
 				if (users[i].isNew())
@@ -305,80 +272,28 @@ void gl_DisplayCallback()
 				{
                     
                     if(showDebug) {
-                        drawSkeleton(user_skel);
+                        drawSkeletonDebug(user_skel);
                     }
                     
-                    //TODO: Organize gesture stuff below!
-                    
-                    
-                    /** Detect Left arm gesture **/
-                    float leftElbowX, leftElbowY, leftShoulderX, leftShoulderY;
-                    status = uTracker.convertJointCoordinatesToDepth(
-                                                                     user_skel.getJoint(nite::JointType::JOINT_LEFT_ELBOW).getPosition().x,
-                                                                     user_skel.getJoint(nite::JointType::JOINT_LEFT_ELBOW).getPosition().y,
-                                                                     user_skel.getJoint(nite::JointType::JOINT_LEFT_ELBOW).getPosition().z,
-                                                                     &leftElbowX, &leftElbowY);
-                    if(HandleStatus(status)) {
-                        //printf("Left elbow: %f\n",leftElbowY);
-                        
-                        status = uTracker.convertJointCoordinatesToDepth(
-                                                                         user_skel.getJoint(nite::JointType::JOINT_LEFT_SHOULDER).getPosition().x,
-                                                                         user_skel.getJoint(nite::JointType::JOINT_LEFT_SHOULDER).getPosition().y,
-                                                                         user_skel.getJoint(nite::JointType::JOINT_LEFT_SHOULDER).getPosition().z,
-                                                                         &leftShoulderX, &leftShoulderY);
-                        
-                        if(HandleStatus(status)) {
-                            //printf("Left shoulder: %f\n",leftShoulderY);
-                            
-                            float leftDeltaY = leftShoulderY-leftElbowY;
-                            //printf("DeltaY: %f\n", leftDeltaY);
-                            
-                            if(leftDeltaY > GESTURE_DELTA_Y) {
-                                leftGestureCount++;
-                                
-                                if(leftGestureCount > GESTURE_HOLD_FRAMES_THRESHOLD) {
-                                    blinkLeft = true;
-                                    glutTimerFunc(2000,blinkLeftEnd,0);
-                                }
-                            } else {
-                                leftGestureCount = 0;
-                            }
+                    //Loop through all available gestures
+                    for(IGesture *gesture : gestures)
+                    {
+                        if(gesture->gestureDetect(&user_skel, &uTracker)) {
+                            activeGesture = gesture;
+                            gestureStartTime = time(0);
                         }
                     }
-                    /** Detect right arm gesture **/
-                    float rightElbowX, rightElbowY, rightShoulderX, rightShoulderY;
-                    status = uTracker.convertJointCoordinatesToDepth(
-                                                                     user_skel.getJoint(nite::JointType::JOINT_RIGHT_ELBOW).getPosition().x,
-                                                                     user_skel.getJoint(nite::JointType::JOINT_RIGHT_ELBOW).getPosition().y,
-                                                                     user_skel.getJoint(nite::JointType::JOINT_RIGHT_ELBOW).getPosition().z,
-                                                                     &rightElbowX, &rightElbowY);
-                    if(HandleStatus(status)) {
-                        //printf("Left elbow: %f\n",leftElbowY);
-                        
-                        status = uTracker.convertJointCoordinatesToDepth(
-                                                                         user_skel.getJoint(nite::JointType::JOINT_RIGHT_SHOULDER).getPosition().x,
-                                                                         user_skel.getJoint(nite::JointType::JOINT_RIGHT_SHOULDER).getPosition().y,
-                                                                         user_skel.getJoint(nite::JointType::JOINT_RIGHT_SHOULDER).getPosition().z,
-                                                                         &rightShoulderX, &rightShoulderY);
-                        
-                        if(HandleStatus(status)) {
-                            //printf("Left shoulder: %f\n",leftShoulderY);
-                            
-                            float rightDeltaY = rightShoulderY-rightElbowY;
-                            //printf("DeltaY: %f\n", leftDeltaY);
-                            
-                            if(rightDeltaY > GESTURE_DELTA_Y) {
-                                rightGestureCount++;
-                                
-                                if(rightGestureCount > GESTURE_HOLD_FRAMES_THRESHOLD) {
-                                    blinkRight = true;
-                                    glutTimerFunc(2000,blinkRightEnd,0);
-                                }
-                            } else {
-                                rightGestureCount = 0;
-                            }
-                        }
+                    
+                    //Show the graphics for 2 seconds
+                    if(time(0) - gestureStartTime > GESTURE_DRAW_TIME) {
+                        activeGesture = NULL;
                     }
+                    
+                    //Only draw graphics for the last detected gesture
+                    if(activeGesture) {
+                        activeGesture->draw();
+                    }
+                    
 				}
 			}
 			
@@ -420,6 +335,10 @@ void gl_Setup(void) {
 
 int main(int argc, char* argv[])
 {
+    
+    gestures.push_back(new TurnLeftGesture());
+    gestures.push_back(new TurnRightGesture());
+    
 	printf("\r\n----------------- NiTE & User Tracker -------------------\r\n");
 	nite::Status status = nite::STATUS_OK;
 	printf("Initializing NiTE ...\r\n");
