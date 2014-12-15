@@ -39,6 +39,7 @@
 		5C3BA8751A3EE45100FE4860 /* FlashlightGesture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5C3BA8741A3EE45100FE4860 /* FlashlightGesture.cpp */; };
 		5C3BA8C21A3F9C0500FE4860 /* img_test.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5C3BA8BF1A3F9B2A00FE4860 /* img_test.bmp */; };
 		5C3BA8C61A3F9DB800FE4860 /* map_lindholmen.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5C3BA8C51A3F9DB100FE4860 /* map_lindholmen.bmp */; };
+		5C3BA8C81A3FA54000FE4860 /* MapGesture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5C3BA8C71A3FA54000FE4860 /* MapGesture.cpp */; };
 		5CAB237F1A3E3EDC0049AB34 /* HUD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5CAB237D1A3E3EDC0049AB34 /* HUD.cpp */; };
 		F4779DAA1A3DABDC00A7CD88 /* TurnLeftGesture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F4779DA81A3DABDC00A7CD88 /* TurnLeftGesture.cpp */; };
 		F4779DAD1A3DBD4200A7CD88 /* TurnRightGesture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F4779DAB1A3DBD4200A7CD88 /* TurnRightGesture.cpp */; };
@@ -185,6 +186,8 @@
 		5C3BA8741A3EE45100FE4860 /* FlashlightGesture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FlashlightGesture.cpp; sourceTree = "<group>"; };
 		5C3BA8BF1A3F9B2A00FE4860 /* img_test.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = img_test.bmp; sourceTree = "<group>"; };
 		5C3BA8C51A3F9DB100FE4860 /* map_lindholmen.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = map_lindholmen.bmp; sourceTree = "<group>"; };
+		5C3BA8C71A3FA54000FE4860 /* MapGesture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MapGesture.cpp; sourceTree = "<group>"; };
+		5C3BA8C91A3FA54A00FE4860 /* MapGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapGesture.h; sourceTree = "<group>"; };
 		5CAB237D1A3E3EDC0049AB34 /* HUD.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HUD.cpp; sourceTree = "<group>"; };
 		5CAB237E1A3E3EDC0049AB34 /* HUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HUD.h; sourceTree = "<group>"; };
 		F4779DA71A3DAB0A00A7CD88 /* IGesture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IGesture.h; sourceTree = "<group>"; };
@@ -224,8 +227,8 @@
 				F499353C1A3F496F00EF31C9 /* CircularBuffer.h */,
 				F4779DAE1A3DC03C00A7CD88 /* Gestures */,
 				0A7F8A9B18A94E00008567DC /* OpenNI2Project.cpp */,
-				5CAB237D1A3E3EDC0049AB34 /* HUD.cpp */,
 				5CAB237E1A3E3EDC0049AB34 /* HUD.h */,
+				5CAB237D1A3E3EDC0049AB34 /* HUD.cpp */,
 				0A7F8A9C18A94E00008567DC /* stdafx.cpp */,
 				0A7F8A9D18A94E00008567DC /* stdafx.h */,
 				0A7F8A9E18A94E00008567DC /* targetver.h */,
@@ -430,17 +433,19 @@
 		F4779DAE1A3DC03C00A7CD88 /* Gestures */ = {
 			isa = PBXGroup;
 			children = (
-				F4779DAB1A3DBD4200A7CD88 /* TurnRightGesture.cpp */,
-				F4779DAC1A3DBD4200A7CD88 /* TurnRightGesture.h */,
-				F4779DA81A3DABDC00A7CD88 /* TurnLeftGesture.cpp */,
-				F4779DA91A3DABDC00A7CD88 /* TurnLeftGesture.h */,
-				5C3BA8741A3EE45100FE4860 /* FlashlightGesture.cpp */,
-				5C3BA8731A3EE44400FE4860 /* FlashlightGesture.h */,
 				F4779DA71A3DAB0A00A7CD88 /* IGesture.h */,
-				F4779DAF1A3DD43300A7CD88 /* StopGesture.cpp */,
-				F4779DB01A3DD43300A7CD88 /* StopGesture.h */,
-				F499353E1A3F526B00EF31C9 /* TurnGesture.cpp */,
 				F499353F1A3F526B00EF31C9 /* TurnGesture.h */,
+				F499353E1A3F526B00EF31C9 /* TurnGesture.cpp */,
+				F4779DAC1A3DBD4200A7CD88 /* TurnRightGesture.h */,
+				F4779DAB1A3DBD4200A7CD88 /* TurnRightGesture.cpp */,
+				F4779DA91A3DABDC00A7CD88 /* TurnLeftGesture.h */,
+				F4779DA81A3DABDC00A7CD88 /* TurnLeftGesture.cpp */,
+				F4779DB01A3DD43300A7CD88 /* StopGesture.h */,
+				F4779DAF1A3DD43300A7CD88 /* StopGesture.cpp */,
+				5C3BA8731A3EE44400FE4860 /* FlashlightGesture.h */,
+				5C3BA8741A3EE45100FE4860 /* FlashlightGesture.cpp */,
+				5C3BA8C91A3FA54A00FE4860 /* MapGesture.h */,
+				5C3BA8C71A3FA54000FE4860 /* MapGesture.cpp */,
 			);
 			name = Gestures;
 			sourceTree = "<group>";
@@ -509,6 +514,7 @@
 				F4779DAA1A3DABDC00A7CD88 /* TurnLeftGesture.cpp in Sources */,
 				F4779DAD1A3DBD4200A7CD88 /* TurnRightGesture.cpp in Sources */,
 				5CAB237F1A3E3EDC0049AB34 /* HUD.cpp in Sources */,
+				5C3BA8C81A3FA54000FE4860 /* MapGesture.cpp in Sources */,
 				5C3BA8751A3EE45100FE4860 /* FlashlightGesture.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
