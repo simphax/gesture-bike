@@ -10,14 +10,12 @@
 #define __Skeleton__TurnRightGesture__
 
 #include <stdio.h>
-#include "IGesture.h"
+#include "TurnGesture.h"
+#include "CircularBuffer.h"
 
-class TurnRightGesture : public IGesture
+class TurnRightGesture : public TurnGesture
 {
 private:
-    //Counts the amount of frames that the user holds up the left arm
-    int rightGestureCount = 0;
-    
     //Animation Properties
     float xTranslation = 0;
     float opacityTotal = 0;
@@ -28,7 +26,7 @@ private:
     
 public:
     TurnRightGesture();
-    bool gestureDetect(nite::Skeleton *skeleton, nite::UserTracker *userTracker);
+    
     void draw();
     void resetDraw();
     void hudMessage(HUD *hud);

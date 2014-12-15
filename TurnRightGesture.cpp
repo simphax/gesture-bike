@@ -10,53 +10,11 @@
 #include <GLUT/GLUT.h>
 #include <stdio.h>
 
-#define GESTURE_HOLD_FRAMES_THRESHOLD 30
-#define GESTURE_DELTA_Y -30
 
-
-TurnRightGesture::TurnRightGesture()
+TurnRightGesture::TurnRightGesture() : TurnGesture(nite::JointType::JOINT_RIGHT_HAND, nite::JointType::JOINT_RIGHT_ELBOW, nite::JointType::JOINT_RIGHT_SHOULDER)
 {
-    
 }
 
-
-bool TurnRightGesture::gestureDetect(nite::Skeleton *skeleton, nite::UserTracker *userTracker)
-{
-    nite::Status status;
-    /** Detect right arm gesture **/
-    float rightElbowX, rightElbowY, rightShoulderX, rightShoulderY;
-    status = userTracker->convertJointCoordinatesToDepth(
-                                                     skeleton->getJoint(nite::JointType::JOINT_RIGHT_ELBOW).getPosition().x,
-                                                     skeleton->getJoint(nite::JointType::JOINT_RIGHT_ELBOW).getPosition().y,
-                                                     skeleton->getJoint(nite::JointType::JOINT_RIGHT_ELBOW).getPosition().z,
-                                                     &rightElbowX, &rightElbowY);
-    if(status == nite::STATUS_OK) {
-        //printf("Left elbow: %f\n",leftElbowY);
-        
-        status = userTracker->convertJointCoordinatesToDepth(
-                                                         skeleton->getJoint(nite::JointType::JOINT_RIGHT_SHOULDER).getPosition().x,
-                                                         skeleton->getJoint(nite::JointType::JOINT_RIGHT_SHOULDER).getPosition().y,
-                                                         skeleton->getJoint(nite::JointType::JOINT_RIGHT_SHOULDER).getPosition().z,
-                                                         &rightShoulderX, &rightShoulderY);
-        
-        if(status == nite::STATUS_OK) {
-            //printf("Left shoulder: %f\n",leftShoulderY);
-            
-            float rightDeltaY = rightShoulderY-rightElbowY;
-            //printf("DeltaY: %f\n", leftDeltaY);
-            
-            if(rightDeltaY > GESTURE_DELTA_Y) {
-                rightGestureCount++;
-                
-                if(rightGestureCount > GESTURE_HOLD_FRAMES_THRESHOLD) {
-                    return true;
-                }
-            } else {
-                rightGestureCount = 0;
-            }
-        }
-    }    return false;
-}
 
 void TurnRightGesture::draw()
 {

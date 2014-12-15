@@ -10,13 +10,11 @@
 #define __Skeleton__TurnLeftGesture__
 
 #include <stdio.h>
-#include "IGesture.h"
+#include "TurnGesture.h"
 
-class TurnLeftGesture : public IGesture
+class TurnLeftGesture : public TurnGesture
 {
 private:
-    //Counts the amount of frames that the user holds up the left arm
-    int leftGestureCount = 0;
     
     //Animation Properties
     float xTranslation = 0;
@@ -28,11 +26,9 @@ private:
     
 public:
     TurnLeftGesture();
-    bool gestureDetect(nite::Skeleton *skeleton, nite::UserTracker *userTracker);
     void draw();
     void resetDraw();
     void hudMessage(HUD *hud);
-    
 };
 
 #endif /* defined(__Skeleton__TurnLeftGesture__) */
