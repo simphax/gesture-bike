@@ -38,7 +38,7 @@ bool StopGesture::gestureDetect(nite::Skeleton *skeleton, nite::UserTracker *use
                                                              skeleton->getJoint(nite::JointType::JOINT_LEFT_ELBOW).getPosition().z,
                                                              &leftElbowX, &leftElbowY);
         if(status == nite::STATUS_OK) {
-            printf("Left elbow: %f\n",leftElbowX);
+            //printf("Left elbow: %f\n",leftElbowX);
             
             status = userTracker->convertJointCoordinatesToDepth(
                                                                  skeleton->getJoint(nite::JointType::JOINT_LEFT_HAND).getPosition().x,
@@ -48,15 +48,15 @@ bool StopGesture::gestureDetect(nite::Skeleton *skeleton, nite::UserTracker *use
             leftHandZ = skeleton->getJoint(nite::JointType::JOINT_LEFT_HAND).getPosition().z;
             
             if(status == nite::STATUS_OK) {
-                printf("Left hand: %f\n",leftHandX);
-                printf("Left hand Z: %f\n",leftHandZ);
+                //printf("Left hand: %f\n",leftHandX);
+                //printf("Left hand Z: %f\n",leftHandZ);
                 //>7-800
                
                 float handElbowDeltaX = abs(leftHandX-leftElbowX);
                 float elbowShoulderDeltaY = leftElbowY - leftShoulderY;
                 float elbowShoulderDeltaX = leftShoulderX - leftElbowX;
                 float handElbowDeltaY = leftHandY - leftElbowY;
-                printf("DeltaX: %f\n", elbowShoulderDeltaX);
+                //printf("DeltaX: %f\n", elbowShoulderDeltaX);
                 
                 if(handElbowDeltaX < HAND_ELBOW_DELTA_X && elbowShoulderDeltaY < ELBOW_SHOULDER_DELTA_Y && elbowShoulderDeltaX > ELBOW_SHOULDER_DELTA_X && leftElbowX < 100 && handElbowDeltaY > HAND_ELBOW_DELTA_Y && leftHandZ > 700) {
                     stopGestureCount++;
@@ -78,19 +78,19 @@ void StopGesture::draw()
     /* Left square */
     glBegin( GL_POLYGON );
     glColor3f(1, 0, 0);
-    glVertex3f(0.0f, 150.0f, 0.0f);
-    glVertex3f(200.0f, 150.0f, 0.0f);
-    glVertex3f(200.0f, 350.0f, 0.0f);
-    glVertex3f(0.0f, 350.0f, 0.0f);
+    glVertex3f(0.0f, 0.0f, 0.0f);
+    glVertex3f(200.0f, 0.0f, 0.0f);
+    glVertex3f(200.0f, 200.0f, 0.0f);
+    glVertex3f(0.0f, 200.0f, 0.0f);
     glEnd();
     
     /* Right square */
     glBegin( GL_POLYGON );
     glColor3f(1, 0, 0);
-    glVertex3f(440.0f, 150.0f, 0.0f);
-    glVertex3f(640.0f, 150.0f, 0.0f);
-    glVertex3f(640.0f, 350.0f, 0.0f);
-    glVertex3f(440.0f, 350.0f, 0.0f);
+    glVertex3f(440.0f, 0.0f, 0.0f);
+    glVertex3f(640.0f, 0.0f, 0.0f);
+    glVertex3f(640.0f, 200.0f, 0.0f);
+    glVertex3f(440.0f, 200.0f, 0.0f);
     glEnd();
 }
 
