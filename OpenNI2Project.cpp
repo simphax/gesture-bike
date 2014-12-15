@@ -3,27 +3,36 @@
 
 #define FULLSCREEN 0
 #define DEBUG 1
+#define DEPTHCAMERA 0
 
 #include "stdafx.h"
 // General headers
 #include <stdio.h>
 #include <list>
+
 // OpenNI2 headers
 #include "OpenNI.h"
 #include "NiTE.h"
 using namespace openni;
+
 // GLUT headers
 #include <GLUT/GLUT.h>
 #include <algorithm>
+
+// Gestures
 #include "IGesture.h"
 #include "TurnLeftGesture.h"
 #include "TurnRightGesture.h"
-#include "FlashlightGesture.h"
 #include "StopGesture.h"
+#include "FlashlightGesture.h"
+#include "MapGesture.h"
+
+
 #include "HUD.h"
 
 int window_w = 640;
 int window_h = 480;
+
 OniRGB888Pixel* gl_texture;
 
 //NiTE vars
@@ -119,6 +128,11 @@ void gl_KeyboardCallback(unsigned char key, int x, int y)
     if(key == 'f')
     {
         hud->toggleFlashlight();
+    }
+    
+    if(key == 'm')
+    {
+        hud->toggleMap();
     }
     
 }
@@ -284,8 +298,8 @@ void drawAwarenessMarkers()
     
     if (!isUserDetected) return;
     
-    float cx = 120;
-    float cy = 120;
+    float cx = 160;
+    float cy = 160;
     float r = 100;
     int num_segments = 50;
     
@@ -423,44 +437,22 @@ void gl_DisplayCallback()
 				}
 			}
 
-            if(debugGrid) {
-                glColor3f( 1.f, 1.f, 1.f );
-
-                for(int x = 0; x < window_w; x += 10){
-                    glBegin(GL_LINE_LOOP);
-                    glVertex3f(x,0,0);
-                    glVertex3f(x,window_h,0);
-                    glEnd();
-                };
-                
-                for(int y = 0; y < window_h; y += 10){
-                    glBegin(GL_LINE_LOOP);
-                    glVertex3f(0,y,0);
-                    glVertex3f(window_w,y,0);
-                    glEnd();
-                };
-            }
             
             //User skeleton lost
             if(users.getSize() < 1){
                 isUserDetected = false;
             }
             
-            //Draw HUD
-            hud->draw();
-            
-			glColor3f( 1.f, 1.f, 1.f );
 			
 		}
 	}
     
-    //No Depth Camera Connected
-    else{
-        
-        //Draw HUD
-        hud->draw();
-        drawAwarenessMarkers();
-    }
+
+    
+    //Draw HUD
+    hud->draw();
+    drawAwarenessMarkers();
+    
     
     if(debugGestures){
         for(IGesture *gesture : gestures)
@@ -469,7 +461,31 @@ void gl_DisplayCallback()
         }
     }
     
+    if(debugGrid) {
+        
+        glLineWidth(1.0);
+        
+        glColor3f( 1.f, 1.f, 1.f );
+        
+        for(int x = 0; x < window_w; x += 10){
+            glBegin(GL_LINE_LOOP);
+            glVertex3f(x,0,0);
+            glVertex3f(x,window_h,0);
+            glEnd();
+        };
+        
+        for(int y = 0; y < window_h; y += 10){
+            glBegin(GL_LINE_LOOP);
+            glVertex3f(0,y,0);
+            glVertex3f(window_w,y,0);
+            glEnd();
+        };
+        
+        glLineWidth(10.0);
+        
+    }
     
+    glColor3f( 1.f, 1.f, 1.f );
     glutSwapBuffers();
 }
 
@@ -517,21 +533,28 @@ void gl_Setup(void) {
 int main(int argc, char* argv[])
 {
     //Add Gestures in order of priority
-    gestures.push_back(new FlashlightGesture());
     gestures.push_back(new StopGesture());
+    gestures.push_back(new FlashlightGesture());
+    gestures.push_back(new MapGesture());
     gestures.push_back(new TurnLeftGesture());
     gestures.push_back(new TurnRightGesture());
 
-    
-	printf("\r\n----------------- NiTE & User Tracker -------------------\r\n");
-	nite::Status status = nite::STATUS_OK;
-	printf("Initializing NiTE ...\r\n");
-	//status = nite::NiTE::initialize();
-	//if (!HandleStatus(status)) return 1;
 
-	printf("Creating a user tracker object ...\r\n");
-	//status = uTracker.create();
-	//if (!HandleStatus(status)) return 1;
+    if(DEPTHCAMERA)
+    {
+        printf("\r\n----------------- NiTE & User Tracker -------------------\r\n");
+        nite::Status status = nite::STATUS_OK;
+        printf("Initializing NiTE ...\r\n");
+        
+        
+        //status = nite::NiTE::initialize();
+        //if (!HandleStatus(status)) return 1;
+        
+        printf("Creating a user tracker object ...\r\n");
+        status = uTracker.create();
+        if (!HandleStatus(status)) return 1;
+    }
+	
 	
 	printf("\r\n---------------------- OpenGL -------------------------\r\n");
 	printf("Initializing OpenGL ...\r\n");

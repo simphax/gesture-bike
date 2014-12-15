@@ -16,7 +16,7 @@
 #include <cmath>        // std::abs
 
 
-#define GESTURETIMEOUT 4000
+#define GESTURETIMEOUT 3500
 #define HUDHEIGHT 160
 #define HUDWIDTH 640
 

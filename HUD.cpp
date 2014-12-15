@@ -60,6 +60,9 @@ void HUD::drawFlashlight()
 
 void HUD::drawMap()
 {
+    
+    if(!isMapOn) return;
+        
     glEnable(GL_TEXTURE_2D);
     
     GLuint texture;
