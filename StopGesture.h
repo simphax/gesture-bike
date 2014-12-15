@@ -23,6 +23,8 @@ public:
     bool gestureDetect(nite::Skeleton *skeleton, nite::UserTracker *userTracker);
     void draw();
     void resetDraw();
+    void hudMessage(HUD *hud);
+    
 };
 
 #endif /* defined(__Skeleton__StopGesture__) */

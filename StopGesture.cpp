@@ -98,3 +98,8 @@ void StopGesture::resetDraw()
 {
     
 }
+
+void StopGesture::hudMessage(HUD *hud)
+{
+    
+}

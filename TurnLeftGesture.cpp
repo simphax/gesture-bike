@@ -106,3 +106,8 @@ void TurnLeftGesture::animate()
 }
 
 
+void TurnLeftGesture::hudMessage(HUD *hud)
+{
+    
+}
+

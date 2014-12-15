@@ -14,6 +14,7 @@
 #define FRAMETIME 33.33
 
 #include "NiTE.h"
+#include "HUD.h"
 
 class IGesture
 {
@@ -32,6 +33,10 @@ public:
      @brief Animates graphics properties
      */
     virtual void resetDraw() = 0;
+    /**
+     @brief Allow gestures to send info/media to the HUD
+     */
+    virtual void hudMessage(HUD *hud) = 0;
 
 };
 

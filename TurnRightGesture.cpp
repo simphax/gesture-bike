@@ -97,3 +97,8 @@ void TurnRightGesture::animate()
     }
 }
 
+void TurnRightGesture::hudMessage(HUD *hud)
+{
+    
+}
+

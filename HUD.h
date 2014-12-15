@@ -15,12 +15,18 @@
 class HUD
 {
 private:
-
+    
+    //Remember flashlight state
+    bool isFlashlightOn;
+    float flashLightToggleTime;
+    float elapsedTime;
     
 public:
     HUD();
+    void draw();
+    void drawFlashlight();
     void displayMessage(const char* string);
-    void flashlight(bool isOn);
+    void toggleFlashlight();
     
 };
 

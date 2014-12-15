@@ -10,8 +10,8 @@
 #include <GLUT/GLUT.h>
 #include <stdio.h>
 
-#define GESTURE_HOLD_FRAMES_THRESHOLD 30
-#define GESTURE_DELTA 30
+#define GESTURE_HOLD_FRAMES_THRESHOLD 10
+#define GESTURE_DELTA 40
 
 
 FlashlightGesture::FlashlightGesture()
@@ -59,6 +59,11 @@ bool FlashlightGesture::gestureDetect(nite::Skeleton *skeleton, nite::UserTracke
         }
     }
     return false;
+}
+
+void FlashlightGesture::hudMessage(HUD *hud)
+{
+    hud->toggleFlashlight();
 }
 
 void FlashlightGesture::draw(){}

@@ -313,7 +313,7 @@ void gl_DisplayCallback()
                     
                     userDetected = true;
                     hud->displayMessage("User Detected");
-                    hud->flashlight(true);
+                    
                     
                     //showDetectionMessage();
                     
@@ -349,7 +349,11 @@ void gl_DisplayCallback()
                     //Only draw graphics for the last detected gesture
                     if(activeGesture) {
                         activeGesture->draw();
+                        activeGesture->hudMessage(hud);
                     }
+                    
+                    //Draw HUD
+                    hud->draw();
                     
 				}
 			}
