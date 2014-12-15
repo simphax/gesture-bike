@@ -42,9 +42,11 @@ long double gestureStartTime = 0;
 #if DEBUG
 bool debugSkeleton = true;
 bool debugGestures = true;
+bool debugGrid = true;
 #else
 bool debugSkeleton = false;
 bool debugGestures = false;
+bool debugGrid = false;
 #endif
 
 //Confirm to user when their body is being tracked
@@ -96,15 +98,21 @@ void gl_KeyboardCallback(unsigned char key, int x, int y)
 		nite::NiTE::shutdown();
 		exit(0);
 	}
-    if (key == 'd') {
+    if (key == 'd')
+    {
         debugSkeleton = !debugSkeleton;
     }
-    if (key == 'g') {
+    if (key == 'g')
+    {
         for(IGesture *gesture : gestures)
         {
             gesture->resetDraw();
         }
         debugGestures = !debugGestures;
+    }
+    if(key == 'h')
+    {
+        debugGrid = !debugGrid;
     }
 }
 
@@ -357,7 +365,25 @@ void gl_DisplayCallback()
                     
 				}
 			}
-			
+
+            if(debugGrid) {
+                glColor3f( 1.f, 1.f, 1.f );
+
+                for(int x = 0; x < window_w; x += 10){
+                    glBegin(GL_LINE_LOOP);
+                    glVertex3f(x,0,0);
+                    glVertex3f(x,window_h,0);
+                    glEnd();
+                };
+                
+                for(int y = 0; y < window_h; y += 10){
+                    glBegin(GL_LINE_LOOP);
+                    glVertex3f(0,y,0);
+                    glVertex3f(window_w,y,0);
+                    glEnd();
+                };
+            }
+            
 			glColor3f( 1.f, 1.f, 1.f );
 			glutSwapBuffers();
 		}
