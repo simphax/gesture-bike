@@ -41,13 +41,16 @@ long double gestureStartTime = 0;
 //Debug help
 #if DEBUG
 bool debugSkeleton = true;
-bool debugGestures = true;
+bool debugGestures = false;
 bool debugGrid = false;
 #else
 bool debugSkeleton = false;
 bool debugGestures = false;
 bool debugGrid = false;
 #endif
+
+//User Detected
+bool isUserDetected = false;
 
 //Time to consider a gesture active
 #define GESTURE_DRAW_TIME 2
@@ -276,6 +279,68 @@ void drawDepthTexture()
 }
 
 
+void drawAwarenessMarkers()
+{
+    
+    if (!isUserDetected) return;
+    
+    float cx = 120;
+    float cy = 120;
+    float r = 100;
+    int num_segments = 50;
+    
+    glColor3f(0.0, 1.0, 0.0 );
+    
+    //Left Half Circle
+    
+    for(int circles = 0; circles < 3; circles++)
+    {
+        glBegin(GL_LINE_STRIP);
+        glColor3f(0.0, 1.0, 0.0 );
+        for(int ii = 25; ii < num_segments; ii++)
+        {
+
+            //Radius gets smaller with each circle
+            float iR = r - circles * 20;
+            
+            float theta = 1.8f * 3.1415926f * float(ii) / float(num_segments);//get the current angle
+            
+            float x = iR * cosf(theta); //calculate the x component
+            float y = iR * sinf(theta); //calculate the y component
+            
+            glVertex3f(x + cx, y + cy, 0.0f);//output vertex
+            
+        }
+        glEnd();
+
+    }
+    
+        
+    cx = window_w - cx;
+    
+    for(int circles = 0; circles < 3; circles++)
+    {
+        
+        //Right Half Circle
+        glBegin(GL_LINE_STRIP);
+        
+        for(int ii = 22; ii < num_segments; ii++)
+        {
+            //Radius gets smaller with each circle
+            float iR = r - circles * 20;
+            
+            float theta = -1.7f * 3.1415926f * float(ii) / float(num_segments);//get the current angle
+            
+            float x = iR * sinf(theta); //calculate the x component
+            float y = iR * cosf(theta); //calculate the y component
+            
+            glVertex3f(x + cx, y + cy, 0.0f);//output vertex
+            
+        }
+        glEnd();
+    }
+}
+
 
 void gl_DisplayCallback()
 {
@@ -291,21 +356,12 @@ void gl_DisplayCallback()
 		if (status == nite::STATUS_OK && usersFrame.isValid())
 		{
 			
-
-	
             gl_depthTextureSetup(usersFrame);
 
             if(debugSkeleton) {
                 drawDepthTexture();
             }
             
-            
-            if(debugGestures){
-                for(IGesture *gesture : gestures)
-                {
-                    gesture->draw();
-                }
-            }
             
 			const nite::Array<nite::UserData>& users = usersFrame.getUsers();
 
@@ -322,9 +378,8 @@ void gl_DisplayCallback()
                     
                     
                     //User detected
-                    hud->toggleUserStatus(true);
-                    //hud->displayMessage("User Detected");
-                    
+                    isUserDetected = true;
+
                     
                     //showDetectionMessage();
                     
@@ -388,17 +443,37 @@ void gl_DisplayCallback()
             
             //User skeleton lost
             if(users.getSize() < 1){
-                hud->toggleUserStatus(false);
+                isUserDetected = false;
             }
             
             //Draw HUD
             hud->draw();
             
 			glColor3f( 1.f, 1.f, 1.f );
-			glutSwapBuffers();
+			
 		}
 	}
+    
+    //No Depth Camera Connected
+    else{
+        
+        //Draw HUD
+        hud->draw();
+        drawAwarenessMarkers();
+    }
+    
+    if(debugGestures){
+        for(IGesture *gesture : gestures)
+        {
+            gesture->draw();
+        }
+    }
+    
+    
+    glutSwapBuffers();
 }
+
+
 
 
 
@@ -451,12 +526,12 @@ int main(int argc, char* argv[])
 	printf("\r\n----------------- NiTE & User Tracker -------------------\r\n");
 	nite::Status status = nite::STATUS_OK;
 	printf("Initializing NiTE ...\r\n");
-	status = nite::NiTE::initialize();
-	if (!HandleStatus(status)) return 1;
+	//status = nite::NiTE::initialize();
+	//if (!HandleStatus(status)) return 1;
 
 	printf("Creating a user tracker object ...\r\n");
-	status = uTracker.create();
-	if (!HandleStatus(status)) return 1;
+	//status = uTracker.create();
+	//if (!HandleStatus(status)) return 1;
 	
 	printf("\r\n---------------------- OpenGL -------------------------\r\n");
 	printf("Initializing OpenGL ...\r\n");

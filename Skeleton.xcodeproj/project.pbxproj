@@ -37,6 +37,8 @@
 		0AB8ED1F18A93ADC00F145E5 /* org.openni.jar in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0AB8ECB318A9349400F145E5 /* org.openni.jar */; };
 		0AB8ED2318A93DE300F145E5 /* libOniFile.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0AB8ECAE18A9349400F145E5 /* libOniFile.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		5C3BA8751A3EE45100FE4860 /* FlashlightGesture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5C3BA8741A3EE45100FE4860 /* FlashlightGesture.cpp */; };
+		5C3BA8C21A3F9C0500FE4860 /* img_test.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5C3BA8BF1A3F9B2A00FE4860 /* img_test.bmp */; };
+		5C3BA8C61A3F9DB800FE4860 /* map_lindholmen.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5C3BA8C51A3F9DB100FE4860 /* map_lindholmen.bmp */; };
 		5CAB237F1A3E3EDC0049AB34 /* HUD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5CAB237D1A3E3EDC0049AB34 /* HUD.cpp */; };
 		F4779DAA1A3DABDC00A7CD88 /* TurnLeftGesture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F4779DA81A3DABDC00A7CD88 /* TurnLeftGesture.cpp */; };
 		F4779DAD1A3DBD4200A7CD88 /* TurnRightGesture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F4779DAB1A3DBD4200A7CD88 /* TurnRightGesture.cpp */; };
@@ -112,6 +114,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		5C3BA8C11A3F9BE200FE4860 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+				5C3BA8C21A3F9C0500FE4860 /* img_test.bmp in CopyFiles */,
+				5C3BA8C61A3F9DB800FE4860 /* map_lindholmen.bmp in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -170,6 +183,8 @@
 		0AB8ED1018A938B200F145E5 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
 		5C3BA8731A3EE44400FE4860 /* FlashlightGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlashlightGesture.h; sourceTree = "<group>"; };
 		5C3BA8741A3EE45100FE4860 /* FlashlightGesture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FlashlightGesture.cpp; sourceTree = "<group>"; };
+		5C3BA8BF1A3F9B2A00FE4860 /* img_test.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = img_test.bmp; sourceTree = "<group>"; };
+		5C3BA8C51A3F9DB100FE4860 /* map_lindholmen.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = map_lindholmen.bmp; sourceTree = "<group>"; };
 		5CAB237D1A3E3EDC0049AB34 /* HUD.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HUD.cpp; sourceTree = "<group>"; };
 		5CAB237E1A3E3EDC0049AB34 /* HUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HUD.h; sourceTree = "<group>"; };
 		F4779DA71A3DAB0A00A7CD88 /* IGesture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IGesture.h; sourceTree = "<group>"; };
@@ -217,6 +232,7 @@
 				0AB8ECEC18A937F200F145E5 /* Includes */,
 				0AB8ECA518A9346100F145E5 /* Frameworks */,
 				0AB8EC9A18A9341600F145E5 /* Products */,
+				5C3BA8C01A3F9B9500FE4860 /* Images */,
 			);
 			sourceTree = "<group>";
 		};
@@ -402,6 +418,15 @@
 			path = Win32;
 			sourceTree = "<group>";
 		};
+		5C3BA8C01A3F9B9500FE4860 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				5C3BA8C51A3F9DB100FE4860 /* map_lindholmen.bmp */,
+				5C3BA8BF1A3F9B2A00FE4860 /* img_test.bmp */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
 		F4779DAE1A3DC03C00A7CD88 /* Gestures */ = {
 			isa = PBXGroup;
 			children = (
@@ -434,6 +459,7 @@
 				0AB8ECD918A9374D00F145E5 /* CopyFiles */,
 				0AB8ECE218A9378600F145E5 /* CopyFiles */,
 				0AB8ECE718A937C000F145E5 /* CopyFiles */,
+				5C3BA8C11A3F9BE200FE4860 /* CopyFiles */,
 			);
 			buildRules = (
 			);

@@ -9,11 +9,16 @@
 #ifndef __Skeleton__HUD__
 #define __Skeleton__HUD__
 
+#include <GLUT/GLUT.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h> // pulls in declaration for strlen.
 #include <cmath>        // std::abs
 
-#define FLASHLIGHTLOCKTIMEMS 5000
+
+#define GESTURETIMEOUT 4000
+#define HUDHEIGHT 160
+#define HUDWIDTH 640
 
 class HUD
 {
@@ -22,22 +27,25 @@ private:
     //Remember flashlight state
     bool isFlashlightOn;
     float flashLightToggleTime;
-    float elapsedTime;
     
-    //Show user status
-    bool isUserDetected;
+    //Remember flashlight state
+    bool isMapOn;
+    float mapToggleTime;
+    
     
     void drawCircle(float cx, float cy, float r, int num_segments);
+    
+    GLuint LoadTexture( const char * filename,  int width, int height);
 
     
 public:
     HUD();
     void draw();
     void drawFlashlight();
-    void drawUserStatus();
-    void displayMessage(const char* string);
+    void drawMap();
+    void drawMessage(const char* string);
     void toggleFlashlight();
-    void toggleUserStatus(bool status);
+    void toggleMap();
     
 };
 
