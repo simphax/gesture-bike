@@ -1,6 +1,9 @@
 // OpenNI2Project.cpp : Defines the entry point for the console application.
 //
 
+#define FULLSCREEN 0
+#define DEBUG 1
+
 #include "stdafx.h"
 // General headers
 #include <stdio.h>
@@ -36,8 +39,13 @@ unsigned int texture_y;
 long double gestureStartTime = 0;
 
 //Debug help
+#if DEBUG
 bool debugSkeleton = true;
 bool debugGestures = true;
+#else
+bool debugSkeleton = false;
+bool debugGestures = false;
+#endif
 
 //Confirm to user when their body is being tracked
 bool userDetected = false;
@@ -361,8 +369,15 @@ void gl_Setup(void) {
     gl_texture = (OniRGB888Pixel*)malloc(window_w * window_h * sizeof(OniRGB888Pixel));
     
     glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
-    glutInitWindowSize(window_w, window_h);
-    glutCreateWindow ("Gesture Bike App");
+ 
+    #if FULLSCREEN
+        glutGameModeString("640x480:32@60");
+        glutEnterGameMode();
+    #else
+        glutInitWindowSize(window_w, window_h);
+        glutCreateWindow ("Gesture Bike App");
+    #endif
+    
     
     //Skeleton tracking point sizes
     glPointSize(10.0);
