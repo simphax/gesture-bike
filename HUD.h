@@ -12,6 +12,8 @@
 #include <stdio.h>
 #include <string.h> // pulls in declaration for strlen.
 
+#define FLASHLIGHTLOCKTIMEMS 5000
+
 class HUD
 {
 private:

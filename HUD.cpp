@@ -68,9 +68,8 @@ void HUD::toggleFlashlight(){
         
         
         
-        if(elapsedTime > 3000)
+        if(elapsedTime > FLASHLIGHTLOCKTIMEMS)
         {
-            printf("Flashlight if ON - elapsed time since turning on is : %f\n",elapsedTime);
             isFlashlightOn = !isFlashlightOn;
             flashLightToggleTime = glutGet(GLUT_ELAPSED_TIME);
         }
@@ -83,9 +82,8 @@ void HUD::toggleFlashlight(){
         
         
         
-        if(elapsedTime > 3000){
+        if(elapsedTime > FLASHLIGHTLOCKTIMEMS){
             
-            printf("Flashlight if OFF - elapsed time since turning on is : %f\n",elapsedTime);
             
             //Turn on flashlight
             isFlashlightOn = !isFlashlightOn;
