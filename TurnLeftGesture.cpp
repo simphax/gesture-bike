@@ -69,9 +69,9 @@ void TurnLeftGesture::draw()
     /* Left arrow */
     glBegin( GL_POLYGON );
     glColor3f(1.0 * opacityTotal, 1 * opacityTotal, 0 * opacityTotal);
-    glVertex3f(0.0f + xTranslation, 150.0f, 0.0f);
+    glVertex3f(0.0f + xTranslation, 230.0f, 0.0f);
     glVertex3f(0.0f + xTranslation, 0.0f, 0.0f);
-    glVertex3f(150.0f + xTranslation, 0.0f, 0.0f);
+    glVertex3f(300.0f + xTranslation, 0.0f, 0.0f);
     
     glEnd();
     

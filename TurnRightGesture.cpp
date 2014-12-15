@@ -64,8 +64,8 @@ void TurnRightGesture::draw()
     glBegin( GL_POLYGON );
     glColor3f(1.0 * opacityTotal, 1 * opacityTotal, 0 * opacityTotal);
     glVertex3f(640.0f, 0.0f, 0.0f);
-    glVertex3f(640.0f, 150.0f, 0.0f);
-    glVertex3f(490.0f, 0.0f, 0.0f);
+    glVertex3f(640.0f, 230.0f, 0.0f);
+    glVertex3f(340.0f, 0.0f, 0.0f);
     glEnd();
     
     this->animate();

@@ -46,8 +46,8 @@ void HUD::drawFlashlight()
     {
         glBegin( GL_POLYGON );
         glColor3f(1.0 , 1.0 , 1.0);
-        glVertex3f(0.0f, 360.0f, 0.0f);
-        glVertex3f(640.0f, 360.0f, 0.0f);
+        glVertex3f(0.0f, 270.0f, 0.0f);
+        glVertex3f(640.0f, 270.0f, 0.0f);
         glVertex3f(640.0f, 480.0f, 0.0f);
         glVertex3f(0.0f, 480.0f, 0.0f);
         glEnd();
