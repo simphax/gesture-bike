@@ -11,6 +11,7 @@
 
 #include <stdio.h>
 #include <string.h> // pulls in declaration for strlen.
+#include <cmath>        // std::abs
 
 #define FLASHLIGHTLOCKTIMEMS 5000
 
@@ -23,12 +24,20 @@ private:
     float flashLightToggleTime;
     float elapsedTime;
     
+    //Show user status
+    bool isUserDetected;
+    
+    void drawCircle(float cx, float cy, float r, int num_segments);
+
+    
 public:
     HUD();
     void draw();
     void drawFlashlight();
+    void drawUserStatus();
     void displayMessage(const char* string);
     void toggleFlashlight();
+    void toggleUserStatus(bool status);
     
 };
 

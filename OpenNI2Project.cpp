@@ -42,15 +42,12 @@ long double gestureStartTime = 0;
 #if DEBUG
 bool debugSkeleton = true;
 bool debugGestures = true;
-bool debugGrid = true;
+bool debugGrid = false;
 #else
 bool debugSkeleton = false;
 bool debugGestures = false;
 bool debugGrid = false;
 #endif
-
-//Confirm to user when their body is being tracked
-bool userDetected = false;
 
 //Time to consider a gesture active
 #define GESTURE_DRAW_TIME 2
@@ -108,12 +105,19 @@ void gl_KeyboardCallback(unsigned char key, int x, int y)
         {
             gesture->resetDraw();
         }
+        
         debugGestures = !debugGestures;
     }
     if(key == 'h')
     {
         debugGrid = !debugGrid;
     }
+    
+    if(key == 'f')
+    {
+        hud->toggleFlashlight();
+    }
+    
 }
 
 void gl_IdleCallback()
@@ -275,12 +279,10 @@ void drawDepthTexture()
 
 void gl_DisplayCallback()
 {
-    
+    // Clear the OpenGL buffers
     glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
-    
 
-    
 	if (uTracker.isValid())
 	{
 
@@ -288,9 +290,8 @@ void gl_DisplayCallback()
 		status = uTracker.readFrame(&usersFrame);
 		if (status == nite::STATUS_OK && usersFrame.isValid())
 		{
-			// Clear the OpenGL buffers
+			
 
-                
 	
             gl_depthTextureSetup(usersFrame);
 
@@ -319,8 +320,10 @@ void gl_DisplayCallback()
 				if (user_skel.getState() == nite::SKELETON_TRACKED)
 				{
                     
-                    userDetected = true;
-                    hud->displayMessage("User Detected");
+                    
+                    //User detected
+                    hud->toggleUserStatus(true);
+                    //hud->displayMessage("User Detected");
                     
                     
                     //showDetectionMessage();
@@ -360,8 +363,7 @@ void gl_DisplayCallback()
                         activeGesture->hudMessage(hud);
                     }
                     
-                    //Draw HUD
-                    hud->draw();
+
                     
 				}
 			}
@@ -383,6 +385,14 @@ void gl_DisplayCallback()
                     glEnd();
                 };
             }
+            
+            //User skeleton lost
+            if(users.getSize() < 1){
+                hud->toggleUserStatus(false);
+            }
+            
+            //Draw HUD
+            hud->draw();
             
 			glColor3f( 1.f, 1.f, 1.f );
 			glutSwapBuffers();
@@ -424,16 +434,19 @@ void gl_Setup(void) {
     glPushMatrix();
     glLoadIdentity();
     glOrtho(0, window_w, window_h, 0, -1.0, 1.0);
+    
+    glLineWidth(10.0);
 }
 
 
 int main(int argc, char* argv[])
 {
     //Add Gestures in order of priority
+    gestures.push_back(new FlashlightGesture());
     gestures.push_back(new StopGesture());
     gestures.push_back(new TurnLeftGesture());
     gestures.push_back(new TurnRightGesture());
-    gestures.push_back(new FlashlightGesture());
+
     
 	printf("\r\n----------------- NiTE & User Tracker -------------------\r\n");
 	nite::Status status = nite::STATUS_OK;
