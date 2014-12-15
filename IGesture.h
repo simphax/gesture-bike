@@ -32,10 +32,6 @@ public:
      @brief Animates graphics properties
      */
     virtual void resetDraw() = 0;
-    /**
-     @brief Gets gesture priority
-     */
-    virtual int getPriority() = 0;
 
 };
 

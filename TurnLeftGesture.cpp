@@ -10,7 +10,7 @@
 #include <GLUT/GLUT.h>
 #include <stdio.h>
 
-#define GESTURE_HOLD_FRAMES_THRESHOLD 10
+#define GESTURE_HOLD_FRAMES_THRESHOLD 30
 #define GESTURE_DELTA_Y -30
 
 
@@ -104,11 +104,6 @@ void TurnLeftGesture::animate()
         
         lastFrameTime = glutGet(GLUT_ELAPSED_TIME);
     }
-}
-
-int TurnLeftGesture::getPriority()
-{
-    return priority;
 }
 
 

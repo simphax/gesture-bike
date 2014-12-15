@@ -10,7 +10,7 @@
 #include <GLUT/GLUT.h>
 #include <stdio.h>
 
-#define GESTURE_HOLD_FRAMES_THRESHOLD 10
+#define GESTURE_HOLD_FRAMES_THRESHOLD 30
 #define GESTURE_DELTA_Y -30
 
 
@@ -97,7 +97,3 @@ void TurnRightGesture::animate()
     }
 }
 
-int TurnRightGesture::getPriority()
-{
-    return priority;
-}

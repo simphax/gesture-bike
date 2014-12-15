@@ -15,6 +15,7 @@ using namespace openni;
 #include "IGesture.h"
 #include "TurnLeftGesture.h"
 #include "TurnRightGesture.h"
+#include "FlashlightGesture.h"
 #include "HUD.h"
 
 int window_w = 640;
@@ -303,6 +304,7 @@ void gl_DisplayCallback()
                     
                     userDetected = true;
                     hud->displayMessage("User Detected");
+                    hud->flashlight(true);
                     
                     //showDetectionMessage();
                     
@@ -324,6 +326,8 @@ void gl_DisplayCallback()
                             //Activate gesture
                             activeGesture = gesture;
                             gestureStartTime = time(0);
+                            
+                            break;
 
                         }
                     }
@@ -379,9 +383,11 @@ void gl_Setup(void) {
 
 int main(int argc, char* argv[])
 {
-    
+ 
+    //Add Gestures in order of priority
     gestures.push_back(new TurnLeftGesture());
     gestures.push_back(new TurnRightGesture());
+    gestures.push_back(new FlashlightGesture());
     
 	printf("\r\n----------------- NiTE & User Tracker -------------------\r\n");
 	nite::Status status = nite::STATUS_OK;

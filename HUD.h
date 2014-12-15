@@ -20,7 +20,7 @@ private:
 public:
     HUD();
     void displayMessage(const char* string);
-
+    void flashlight(bool isOn);
     
 };
 
