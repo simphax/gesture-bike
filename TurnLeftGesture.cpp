@@ -13,7 +13,6 @@
 #define GESTURE_HOLD_FRAMES_THRESHOLD 30
 #define GESTURE_DELTA_Y -30
 
-
 TurnLeftGesture::TurnLeftGesture()
 {
     

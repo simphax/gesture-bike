@@ -16,6 +16,7 @@ using namespace openni;
 #include "TurnLeftGesture.h"
 #include "TurnRightGesture.h"
 #include "FlashlightGesture.h"
+#include "StopGesture.h"
 #include "HUD.h"
 
 int window_w = 640;
@@ -383,8 +384,8 @@ void gl_Setup(void) {
 
 int main(int argc, char* argv[])
 {
- 
     //Add Gestures in order of priority
+    gestures.push_back(new StopGesture());
     gestures.push_back(new TurnLeftGesture());
     gestures.push_back(new TurnRightGesture());
     gestures.push_back(new FlashlightGesture());

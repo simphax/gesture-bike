@@ -40,6 +40,7 @@
 		5CAB237F1A3E3EDC0049AB34 /* HUD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5CAB237D1A3E3EDC0049AB34 /* HUD.cpp */; };
 		F4779DAA1A3DABDC00A7CD88 /* TurnLeftGesture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F4779DA81A3DABDC00A7CD88 /* TurnLeftGesture.cpp */; };
 		F4779DAD1A3DBD4200A7CD88 /* TurnRightGesture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F4779DAB1A3DBD4200A7CD88 /* TurnRightGesture.cpp */; };
+		F4779DB11A3DD43300A7CD88 /* StopGesture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F4779DAF1A3DD43300A7CD88 /* StopGesture.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -174,6 +175,8 @@
 		F4779DA91A3DABDC00A7CD88 /* TurnLeftGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TurnLeftGesture.h; sourceTree = "<group>"; };
 		F4779DAB1A3DBD4200A7CD88 /* TurnRightGesture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TurnRightGesture.cpp; sourceTree = "<group>"; };
 		F4779DAC1A3DBD4200A7CD88 /* TurnRightGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TurnRightGesture.h; sourceTree = "<group>"; };
+		F4779DAF1A3DD43300A7CD88 /* StopGesture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StopGesture.cpp; sourceTree = "<group>"; };
+		F4779DB01A3DD43300A7CD88 /* StopGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StopGesture.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -401,6 +404,8 @@
 				5C3BA8741A3EE45100FE4860 /* FlashlightGesture.cpp */,
 				5C3BA8731A3EE44400FE4860 /* FlashlightGesture.h */,
 				F4779DA71A3DAB0A00A7CD88 /* IGesture.h */,
+				F4779DAF1A3DD43300A7CD88 /* StopGesture.cpp */,
+				F4779DB01A3DD43300A7CD88 /* StopGesture.h */,
 			);
 			name = Gestures;
 			sourceTree = "<group>";
@@ -461,6 +466,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A7F8A9F18A94E00008567DC /* OpenNI2Project.cpp in Sources */,
+				F4779DB11A3DD43300A7CD88 /* StopGesture.cpp in Sources */,
 				0A7F8AA018A94E00008567DC /* stdafx.cpp in Sources */,
 				F4779DAA1A3DABDC00A7CD88 /* TurnLeftGesture.cpp in Sources */,
 				F4779DAD1A3DBD4200A7CD88 /* TurnRightGesture.cpp in Sources */,
