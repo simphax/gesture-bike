@@ -79,18 +79,18 @@ void StopGesture::draw()
     glBegin( GL_POLYGON );
     glColor3f(1, 0, 0);
     glVertex3f(0.0f, 0.0f, 0.0f);
-    glVertex3f(200.0f, 0.0f, 0.0f);
-    glVertex3f(200.0f, 200.0f, 0.0f);
-    glVertex3f(0.0f, 200.0f, 0.0f);
+    glVertex3f(230.0f, 0.0f, 0.0f);
+    glVertex3f(230.0f, 300.0f, 0.0f);
+    glVertex3f(0.0f, 300.0f, 0.0f);
     glEnd();
     
     /* Right square */
     glBegin( GL_POLYGON );
     glColor3f(1, 0, 0);
-    glVertex3f(440.0f, 0.0f, 0.0f);
+    glVertex3f(340.0f, 0.0f, 0.0f);
     glVertex3f(640.0f, 0.0f, 0.0f);
-    glVertex3f(640.0f, 200.0f, 0.0f);
-    glVertex3f(440.0f, 200.0f, 0.0f);
+    glVertex3f(640.0f, 230.0f, 0.0f);
+    glVertex3f(340.0f, 230.0f, 0.0f);
     glEnd();
 }
 
