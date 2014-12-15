@@ -11,7 +11,7 @@
 
 //Frame Rate
 //1000ms / Framerate (30)
-#define FRAMETIME 33.33
+#define FRAMETIME 10
 
 #include "NiTE.h"
 #include "HUD.h"
