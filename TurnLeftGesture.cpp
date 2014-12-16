@@ -20,17 +20,23 @@ TurnLeftGesture::TurnLeftGesture() : TurnGesture(nite::JointType::JOINT_LEFT_HAN
 void TurnLeftGesture::draw()
 {
     
-    //glLineWidth(20.0);
-    //glEnable(GL_LINE_SMOOTH);
-    
     /* Left arrow */
     glBegin( GL_POLYGON );
     glColor3f(1.0 * opacityTotal, 1 * opacityTotal, 0 * opacityTotal);
-    glVertex3f(0.0f + xTranslation, 230.0f, 0.0f);
-    glVertex3f(0.0f + xTranslation, 0.0f, 0.0f);
-    glVertex3f(300.0f + xTranslation, 0.0f, 0.0f);
-    
+    glVertex3f(0.0f, 230.0f, 0.0f);
+    glVertex3f(0.0f, 0.0f, 0.0f);
+    glVertex3f(300.0f, 0.0f, 0.0f);
     glEnd();
+   
+    /* HUD square signal */
+    glBegin( GL_POLYGON );
+    glColor3f(1.0 * opacityTotal, 1 * opacityTotal, 0 * opacityTotal);
+    glVertex3f(0.0f, 320.0f, 0.0f);
+    glVertex3f(80.0f, 320.0f, 0.0f);
+    glVertex3f(80.0f, 480.0f, 0.0f);
+    glVertex3f(0.0f, 480.0f, 0.0f);
+    glEnd();
+    
     
     this->animate();
     

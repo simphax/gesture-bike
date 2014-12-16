@@ -361,6 +361,10 @@ void gl_DisplayCallback()
     // Clear the OpenGL buffers
     glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
+    //Draw HUD
+    hud->draw();
+    //Draw Awareness Markers
+    drawAwarenessMarkers();
 
 	if (uTracker.isValid())
 	{
@@ -390,10 +394,16 @@ void gl_DisplayCallback()
 				if (user_skel.getState() == nite::SKELETON_TRACKED)
 				{
                     
+                    //First time user is detected
+                    if(!isUserDetected)
+                    {
+                        hud->toggleFlashlight();
+                    }
                     
                     //User detected
                     isUserDetected = true;
 
+                    
                     
                     //showDetectionMessage();
                     
@@ -448,10 +458,6 @@ void gl_DisplayCallback()
 	}
     
 
-    
-    //Draw HUD
-    hud->draw();
-    drawAwarenessMarkers();
     
     
     if(debugGestures){
@@ -547,8 +553,8 @@ int main(int argc, char* argv[])
         printf("Initializing NiTE ...\r\n");
         
         
-        //status = nite::NiTE::initialize();
-        //if (!HandleStatus(status)) return 1;
+        status = nite::NiTE::initialize();
+        if (!HandleStatus(status)) return 1;
         
         printf("Creating a user tracker object ...\r\n");
         status = uTracker.create();
