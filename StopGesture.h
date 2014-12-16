@@ -18,6 +18,12 @@ private:
     //Counts the amount of frames that the user holds down the arm
     int stopGestureCount = 0;
     
+    CircularBuffer *handElbowDeltaXBuffer;
+    CircularBuffer *handElbowDeltaYBuffer;
+    CircularBuffer *elbowShoulderDeltaYBuffer;
+    CircularBuffer *elbowShoulderDeltaXBuffer;
+    
+    
 public:
     StopGesture();
     bool gestureDetect(nite::Skeleton *skeleton, nite::UserTracker *userTracker);

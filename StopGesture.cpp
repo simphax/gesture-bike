@@ -10,7 +10,7 @@
 #include <GLUT/GLUT.h>
 #include <stdio.h>
 
-#define GESTURE_HOLD_FRAMES_THRESHOLD 10
+#define GESTURE_HOLD_FRAMES_THRESHOLD 15
 #define ELBOW_SHOULDER_DELTA_Y 60
 #define ELBOW_SHOULDER_DELTA_X 20
 #define HAND_ELBOW_DELTA_X 30
@@ -18,6 +18,10 @@
 
 StopGesture::StopGesture()
 {
+    handElbowDeltaXBuffer = new CircularBuffer(20);
+    handElbowDeltaYBuffer = new CircularBuffer(20);
+    elbowShoulderDeltaYBuffer = new CircularBuffer(20);
+    elbowShoulderDeltaXBuffer = new CircularBuffer(20);
     
 }
 
@@ -51,11 +55,16 @@ bool StopGesture::gestureDetect(nite::Skeleton *skeleton, nite::UserTracker *use
                 //printf("Left hand: %f\n",leftHandX);
                 //printf("Left hand Z: %f\n",leftHandZ);
                 //>7-800
+                
+                handElbowDeltaXBuffer->add(abs(leftHandX - leftElbowX));
+                handElbowDeltaYBuffer->add(leftHandY - leftElbowY);
+                elbowShoulderDeltaYBuffer->add(leftElbowY - leftShoulderY);
+                elbowShoulderDeltaXBuffer->add(leftShoulderX - leftElbowX);
                
-                float handElbowDeltaX = abs(leftHandX-leftElbowX);
-                float elbowShoulderDeltaY = leftElbowY - leftShoulderY;
-                float elbowShoulderDeltaX = leftShoulderX - leftElbowX;
-                float handElbowDeltaY = leftHandY - leftElbowY;
+                float handElbowDeltaX = handElbowDeltaXBuffer->getAvg();
+                float handElbowDeltaY = handElbowDeltaYBuffer->getAvg();
+                float elbowShoulderDeltaX = elbowShoulderDeltaXBuffer->getAvg();
+                float elbowShoulderDeltaY = elbowShoulderDeltaYBuffer->getAvg();
                 //printf("DeltaX: %f\n", elbowShoulderDeltaX);
                 
                 if(handElbowDeltaX < HAND_ELBOW_DELTA_X && elbowShoulderDeltaY < ELBOW_SHOULDER_DELTA_Y && elbowShoulderDeltaX > ELBOW_SHOULDER_DELTA_X && leftElbowX < 100 && handElbowDeltaY > HAND_ELBOW_DELTA_Y && leftHandZ > 700) {
