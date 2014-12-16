@@ -2,8 +2,8 @@
 //
 
 #define FULLSCREEN 0
-#define DEBUG 1
-#define DEPTHCAMERA 0
+#define DEBUG 0
+#define DEPTHCAMERA 1
 
 #include "stdafx.h"
 // General headers
@@ -361,12 +361,17 @@ void gl_DisplayCallback()
     // Clear the OpenGL buffers
     glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
-    //Draw HUD
-    hud->draw();
-    //Draw Awareness Markers
-    drawAwarenessMarkers();
+    
 
-	if (uTracker.isValid())
+	if (!uTracker.isValid())
+    {
+        //For debug purposes
+        //Draw HUD
+        hud->draw();
+        //Draw Awareness Markers
+        drawAwarenessMarkers();
+    }
+    else
 	{
 
 		nite::UserTrackerFrameRef usersFrame;
@@ -380,6 +385,10 @@ void gl_DisplayCallback()
                 drawDepthTexture();
             }
             
+            //Draw HUD
+            hud->draw();
+            //Draw Awareness Markers
+            drawAwarenessMarkers();
             
 			const nite::Array<nite::UserData>& users = usersFrame.getUsers();
 
