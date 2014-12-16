@@ -11,9 +11,10 @@
 #include <stdio.h>
 
 #define ELBOW_HOLD_FRAMES_THRESHOLD 15
-#define HAND_HOLD_FRAMES_THRESHOLD 5
-#define ELBOW_GESTURE_DELTA_Y 30
+#define HAND_HOLD_FRAMES_THRESHOLD 10
+#define ELBOW_GESTURE_DELTA_Y 40
 #define HAND_GESTURE_DELTA_Y 40
+#define Z_MIN 700
 
 
 TurnGesture::TurnGesture(nite::JointType handJoint, nite::JointType elbowJoint, nite::JointType shoulderJoint)
@@ -30,7 +31,7 @@ bool TurnGesture::gestureDetect(nite::Skeleton *skeleton, nite::UserTracker *use
 {
     nite::Status status;
     /** Detect right arm gesture **/
-    float elbowX, elbowY, handX, handY, shoulderX, shoulderY;
+    float elbowX, elbowY, handX, handY, shoulderX, shoulderY, elbowZ;
     status = userTracker->convertJointCoordinatesToDepth(
                                                          skeleton->getJoint(handJoint).getPosition().x,
                                                          skeleton->getJoint(handJoint).getPosition().y,
@@ -42,6 +43,7 @@ bool TurnGesture::gestureDetect(nite::Skeleton *skeleton, nite::UserTracker *use
                                                              skeleton->getJoint(elbowJoint).getPosition().y,
                                                              skeleton->getJoint(elbowJoint).getPosition().z,
                                                              &elbowX, &elbowY);
+        elbowZ = skeleton->getJoint(elbowJoint).getPosition().z;
         if(status == nite::STATUS_OK) {
             //printf("Left elbow: %f\n",leftElbowY);
             
@@ -79,7 +81,7 @@ bool TurnGesture::gestureDetect(nite::Skeleton *skeleton, nite::UserTracker *use
                 }
                 
                 
-                if(elbowGestureCount > ELBOW_HOLD_FRAMES_THRESHOLD && handGestureCount > HAND_HOLD_FRAMES_THRESHOLD) {
+                if(elbowGestureCount > ELBOW_HOLD_FRAMES_THRESHOLD && handGestureCount > HAND_HOLD_FRAMES_THRESHOLD && elbowZ > Z_MIN) {
                     return true;
                 }
             }
