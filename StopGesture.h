@@ -24,6 +24,13 @@ private:
     CircularBuffer *elbowShoulderDeltaXBuffer;
     
     
+    //Animation Properties
+    float opacityTotal = 0;
+    signed int opacityDelta = 1;
+    float lastFrameTime = 0;
+    
+    void animate();
+    
 public:
     StopGesture();
     bool gestureDetect(nite::Skeleton *skeleton, nite::UserTracker *userTracker);

@@ -86,7 +86,7 @@ void StopGesture::draw()
 {
     /* Left square */
     glBegin( GL_POLYGON );
-    glColor3f(1, 0, 0);
+    glColor3f(1.0 * opacityTotal, 0 * opacityTotal, 0 * opacityTotal);
     glVertex3f(0.0f, 0.0f, 0.0f);
     glVertex3f(300.0f, 0.0f, 0.0f);
     glVertex3f(300.0f, 230.0f, 0.0f);
@@ -95,7 +95,7 @@ void StopGesture::draw()
     
     /* Right square */
     glBegin( GL_POLYGON );
-    glColor3f(1, 0, 0);
+    glColor3f(1.0 * opacityTotal, 0 * opacityTotal, 0 * opacityTotal);
     glVertex3f(340.0f, 0.0f, 0.0f);
     glVertex3f(640.0f, 0.0f, 0.0f);
     glVertex3f(640.0f, 230.0f, 0.0f);
@@ -104,7 +104,7 @@ void StopGesture::draw()
     
     /* HUD squares */
     glBegin( GL_POLYGON );
-    glColor3f(1.0, 0, 0);
+    glColor3f(1.0 * opacityTotal, 0 * opacityTotal, 0 * opacityTotal);
     glVertex3f(0.0f, 320.0f, 0.0f);
     glVertex3f(80.0f, 320.0f, 0.0f);
     glVertex3f(80.0f, 480.0f, 0.0f);
@@ -112,19 +112,39 @@ void StopGesture::draw()
     glEnd();
     
     glBegin( GL_POLYGON );
-    glColor3f(1.0, 0, 0);
+    glColor3f(1.0 * opacityTotal, 0 * opacityTotal, 0 * opacityTotal);
     glVertex3f(560.0f, 320.0f, 0.0f);
     glVertex3f(640.0f, 320.0f, 0.0f);
     glVertex3f(640.0f, 480.0f, 0.0f);
     glVertex3f(560.0f, 480.0f, 0.0f);
     glEnd();
     
+    this->animate();
     
 }
 
 void StopGesture::resetDraw()
 {
     
+}
+
+
+void StopGesture::animate()
+{
+    if(lastFrameTime + FRAMETIME < glutGet(GLUT_ELAPSED_TIME) ) {
+        
+        
+        if(opacityTotal <= 0.5) {
+            opacityDelta = 1;
+        }
+        if(opacityTotal >= 0.9) {
+            opacityDelta = -opacityDelta;
+        }
+        
+        opacityTotal += opacityDelta * 0.025;
+        
+        lastFrameTime = glutGet(GLUT_ELAPSED_TIME);
+    }
 }
 
 void StopGesture::hudMessage(HUD *hud)
