@@ -16,8 +16,15 @@
 class FlashlightGesture : public IGesture
 {
 private:
-    //Counts the amount of frames that the user holds up the left arm
-    int flashlightGestureCount = 0;
+    
+    //Counts the amount of frames that the users hand and head are in proximty on X and Y
+    int XGestureCount = 0;
+    int YGestureCount = 0;
+    
+    CircularBuffer *deltaBufferX;
+    CircularBuffer *deltaBufferY;
+    
+    nite::JointType handJoint, headJoint;
     
     
 public:
