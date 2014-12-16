@@ -14,7 +14,7 @@
 #define HAND_HOLD_FRAMES_THRESHOLD 10
 #define ELBOW_GESTURE_DELTA_Y 40
 #define HAND_GESTURE_DELTA_Y 40
-#define Z_MIN 700
+#define Z_MIN 800
 
 
 TurnGesture::TurnGesture(nite::JointType handJoint, nite::JointType elbowJoint, nite::JointType shoulderJoint)
@@ -31,12 +31,13 @@ bool TurnGesture::gestureDetect(nite::Skeleton *skeleton, nite::UserTracker *use
 {
     nite::Status status;
     /** Detect right arm gesture **/
-    float elbowX, elbowY, handX, handY, shoulderX, shoulderY, elbowZ;
+    float elbowX, elbowY, handX, handY, handZ, shoulderX, shoulderY, elbowZ;
     status = userTracker->convertJointCoordinatesToDepth(
                                                          skeleton->getJoint(handJoint).getPosition().x,
                                                          skeleton->getJoint(handJoint).getPosition().y,
                                                          skeleton->getJoint(handJoint).getPosition().z,
                                                          &handX, &handY);
+    handZ =skeleton->getJoint(handJoint).getPosition().z;
     if(status == nite::STATUS_OK) {
         status = userTracker->convertJointCoordinatesToDepth(
                                                              skeleton->getJoint(elbowJoint).getPosition().x,
@@ -81,7 +82,7 @@ bool TurnGesture::gestureDetect(nite::Skeleton *skeleton, nite::UserTracker *use
                 }
                 
                 
-                if(elbowGestureCount > ELBOW_HOLD_FRAMES_THRESHOLD && handGestureCount > HAND_HOLD_FRAMES_THRESHOLD && elbowZ > Z_MIN) {
+                if(elbowGestureCount > ELBOW_HOLD_FRAMES_THRESHOLD && handGestureCount > HAND_HOLD_FRAMES_THRESHOLD && elbowZ > Z_MIN && handZ > Z_MIN) {
                     return true;
                 }
             }
