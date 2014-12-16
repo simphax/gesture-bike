@@ -11,7 +11,6 @@
 
 #include <stdio.h>
 #include "IGesture.h"
-#include "CircularBuffer.h"
 #include "NiTE.h"
 
 class TurnGesture : public IGesture

@@ -15,6 +15,7 @@
 
 #include "NiTE.h"
 #include "HUD.h"
+#include "CircularBuffer.h"
 
 class IGesture
 {
