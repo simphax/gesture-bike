@@ -9,10 +9,11 @@
 #include "FlashlightGesture.h"
 #include <GLUT/GLUT.h>
 #include <stdio.h>
+#include <cmath>        // std::abs
 
 #define X_HOLD_FRAMES_THRESHOLD 5
 #define Y_HOLD_FRAMES_THRESHOLD 10
-#define GESTURE_DELTA_X 30
+#define GESTURE_DELTA_X 60
 #define GESTURE_DELTA_Y 30
 
 FlashlightGesture::FlashlightGesture()

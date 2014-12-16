@@ -11,7 +11,6 @@
 
 #include <stdio.h>
 #include "IGesture.h"
-#include <cmath>        // std::abs
 
 class FlashlightGesture : public IGesture
 {

@@ -3,61 +3,84 @@
 //  Skeleton
 //
 //  Created by Simon on 2014-12-14.
-//  Copylright(c) 2014 Gabriele Gambotto. All rights reserved.
+//  Copyright (c) 2014 Gabriele Gambotto. All rights reserved.
 //
 
 #include "MapGesture.h"
 #include <GLUT/GLUT.h>
 #include <stdio.h>
+#include <cmath>        // std::abs
 
-#define GESTURE_HOLD_FRAMES_THRESHOLD 10
-#define GESTURE_DELTA 40
-
+#define X_HOLD_FRAMES_THRESHOLD 5
+#define Y_HOLD_FRAMES_THRESHOLD 10
+#define GESTURE_DELTA_X 60
+#define GESTURE_DELTA_Y 30
 
 MapGesture::MapGesture()
 {
+    handJoint = nite::JointType::JOINT_LEFT_HAND;
+    headJoint = nite::JointType::JOINT_HEAD;
     
+    
+    deltaBufferX = new CircularBuffer(20);
+    deltaBufferY = new CircularBuffer(10);
 }
 
 
 bool MapGesture::gestureDetect(nite::Skeleton *skeleton, nite::UserTracker *userTracker)
 {
     nite::Status status;
-    /** Detect Left arm gesture **/
-    float leftHandX, leftHandY, headX, headY;
+    
+    /** Detect right arm gesture **/
+    float headX, headY, handX, handY;
+    
+    
     status = userTracker->convertJointCoordinatesToDepth(
-                                                     skeleton->getJoint(nite::JointType::JOINT_LEFT_HAND).getPosition().x,
-                                                     skeleton->getJoint(nite::JointType::JOINT_LEFT_HAND).getPosition().y,
-                                                     skeleton->getJoint(nite::JointType::JOINT_LEFT_HAND).getPosition().z,
-                                                     &leftHandX, &leftHandY);
+                                                         skeleton->getJoint(headJoint).getPosition().x,
+                                                         skeleton->getJoint(headJoint).getPosition().y,
+                                                         skeleton->getJoint(headJoint).getPosition().z,
+                                                         &headX, &headY);
     if(status == nite::STATUS_OK) {
-        //printf("Left elbow: %f\n",leftElbowY);
         
         status = userTracker->convertJointCoordinatesToDepth(
-                                                         skeleton->getJoint(nite::JointType::JOINT_HEAD).getPosition().x,
-                                                         skeleton->getJoint(nite::JointType::JOINT_HEAD).getPosition().y,
-                                                         skeleton->getJoint(nite::JointType::JOINT_HEAD).getPosition().z,
-                                                         &headX, &headY);
+                                                             skeleton->getJoint(handJoint).getPosition().x,
+                                                             skeleton->getJoint(handJoint).getPosition().y,
+                                                             skeleton->getJoint(handJoint).getPosition().z,
+                                                             &handX, &handY);
         
         if(status == nite::STATUS_OK) {
             //printf("Left shoulder: %f\n",leftShoulderY);
             
-            float deltaY = std::abs(leftHandX - headX);
-            float deltaX = std::abs(leftHandY - headY);
+            deltaBufferX->add(abs(headX-handX));
+            deltaBufferY->add(abs(headY-handY));
             
+            
+            float deltaX = deltaBufferX->getAvg();
+            float deltaY = deltaBufferY->getAvg();
             //printf("DeltaY: %f\n", leftDeltaY);
             
-            if(deltaY < GESTURE_DELTA && deltaX < GESTURE_DELTA) {
-                MapGestureCount++;
+            
+            if(deltaX < GESTURE_DELTA_X) {
+                XGestureCount++;
                 
-                if(MapGestureCount > GESTURE_HOLD_FRAMES_THRESHOLD) {
-                    return true;
-                }
             } else {
-                MapGestureCount = 0;
+                XGestureCount = 0;
+            }
+            
+            if(deltaY < GESTURE_DELTA_Y) {
+                YGestureCount++;
+                
+            } else {
+                YGestureCount = 0;
+            }
+            
+            
+            if(XGestureCount > X_HOLD_FRAMES_THRESHOLD && YGestureCount > Y_HOLD_FRAMES_THRESHOLD) {
+                return true;
             }
         }
     }
+    
     return false;
 }
 
