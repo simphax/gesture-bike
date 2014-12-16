@@ -66,7 +66,7 @@ void HUD::drawMap()
     glEnable(GL_TEXTURE_2D);
     
     GLuint texture;
-    texture= LoadTexture( "map_lindholmen.bmp", HUDWIDTH, HUDHEIGHT );
+    texture= LoadTexture( "course-lindholmen.bmp", HUDWIDTH, HUDHEIGHT );
     
 
     glColor3f(1.0, 1.0, 1.0);
@@ -93,7 +93,7 @@ void HUD::drawMap()
     
     glDisable(GL_TEXTURE_2D);
     
-    this->drawCircle(320.0, 400.0, 40.0, 50);
+    //this->drawCircle(320.0, 400.0, 40.0, 50);
     
 }
 

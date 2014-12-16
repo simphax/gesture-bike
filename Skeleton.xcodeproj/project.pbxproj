@@ -41,6 +41,7 @@
 		5C3BA8C61A3F9DB800FE4860 /* map_lindholmen.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5C3BA8C51A3F9DB100FE4860 /* map_lindholmen.bmp */; };
 		5C3BA8C81A3FA54000FE4860 /* MapGesture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5C3BA8C71A3FA54000FE4860 /* MapGesture.cpp */; };
 		5CAB237F1A3E3EDC0049AB34 /* HUD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5CAB237D1A3E3EDC0049AB34 /* HUD.cpp */; };
+		5CBD38AF1A40802D00B1368C /* course-lindholmen.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5CBD38AE1A40802600B1368C /* course-lindholmen.bmp */; };
 		F4779DAA1A3DABDC00A7CD88 /* TurnLeftGesture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F4779DA81A3DABDC00A7CD88 /* TurnLeftGesture.cpp */; };
 		F4779DAD1A3DBD4200A7CD88 /* TurnRightGesture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F4779DAB1A3DBD4200A7CD88 /* TurnRightGesture.cpp */; };
 		F4779DB11A3DD43300A7CD88 /* StopGesture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F4779DAF1A3DD43300A7CD88 /* StopGesture.cpp */; };
@@ -123,6 +124,7 @@
 			files = (
 				5C3BA8C21A3F9C0500FE4860 /* img_test.bmp in CopyFiles */,
 				5C3BA8C61A3F9DB800FE4860 /* map_lindholmen.bmp in CopyFiles */,
+				5CBD38AF1A40802D00B1368C /* course-lindholmen.bmp in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -190,6 +192,7 @@
 		5C3BA8C91A3FA54A00FE4860 /* MapGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapGesture.h; sourceTree = "<group>"; };
 		5CAB237D1A3E3EDC0049AB34 /* HUD.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HUD.cpp; sourceTree = "<group>"; };
 		5CAB237E1A3E3EDC0049AB34 /* HUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HUD.h; sourceTree = "<group>"; };
+		5CBD38AE1A40802600B1368C /* course-lindholmen.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = "course-lindholmen.bmp"; sourceTree = "<group>"; };
 		F4779DA71A3DAB0A00A7CD88 /* IGesture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IGesture.h; sourceTree = "<group>"; };
 		F4779DA81A3DABDC00A7CD88 /* TurnLeftGesture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TurnLeftGesture.cpp; sourceTree = "<group>"; };
 		F4779DA91A3DABDC00A7CD88 /* TurnLeftGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TurnLeftGesture.h; sourceTree = "<group>"; };
@@ -424,6 +427,7 @@
 		5C3BA8C01A3F9B9500FE4860 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				5CBD38AE1A40802600B1368C /* course-lindholmen.bmp */,
 				5C3BA8C51A3F9DB100FE4860 /* map_lindholmen.bmp */,
 				5C3BA8BF1A3F9B2A00FE4860 /* img_test.bmp */,
 			);
