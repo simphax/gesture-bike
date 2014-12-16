@@ -64,8 +64,8 @@ bool TurnGesture::gestureDetect(nite::Skeleton *skeleton, nite::UserTracker *use
                 float elbowDeltaY = elbowDeltaYBuffer->getAvg();
                 float handDeltaY = handDeltaYBuffer->getAvg();
                 //printf("DeltaY: %f\n", leftDeltaY);
-                printf("elbowDeltaY: %f\n", elbowDeltaY);
-                printf("handDeltaY: %f\n", handDeltaY);
+                //printf("elbowDeltaY: %f\n", elbowDeltaY);
+                //printf("handDeltaY: %f\n", handDeltaY);
                 
                 if(elbowDeltaY < ELBOW_GESTURE_DELTA_Y) {
                     elbowGestureCount++;

@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Gabriele Gambotto. All rights reserved.
 //
 
-#include "StopGesture.h"
+#include "RightStopGesture.h"
 #include <GLUT/GLUT.h>
 #include <stdio.h>
 
@@ -17,7 +17,7 @@
 #define HAND_ELBOW_DELTA_Y 20
 #define HAND_Z_MIN 700
 
-StopGesture::StopGesture()
+RightStopGesture::RightStopGesture()
 {
     handElbowDeltaXBuffer = new CircularBuffer(20);
     handElbowDeltaYBuffer = new CircularBuffer(20);
@@ -25,31 +25,31 @@ StopGesture::StopGesture()
     elbowShoulderDeltaXBuffer = new CircularBuffer(20);
 }
 
-bool StopGesture::gestureDetect(nite::Skeleton *skeleton, nite::UserTracker *userTracker)
+bool RightStopGesture::gestureDetect(nite::Skeleton *skeleton, nite::UserTracker *userTracker)
 {
     nite::Status status;
     /** Detect Left arm gesture **/
     float leftElbowX, leftElbowY, leftHandX, leftHandY, leftHandZ, leftShoulderX, leftShoulderY;
     status = userTracker->convertJointCoordinatesToDepth(
-                                                         skeleton->getJoint(nite::JointType::JOINT_LEFT_SHOULDER).getPosition().x,
-                                                         skeleton->getJoint(nite::JointType::JOINT_LEFT_SHOULDER).getPosition().y,
-                                                         skeleton->getJoint(nite::JointType::JOINT_LEFT_SHOULDER).getPosition().z,
+                                                         skeleton->getJoint(nite::JointType::JOINT_RIGHT_SHOULDER).getPosition().x,
+                                                         skeleton->getJoint(nite::JointType::JOINT_RIGHT_SHOULDER).getPosition().y,
+                                                         skeleton->getJoint(nite::JointType::JOINT_RIGHT_SHOULDER).getPosition().z,
                                                          &leftShoulderX, &leftShoulderY);
     if(status == nite::STATUS_OK) {
         status = userTracker->convertJointCoordinatesToDepth(
-                                                             skeleton->getJoint(nite::JointType::JOINT_LEFT_ELBOW).getPosition().x,
-                                                             skeleton->getJoint(nite::JointType::JOINT_LEFT_ELBOW).getPosition().y,
-                                                             skeleton->getJoint(nite::JointType::JOINT_LEFT_ELBOW).getPosition().z,
+                                                             skeleton->getJoint(nite::JointType::JOINT_RIGHT_ELBOW).getPosition().x,
+                                                             skeleton->getJoint(nite::JointType::JOINT_RIGHT_ELBOW).getPosition().y,
+                                                             skeleton->getJoint(nite::JointType::JOINT_RIGHT_ELBOW).getPosition().z,
                                                              &leftElbowX, &leftElbowY);
         if(status == nite::STATUS_OK) {
             //printf("Left elbow: %f\n",leftElbowX);
             
             status = userTracker->convertJointCoordinatesToDepth(
-                                                                 skeleton->getJoint(nite::JointType::JOINT_LEFT_HAND).getPosition().x,
-                                                                 skeleton->getJoint(nite::JointType::JOINT_LEFT_HAND).getPosition().y,
-                                                                 skeleton->getJoint(nite::JointType::JOINT_LEFT_HAND).getPosition().z,
+                                                                 skeleton->getJoint(nite::JointType::JOINT_RIGHT_HAND).getPosition().x,
+                                                                 skeleton->getJoint(nite::JointType::JOINT_RIGHT_HAND).getPosition().y,
+                                                                 skeleton->getJoint(nite::JointType::JOINT_RIGHT_HAND).getPosition().z,
                                                                  &leftHandX, &leftHandY);
-            leftHandZ = skeleton->getJoint(nite::JointType::JOINT_LEFT_HAND).getPosition().z;
+            leftHandZ = skeleton->getJoint(nite::JointType::JOINT_RIGHT_HAND).getPosition().z;
             
             if(status == nite::STATUS_OK) {
                 //printf("Left hand: %f\n",leftHandX);
@@ -59,13 +59,13 @@ bool StopGesture::gestureDetect(nite::Skeleton *skeleton, nite::UserTracker *use
                 handElbowDeltaXBuffer->add(abs(leftHandX - leftElbowX));
                 handElbowDeltaYBuffer->add(leftHandY - leftElbowY);
                 elbowShoulderDeltaYBuffer->add(leftElbowY - leftShoulderY);
-                elbowShoulderDeltaXBuffer->add(leftShoulderX - leftElbowX);
+                elbowShoulderDeltaXBuffer->add(leftElbowX - leftShoulderX);
                
                 float handElbowDeltaX = handElbowDeltaXBuffer->getAvg();
                 float handElbowDeltaY = handElbowDeltaYBuffer->getAvg();
                 float elbowShoulderDeltaX = elbowShoulderDeltaXBuffer->getAvg();
                 float elbowShoulderDeltaY = elbowShoulderDeltaYBuffer->getAvg();
-                //printf("DeltaX: %f\n", elbowShoulderDeltaX);
+                printf("DeltaX: %f\n", elbowShoulderDeltaX);
                 
                 if(handElbowDeltaX < HAND_ELBOW_DELTA_X && elbowShoulderDeltaY < ELBOW_SHOULDER_DELTA_Y && elbowShoulderDeltaX > ELBOW_SHOULDER_DELTA_X && handElbowDeltaY > HAND_ELBOW_DELTA_Y && leftHandZ > HAND_Z_MIN) {
                     stopGestureCount++;
@@ -82,7 +82,7 @@ bool StopGesture::gestureDetect(nite::Skeleton *skeleton, nite::UserTracker *use
     return false;
 }
 
-void StopGesture::draw()
+void RightStopGesture::draw()
 {
     /* Left square */
     glBegin( GL_POLYGON );
@@ -123,17 +123,15 @@ void StopGesture::draw()
     
 }
 
-void StopGesture::resetDraw()
+void RightStopGesture::resetDraw()
 {
     
 }
 
 
-void StopGesture::animate()
+void RightStopGesture::animate()
 {
     if(lastFrameTime + FRAMETIME < glutGet(GLUT_ELAPSED_TIME) ) {
-        
-        
         if(opacityTotal <= 0.5) {
             opacityDelta = 1;
         }
@@ -147,7 +145,7 @@ void StopGesture::animate()
     }
 }
 
-void StopGesture::hudMessage(HUD *hud)
+void RightStopGesture::hudMessage(HUD *hud)
 {
     
 }

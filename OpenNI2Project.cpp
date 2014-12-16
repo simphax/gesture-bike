@@ -24,6 +24,7 @@ using namespace openni;
 #include "TurnLeftGesture.h"
 #include "TurnRightGesture.h"
 #include "StopGesture.h"
+#include "RightStopGesture.h"
 #include "FlashlightGesture.h"
 #include "MapGesture.h"
 
@@ -549,6 +550,7 @@ int main(int argc, char* argv[])
 {
     //Add Gestures in order of priority
     gestures.push_back(new StopGesture());
+    gestures.push_back(new RightStopGesture());
     gestures.push_back(new FlashlightGesture());
     gestures.push_back(new MapGesture());
     gestures.push_back(new TurnLeftGesture());

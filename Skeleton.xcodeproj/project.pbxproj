@@ -45,6 +45,7 @@
 		F4779DAA1A3DABDC00A7CD88 /* TurnLeftGesture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F4779DA81A3DABDC00A7CD88 /* TurnLeftGesture.cpp */; };
 		F4779DAD1A3DBD4200A7CD88 /* TurnRightGesture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F4779DAB1A3DBD4200A7CD88 /* TurnRightGesture.cpp */; };
 		F4779DB11A3DD43300A7CD88 /* StopGesture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F4779DAF1A3DD43300A7CD88 /* StopGesture.cpp */; };
+		F49502B91A40820E00A88599 /* RightStopGesture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F49502B71A40820E00A88599 /* RightStopGesture.cpp */; };
 		F499353D1A3F496F00EF31C9 /* CircularBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F499353B1A3F496F00EF31C9 /* CircularBuffer.cpp */; };
 		F49935401A3F526B00EF31C9 /* TurnGesture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F499353E1A3F526B00EF31C9 /* TurnGesture.cpp */; };
 /* End PBXBuildFile section */
@@ -200,6 +201,8 @@
 		F4779DAC1A3DBD4200A7CD88 /* TurnRightGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TurnRightGesture.h; sourceTree = "<group>"; };
 		F4779DAF1A3DD43300A7CD88 /* StopGesture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StopGesture.cpp; sourceTree = "<group>"; };
 		F4779DB01A3DD43300A7CD88 /* StopGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StopGesture.h; sourceTree = "<group>"; };
+		F49502B71A40820E00A88599 /* RightStopGesture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RightStopGesture.cpp; sourceTree = "<group>"; };
+		F49502B81A40820E00A88599 /* RightStopGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RightStopGesture.h; sourceTree = "<group>"; };
 		F499353B1A3F496F00EF31C9 /* CircularBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CircularBuffer.cpp; sourceTree = "<group>"; };
 		F499353C1A3F496F00EF31C9 /* CircularBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircularBuffer.h; sourceTree = "<group>"; };
 		F499353E1A3F526B00EF31C9 /* TurnGesture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TurnGesture.cpp; sourceTree = "<group>"; };
@@ -437,6 +440,10 @@
 		F4779DAE1A3DC03C00A7CD88 /* Gestures */ = {
 			isa = PBXGroup;
 			children = (
+				F49502B71A40820E00A88599 /* RightStopGesture.cpp */,
+				F49502B81A40820E00A88599 /* RightStopGesture.h */,
+				F4779DB01A3DD43300A7CD88 /* StopGesture.h */,
+				F4779DAF1A3DD43300A7CD88 /* StopGesture.cpp */,
 				F4779DA71A3DAB0A00A7CD88 /* IGesture.h */,
 				F499353F1A3F526B00EF31C9 /* TurnGesture.h */,
 				F499353E1A3F526B00EF31C9 /* TurnGesture.cpp */,
@@ -444,8 +451,6 @@
 				F4779DAB1A3DBD4200A7CD88 /* TurnRightGesture.cpp */,
 				F4779DA91A3DABDC00A7CD88 /* TurnLeftGesture.h */,
 				F4779DA81A3DABDC00A7CD88 /* TurnLeftGesture.cpp */,
-				F4779DB01A3DD43300A7CD88 /* StopGesture.h */,
-				F4779DAF1A3DD43300A7CD88 /* StopGesture.cpp */,
 				5C3BA8731A3EE44400FE4860 /* FlashlightGesture.h */,
 				5C3BA8741A3EE45100FE4860 /* FlashlightGesture.cpp */,
 				5C3BA8C91A3FA54A00FE4860 /* MapGesture.h */,
@@ -519,6 +524,7 @@
 				F4779DAD1A3DBD4200A7CD88 /* TurnRightGesture.cpp in Sources */,
 				5CAB237F1A3E3EDC0049AB34 /* HUD.cpp in Sources */,
 				5C3BA8C81A3FA54000FE4860 /* MapGesture.cpp in Sources */,
+				F49502B91A40820E00A88599 /* RightStopGesture.cpp in Sources */,
 				5C3BA8751A3EE45100FE4860 /* FlashlightGesture.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
