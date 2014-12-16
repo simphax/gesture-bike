@@ -12,9 +12,10 @@
 
 #define GESTURE_HOLD_FRAMES_THRESHOLD 15
 #define ELBOW_SHOULDER_DELTA_Y 60
-#define ELBOW_SHOULDER_DELTA_X 20
-#define HAND_ELBOW_DELTA_X 30
+#define ELBOW_SHOULDER_DELTA_X 30
+#define HAND_ELBOW_DELTA_X 40
 #define HAND_ELBOW_DELTA_Y 20
+#define HAND_Z_MIN 700
 
 StopGesture::StopGesture()
 {
@@ -22,7 +23,6 @@ StopGesture::StopGesture()
     handElbowDeltaYBuffer = new CircularBuffer(20);
     elbowShoulderDeltaYBuffer = new CircularBuffer(20);
     elbowShoulderDeltaXBuffer = new CircularBuffer(20);
-    
 }
 
 bool StopGesture::gestureDetect(nite::Skeleton *skeleton, nite::UserTracker *userTracker)
@@ -67,7 +67,7 @@ bool StopGesture::gestureDetect(nite::Skeleton *skeleton, nite::UserTracker *use
                 float elbowShoulderDeltaY = elbowShoulderDeltaYBuffer->getAvg();
                 //printf("DeltaX: %f\n", elbowShoulderDeltaX);
                 
-                if(handElbowDeltaX < HAND_ELBOW_DELTA_X && elbowShoulderDeltaY < ELBOW_SHOULDER_DELTA_Y && elbowShoulderDeltaX > ELBOW_SHOULDER_DELTA_X && leftElbowX < 100 && handElbowDeltaY > HAND_ELBOW_DELTA_Y && leftHandZ > 700) {
+                if(handElbowDeltaX < HAND_ELBOW_DELTA_X && elbowShoulderDeltaY < ELBOW_SHOULDER_DELTA_Y && elbowShoulderDeltaX > ELBOW_SHOULDER_DELTA_X && leftElbowX < 90 && handElbowDeltaY > HAND_ELBOW_DELTA_Y && leftHandZ > HAND_Z_MIN) {
                     stopGestureCount++;
                     
                     if(stopGestureCount > GESTURE_HOLD_FRAMES_THRESHOLD) {
