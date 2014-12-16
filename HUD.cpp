@@ -12,8 +12,8 @@
 //Constructor
 HUD::HUD()
 {
-    isFlashlightOn = true;
-    isMapOn = true;
+    isFlashlightOn = false;
+    isMapOn = false;
     flashLightToggleTime = glutGet(GLUT_ELAPSED_TIME);
     mapToggleTime = glutGet(GLUT_ELAPSED_TIME);
 }
