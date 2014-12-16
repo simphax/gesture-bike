@@ -88,18 +88,18 @@ void StopGesture::draw()
     glBegin( GL_POLYGON );
     glColor3f(1.0 * opacityTotal, 0 * opacityTotal, 0 * opacityTotal);
     glVertex3f(0.0f, 0.0f, 0.0f);
-    glVertex3f(300.0f, 0.0f, 0.0f);
-    glVertex3f(300.0f, 230.0f, 0.0f);
+    glVertex3f(270.0f, 0.0f, 0.0f);
+    glVertex3f(270.0f, 230.0f, 0.0f);
     glVertex3f(0.0f, 230.0f, 0.0f);
     glEnd();
     
     /* Right square */
     glBegin( GL_POLYGON );
     glColor3f(1.0 * opacityTotal, 0 * opacityTotal, 0 * opacityTotal);
-    glVertex3f(340.0f, 0.0f, 0.0f);
+    glVertex3f(370.0f, 0.0f, 0.0f);
     glVertex3f(640.0f, 0.0f, 0.0f);
     glVertex3f(640.0f, 230.0f, 0.0f);
-    glVertex3f(340.0f, 230.0f, 0.0f);
+    glVertex3f(370.0f, 230.0f, 0.0f);
     glEnd();
     
     /* HUD squares */

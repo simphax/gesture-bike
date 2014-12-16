@@ -62,7 +62,7 @@ bool debugGrid = false;
 bool isUserDetected = false;
 
 //Time to consider a gesture active
-#define GESTURE_DRAW_TIME 2
+#define GESTURE_DRAW_TIME 3
 
 //List of all available gestures
 std::list<IGesture*> gestures;
@@ -298,8 +298,8 @@ void drawAwarenessMarkers()
     
     if (!isUserDetected) return;
     
-    float cx = 160;
-    float cy = 160;
+    float cx = 110;
+    float cy = 110;
     float r = 100;
     int num_segments = 50;
     
@@ -370,10 +370,11 @@ void gl_DisplayCallback()
         hud->draw();
         //Draw Awareness Markers
         drawAwarenessMarkers();
+
     }
     else
 	{
-
+        
 		nite::UserTrackerFrameRef usersFrame;
 		status = uTracker.readFrame(&usersFrame);
 		if (status == nite::STATUS_OK && usersFrame.isValid())
@@ -402,7 +403,6 @@ void gl_DisplayCallback()
 				nite::Skeleton user_skel = users[i].getSkeleton();
 				if (user_skel.getState() == nite::SKELETON_TRACKED)
 				{
-                    
                     //First time user is detected
                     if(!isUserDetected)
                     {
@@ -451,19 +451,18 @@ void gl_DisplayCallback()
                         activeGesture->hudMessage(hud);
                     }
                     
-
+                    break;
                     
 				}
-			}
-
-            
-            //User skeleton lost
-            if(users.getSize() < 1){
-                isUserDetected = false;
+                else
+                {
+                    isUserDetected = false;
+                }
             }
             
-			
-		}
+        }
+        
+
 	}
     
 
@@ -502,6 +501,7 @@ void gl_DisplayCallback()
     
     glColor3f( 1.f, 1.f, 1.f );
     glutSwapBuffers();
+
 }
 
 
@@ -563,11 +563,18 @@ int main(int argc, char* argv[])
         
         
         status = nite::NiTE::initialize();
-        if (!HandleStatus(status)) return 1;
+        while (!HandleStatus(status)){
+            sleep(1);
+            status = nite::NiTE::initialize();
+
+        }
         
         printf("Creating a user tracker object ...\r\n");
         status = uTracker.create();
-        if (!HandleStatus(status)) return 1;
+        while (!HandleStatus(status)){
+            sleep(1);
+            status = uTracker.create();
+        }
     }
 	
 	
