@@ -405,11 +405,11 @@ void gl_DisplayCallback()
 				if (user_skel.getState() == nite::SKELETON_TRACKED)
 				{
                     //First time user is detected
-                    if(!isUserDetected)
+                    /*if(!isUserDetected)
                     {
                         hud->toggleFlashlight();
                     }
-                    
+                    */
                     //User detected
                     isUserDetected = true;
 
