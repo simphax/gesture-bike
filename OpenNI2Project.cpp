@@ -31,7 +31,7 @@ using namespace openni;
 
 #include "HUD.h"
 
-int window_w = 640;
+int window_w = 840;
 int window_h = 480;
 
 OniRGB888Pixel* gl_texture;
@@ -518,7 +518,7 @@ void gl_Setup(void) {
     glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
  
     #if FULLSCREEN
-        glutGameModeString("640x480:32@60");
+        glutGameModeString("840x480:32@60");
         glutEnterGameMode();
     #else
         glutInitWindowSize(window_w, window_h);
@@ -551,8 +551,8 @@ int main(int argc, char* argv[])
     //Add Gestures in order of priority
     gestures.push_back(new StopGesture());
     gestures.push_back(new RightStopGesture());
-    gestures.push_back(new FlashlightGesture());
-    gestures.push_back(new MapGesture());
+    //gestures.push_back(new FlashlightGesture());
+    //gestures.push_back(new MapGesture());
     gestures.push_back(new TurnLeftGesture());
     gestures.push_back(new TurnRightGesture());
 
