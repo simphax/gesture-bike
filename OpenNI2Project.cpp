@@ -3,7 +3,7 @@
 
 #define FULLSCREEN 0
 #define DEBUG 0
-#define DEPTHCAMERA 1
+#define DEPTHCAMERA 0
 
 #include "stdafx.h"
 // General headers
@@ -294,66 +294,65 @@ void drawDepthTexture()
 }
 
 
+void drawAwarenessLine(float xOffset, float yOffset, float skew)
+{
+    /* Left square */
+    //save matrix
+    glPushMatrix();
+    
+    //glRotated(100,135,30,0);
+    
+    float width = 270;
+    float height = 30;
+    
+    glBegin( GL_POLYGON );
+    
+    glColor3f(0, 1.0, 0);
+    glVertex3f(xOffset, yOffset, 0.0f);
+    glVertex3f(xOffset+270.0f, yOffset + skew, 0.0f);
+    glVertex3f(xOffset+270.0f, yOffset + skew + height, 0.0f);
+    glVertex3f(xOffset, height + yOffset, 0.0f);
+    glEnd();
+    
+    
+    glPopMatrix();
+}
+
+int frame=0;
+
 void drawAwarenessMarkers()
 {
     
     if (!isUserDetected) return;
     
-    float cx = 110;
-    float cy = 110;
-    float r = 100;
-    int num_segments = 50;
+    int animationOffset = frame * 4 % 120;
     
-    glColor3f(0.0, 1.0, 0.0 );
-    
-    //Left Half Circle
-    
-    for(int circles = 0; circles < 3; circles++)
-    {
-        glBegin(GL_LINE_STRIP);
-        glColor3f(0.0, 1.0, 0.0 );
-        for(int ii = 25; ii < num_segments; ii++)
-        {
-
-            //Radius gets smaller with each circle
-            float iR = r - circles * 20;
-            
-            float theta = 1.8f * 3.1415926f * float(ii) / float(num_segments);//get the current angle
-            
-            float x = iR * cosf(theta); //calculate the x component
-            float y = iR * sinf(theta); //calculate the y component
-            
-            glVertex3f(x + cx, y + cy, 0.0f);//output vertex
-            
-        }
-        glEnd();
-
+    for(int i=0; i<20; i++) {
+        drawAwarenessLine(0,i*60+animationOffset-100,-30.0f);
     }
     
-        
-    cx = window_w - cx;
-    
-    for(int circles = 0; circles < 3; circles++)
-    {
-        
-        //Right Half Circle
-        glBegin(GL_LINE_STRIP);
-        
-        for(int ii = 22; ii < num_segments; ii++)
-        {
-            //Radius gets smaller with each circle
-            float iR = r - circles * 20;
-            
-            float theta = -1.7f * 3.1415926f * float(ii) / float(num_segments);//get the current angle
-            
-            float x = iR * sinf(theta); //calculate the x component
-            float y = iR * cosf(theta); //calculate the y component
-            
-            glVertex3f(x + cx, y + cy, 0.0f);//output vertex
-            
-        }
-        glEnd();
+    for(int i=0; i<20; i++) {
+        drawAwarenessLine(570,i*60+animationOffset-100,30.0f);
     }
+    
+    frame++;
+    
+    glBegin( GL_POLYGON );
+    glColor3f(0, 0, 0);
+    glVertex3f(0.0f, 230.0f, 0.0f);
+    glVertex3f(270.0f, 230.0f, 0.0f);
+    glVertex3f(270.0f, 480.0f, 0.0f);
+    glVertex3f(0.0f, 480.0f, 0.0f);
+    glEnd();
+    
+    glBegin( GL_POLYGON );
+    glColor3f(0, 0, 0);
+    glVertex3f(570.0f, 230.0f, 0.0f);
+    glVertex3f(570.0f + 270.0f, 230.0f, 0.0f);
+    glVertex3f(570.0f + 270.0f, 480.0f, 0.0f);
+    glVertex3f(570.0f, 480.0f, 0.0f);
+    glEnd();
+    
 }
 
 
@@ -578,7 +577,7 @@ int main(int argc, char* argv[])
             status = uTracker.create();
         }
     }
-	
+    isUserDetected = true;
 	
 	printf("\r\n---------------------- OpenGL -------------------------\r\n");
 	printf("Initializing OpenGL ...\r\n");
