@@ -28,6 +28,7 @@ private:
     float opacityTotal = 0;
     signed int opacityDelta = 1;
     float lastFrameTime = 0;
+    GLuint texture;
     
     void animate();
     

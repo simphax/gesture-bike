@@ -9,6 +9,7 @@
 #include "StopGesture.h"
 #include <GLUT/GLUT.h>
 #include <stdio.h>
+#include "GLHelper.h"
 
 #define GESTURE_HOLD_FRAMES_THRESHOLD 15
 #define ELBOW_SHOULDER_DELTA_Y 60
@@ -17,12 +18,17 @@
 #define HAND_ELBOW_DELTA_Y 20
 #define HAND_Z_MIN 700
 
+#define STOP_IMG_WIDTH 540
+#define STOP_IMG_HEIGHT 460
+
 StopGesture::StopGesture()
 {
     handElbowDeltaXBuffer = new CircularBuffer(20);
     handElbowDeltaYBuffer = new CircularBuffer(20);
     elbowShoulderDeltaYBuffer = new CircularBuffer(20);
     elbowShoulderDeltaXBuffer = new CircularBuffer(20);
+    
+    texture = GLHelper::LoadTexture( "stop.bmp", STOP_IMG_WIDTH, STOP_IMG_HEIGHT );
 }
 
 bool StopGesture::gestureDetect(nite::Skeleton *skeleton, nite::UserTracker *userTracker)
@@ -84,41 +90,10 @@ bool StopGesture::gestureDetect(nite::Skeleton *skeleton, nite::UserTracker *use
 
 void StopGesture::draw()
 {
-    /* Left square */
-    glBegin( GL_POLYGON );
-    glColor3f(1.0 * opacityTotal, 0 * opacityTotal, 0 * opacityTotal);
-    glVertex3f(0.0f, 0.0f, 0.0f);
-    glVertex3f(270.0f, 0.0f, 0.0f);
-    glVertex3f(270.0f, 230.0f, 0.0f);
-    glVertex3f(0.0f, 230.0f, 0.0f);
-    glEnd();
     
-    /* Right square */
-    glBegin( GL_POLYGON );
-    glColor3f(1.0 * opacityTotal, 0 * opacityTotal, 0 * opacityTotal);
-    glVertex3f(370.0f, 0.0f, 0.0f);
-    glVertex3f(640.0f, 0.0f, 0.0f);
-    glVertex3f(640.0f, 230.0f, 0.0f);
-    glVertex3f(370.0f, 230.0f, 0.0f);
-    glEnd();
-    
-    /* HUD squares */
-    glBegin( GL_POLYGON );
-    glColor3f(1.0 * opacityTotal, 0 * opacityTotal, 0 * opacityTotal);
-    glVertex3f(0.0f, 320.0f, 0.0f);
-    glVertex3f(80.0f, 320.0f, 0.0f);
-    glVertex3f(80.0f, 480.0f, 0.0f);
-    glVertex3f(0.0f, 480.0f, 0.0f);
-    glEnd();
-    
-    glBegin( GL_POLYGON );
-    glColor3f(1.0 * opacityTotal, 0 * opacityTotal, 0 * opacityTotal);
-    glVertex3f(560.0f, 320.0f, 0.0f);
-    glVertex3f(640.0f, 320.0f, 0.0f);
-    glVertex3f(640.0f, 480.0f, 0.0f);
-    glVertex3f(560.0f, 480.0f, 0.0f);
-    glEnd();
-    
+    GLHelper::DrawTexture(texture, STOP_IMG_WIDTH/2, STOP_IMG_HEIGHT/2, 0, 0, opacityTotal);
+    GLHelper::DrawTexture(texture, STOP_IMG_WIDTH/2, STOP_IMG_HEIGHT/2, 840 - STOP_IMG_WIDTH/2, 0, opacityTotal);
+
     this->animate();
     
 }

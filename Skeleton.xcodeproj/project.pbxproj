@@ -48,6 +48,8 @@
 		F49502B91A40820E00A88599 /* RightStopGesture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F49502B71A40820E00A88599 /* RightStopGesture.cpp */; };
 		F499353D1A3F496F00EF31C9 /* CircularBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F499353B1A3F496F00EF31C9 /* CircularBuffer.cpp */; };
 		F49935401A3F526B00EF31C9 /* TurnGesture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F499353E1A3F526B00EF31C9 /* TurnGesture.cpp */; };
+		F4A00B361A6FDFF8005468F7 /* GLHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F4A00B341A6FDFF8005468F7 /* GLHelper.cpp */; };
+		F4A00B371A6FE247005468F7 /* stop.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = F4A00B331A6FDF2D005468F7 /* stop.bmp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -123,6 +125,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				F4A00B371A6FE247005468F7 /* stop.bmp in CopyFiles */,
 				5C3BA8C21A3F9C0500FE4860 /* img_test.bmp in CopyFiles */,
 				5C3BA8C61A3F9DB800FE4860 /* map_lindholmen.bmp in CopyFiles */,
 				5CBD38AF1A40802D00B1368C /* course-lindholmen.bmp in CopyFiles */,
@@ -207,6 +210,9 @@
 		F499353C1A3F496F00EF31C9 /* CircularBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircularBuffer.h; sourceTree = "<group>"; };
 		F499353E1A3F526B00EF31C9 /* TurnGesture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TurnGesture.cpp; sourceTree = "<group>"; };
 		F499353F1A3F526B00EF31C9 /* TurnGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TurnGesture.h; sourceTree = "<group>"; };
+		F4A00B331A6FDF2D005468F7 /* stop.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = stop.bmp; sourceTree = "<group>"; };
+		F4A00B341A6FDFF8005468F7 /* GLHelper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLHelper.cpp; sourceTree = "<group>"; };
+		F4A00B351A6FDFF8005468F7 /* GLHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLHelper.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -229,6 +235,8 @@
 		0AB8EC9018A9341600F145E5 = {
 			isa = PBXGroup;
 			children = (
+				F4A00B341A6FDFF8005468F7 /* GLHelper.cpp */,
+				F4A00B351A6FDFF8005468F7 /* GLHelper.h */,
 				F499353B1A3F496F00EF31C9 /* CircularBuffer.cpp */,
 				F499353C1A3F496F00EF31C9 /* CircularBuffer.h */,
 				F4779DAE1A3DC03C00A7CD88 /* Gestures */,
@@ -430,6 +438,7 @@
 		5C3BA8C01A3F9B9500FE4860 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				F4A00B331A6FDF2D005468F7 /* stop.bmp */,
 				5CBD38AE1A40802600B1368C /* course-lindholmen.bmp */,
 				5C3BA8C51A3F9DB100FE4860 /* map_lindholmen.bmp */,
 				5C3BA8BF1A3F9B2A00FE4860 /* img_test.bmp */,
@@ -515,6 +524,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4A00B361A6FDFF8005468F7 /* GLHelper.cpp in Sources */,
 				0A7F8A9F18A94E00008567DC /* OpenNI2Project.cpp in Sources */,
 				F4779DB11A3DD43300A7CD88 /* StopGesture.cpp in Sources */,
 				F49935401A3F526B00EF31C9 /* TurnGesture.cpp in Sources */,

@@ -322,7 +322,6 @@ int frame=0;
 
 void drawAwarenessMarkers()
 {
-    
     if (!isUserDetected) return;
     
     int animationOffset = frame * 4 % 120;
@@ -360,7 +359,7 @@ void gl_DisplayCallback()
 {
     // Clear the OpenGL buffers
     glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    
+    glBindTexture(GL_TEXTURE_2D, 1);
     
 
 	if (!uTracker.isValid())
@@ -535,6 +534,8 @@ void gl_Setup(void) {
     glDisable(GL_DEPTH_TEST);
     glEnable(GL_COLOR_MATERIAL);
     
+    glEnable(GL_TEXTURE_2D);
+    
     // Setup the OpenGL viewpoint
     glMatrixMode(GL_PROJECTION);
     glPushMatrix();
@@ -542,18 +543,13 @@ void gl_Setup(void) {
     glOrtho(0, window_w, window_h, 0, -1.0, 1.0);
     
     glLineWidth(10.0);
+    
+    glBindTexture(GL_TEXTURE_2D, 1);
 }
 
 
 int main(int argc, char* argv[])
 {
-    //Add Gestures in order of priority
-    gestures.push_back(new StopGesture());
-    gestures.push_back(new RightStopGesture());
-    //gestures.push_back(new FlashlightGesture());
-    //gestures.push_back(new MapGesture());
-    gestures.push_back(new TurnLeftGesture());
-    gestures.push_back(new TurnRightGesture());
 
 
     if(DEPTHCAMERA)
@@ -584,6 +580,14 @@ int main(int argc, char* argv[])
     
     glutInit(&argc, (char**)argv);
     gl_Setup();
+    
+    //Add Gestures in order of priority
+    gestures.push_back(new StopGesture());
+    gestures.push_back(new RightStopGesture());
+    //gestures.push_back(new FlashlightGesture());
+    //gestures.push_back(new MapGesture());
+    gestures.push_back(new TurnLeftGesture());
+    gestures.push_back(new TurnRightGesture());
     
 	printf("Starting OpenGL rendering process ...\r\n");
 	glutMainLoop();
