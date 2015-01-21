@@ -91,8 +91,8 @@ bool RightStopGesture::gestureDetect(nite::Skeleton *skeleton, nite::UserTracker
 void RightStopGesture::draw()
 {
     
-    GLHelper::DrawTexture(texture, STOP_IMG_WIDTH/2, STOP_IMG_HEIGHT/2, 0, 0, opacityTotal);
-    GLHelper::DrawTexture(texture, STOP_IMG_WIDTH/2, STOP_IMG_HEIGHT/2, 840 - STOP_IMG_WIDTH/2, 0, opacityTotal);
+    GLHelper::DrawTexture(texture, STOP_IMG_WIDTH/2, STOP_IMG_HEIGHT/2, 0, 0, opacityTotal, false, false);
+    GLHelper::DrawTexture(texture, STOP_IMG_WIDTH/2, STOP_IMG_HEIGHT/2, 840 - STOP_IMG_WIDTH/2, 0, opacityTotal, false, false);
     
     this->animate();
 }

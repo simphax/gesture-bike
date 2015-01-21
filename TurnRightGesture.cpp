@@ -9,33 +9,21 @@
 #include "TurnRightGesture.h"
 #include <GLUT/GLUT.h>
 #include <stdio.h>
+#include "GLHelper.h"
+
+#define ARROW_IMG_WIDTH 540
+#define ARROW_IMG_HEIGHT 460
 
 
 TurnRightGesture::TurnRightGesture() : TurnGesture(nite::JointType::JOINT_RIGHT_HAND, nite::JointType::JOINT_RIGHT_ELBOW, nite::JointType::JOINT_RIGHT_SHOULDER)
 {
+    texture = GLHelper::LoadTexture("arrow.bmp", ARROW_IMG_WIDTH, ARROW_IMG_HEIGHT);
 }
 
 
 void TurnRightGesture::draw()
 {
-    /* Right arrow */
-    glBegin( GL_POLYGON );
-    glColor3f(1.0 * opacityTotal, 1 * opacityTotal, 0 * opacityTotal);
-    glVertex3f(640.0f, 0.0f, 0.0f);
-    glVertex3f(640.0f, 230.0f, 0.0f);
-    glVertex3f(340.0f, 0.0f, 0.0f);
-    glEnd();
-    
-    
-    /* HUD square signal */
-    glBegin( GL_POLYGON );
-    glColor3f(1.0 * opacityTotal, 1 * opacityTotal, 0 * opacityTotal);
-    glVertex3f(560.0f, 320.0f, 0.0f);
-    glVertex3f(640.0f, 320.0f, 0.0f);
-    glVertex3f(640.0f, 480.0f, 0.0f);
-    glVertex3f(560.0f, 480.0f, 0.0f);
-    glEnd();
-    
+    GLHelper::DrawTexture(texture, ARROW_IMG_WIDTH/2, ARROW_IMG_HEIGHT/2, 840-ARROW_IMG_WIDTH/2, 0, opacityTotal, true, false);
     
     this->animate();
 }

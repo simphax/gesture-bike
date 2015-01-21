@@ -60,25 +60,38 @@ GLuint GLHelper::LoadTexture( const char * filename, int width, int height )
     return texture;
 }
 
-void GLHelper::DrawTexture( GLuint texture, int width, int height, int x, int y, float opacity )
+void GLHelper::DrawTexture( GLuint texture, int width, int height, int x, int y, float opacity , bool flipx, bool flipy)
 {
     glColor3f(1.0 * opacity, 1.0 * opacity, 1.0 * opacity);
     
     glBindTexture (GL_TEXTURE_2D, texture);
     
     glBegin(GL_QUADS);
-    glTexCoord2f(0.0f, 0.0f);
+    
+    if(flipx)
+        glTexCoord2f(1.0f, 0.0f);
+    else
+        glTexCoord2f(0.0f, 0.0f);
     glVertex3f(x, y, 0.0f);
     
     
-    glTexCoord2f(0.0f, 1.0f);
+    if(flipx)
+        glTexCoord2f(1.0f, 1.0f);
+    else
+        glTexCoord2f(0.0f, 1.0f);
     glVertex3f(x, height + y, 0.0f);
     
-    glTexCoord2f(1.0f, 1.0f);
+    if(flipx)
+        glTexCoord2f(0.0f, 1.0f);
+    else
+        glTexCoord2f(1.0f, 1.0f);
     glVertex3f(x + width, height + y, 0.0f);
     
     
-    glTexCoord2f(1.0f, 0.0f);
+    if(flipx)
+        glTexCoord2f(0.0f, 0.0f);
+    else
+        glTexCoord2f(1.0f, 0.0f);
     glVertex3f(x + width, y, 0.0f);
     glEnd();
     

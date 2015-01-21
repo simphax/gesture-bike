@@ -16,7 +16,7 @@ class GLHelper
 {
 public:
     static GLuint LoadTexture( const char * filename, int width, int height );
-    static void DrawTexture( GLuint texture, int width, int height, int x, int y, float opacity );
+    static void DrawTexture( GLuint texture, int width, int height, int x, int y, float opacity , bool flipx, bool flipy);
 };
 
 #endif /* defined(__Skeleton__GLHelper__) */
