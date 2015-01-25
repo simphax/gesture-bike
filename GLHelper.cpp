@@ -35,7 +35,7 @@ GLuint GLHelper::LoadTexture( const char * filename, int width, int height )
     for(int i = 0; i < width * height ; ++i)
     {
         int index = i*3;
-        unsigned char B,R;
+        unsigned char R,B;
         B = data[index];
         R = data[index+2];
         
@@ -44,7 +44,8 @@ GLuint GLHelper::LoadTexture( const char * filename, int width, int height )
         
     }
     
-    
+    //printf("Location value: %d, ", data[200690]);
+       
     glGenTextures( 1, &texture );
     glBindTexture( GL_TEXTURE_2D, texture );
     glTexEnvf( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE,GL_MODULATE );
@@ -68,29 +69,31 @@ void GLHelper::DrawTexture( GLuint texture, int width, int height, int x, int y,
     
     glBegin(GL_QUADS);
     
-    if(flipx)
-        glTexCoord2f(1.0f, 0.0f);
-    else
+
+    glTexCoord2f(0.0f, 0.0f);
+    glVertex3f(0.0f, 480.0f, 0.0f);
+    
+    
+    glTexCoord2f(0.0f, 1.0f);
+    glVertex3f(0.0f, 480.0f - (float)HUDHEIGHT, 0.0f);
+    
+    glTexCoord2f(1.0f, 1.0f);
+    glVertex3f(640.0f, 480.0f - (float)HUDHEIGHT, 0.0f);
+    
+    
+    glTexCoord2f(1.0f, 0.0f);
+    glVertex3f(640.0f,480.0f, 0.0f);
+    
+    
         glTexCoord2f(0.0f, 0.0f);
-    glVertex3f(x, y, 0.0f);
+    glVertex3f(x, height, 0.0f);
     
-    
-    if(flipx)
-        glTexCoord2f(1.0f, 1.0f);
-    else
         glTexCoord2f(0.0f, 1.0f);
     glVertex3f(x, height + y, 0.0f);
     
-    if(flipx)
-        glTexCoord2f(0.0f, 1.0f);
-    else
         glTexCoord2f(1.0f, 1.0f);
     glVertex3f(x + width, height + y, 0.0f);
     
-    
-    if(flipx)
-        glTexCoord2f(0.0f, 0.0f);
-    else
         glTexCoord2f(1.0f, 0.0f);
     glVertex3f(x + width, y, 0.0f);
     glEnd();

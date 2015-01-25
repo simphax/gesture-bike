@@ -86,7 +86,7 @@ bool FlashlightGesture::gestureDetect(nite::Skeleton *skeleton, nite::UserTracke
 
 void FlashlightGesture::hudMessage(HUD *hud)
 {
-    hud->toggleFlashlight();
+    //hud->toggleFlashlight();
 }
 
 void FlashlightGesture::draw(){}

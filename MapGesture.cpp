@@ -86,7 +86,7 @@ bool MapGesture::gestureDetect(nite::Skeleton *skeleton, nite::UserTracker *user
 
 void MapGesture::hudMessage(HUD *hud)
 {
-    hud->toggleMap();
+    //hud->toggleMap();
 }
 
 void MapGesture::draw(){}

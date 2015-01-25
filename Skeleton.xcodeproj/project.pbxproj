@@ -36,10 +36,13 @@
 		0AB8ED1E18A93ADC00F145E5 /* OpenNI.ini in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0AB8ECA818A9349400F145E5 /* OpenNI.ini */; };
 		0AB8ED1F18A93ADC00F145E5 /* org.openni.jar in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0AB8ECB318A9349400F145E5 /* org.openni.jar */; };
 		0AB8ED2318A93DE300F145E5 /* libOniFile.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0AB8ECAE18A9349400F145E5 /* libOniFile.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		5C2B31361A7543630047C58C /* recognizing.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5C2B31351A75435F0047C58C /* recognizing.bmp */; };
 		5C3BA8751A3EE45100FE4860 /* FlashlightGesture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5C3BA8741A3EE45100FE4860 /* FlashlightGesture.cpp */; };
 		5C3BA8C21A3F9C0500FE4860 /* img_test.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5C3BA8BF1A3F9B2A00FE4860 /* img_test.bmp */; };
 		5C3BA8C61A3F9DB800FE4860 /* map_lindholmen.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5C3BA8C51A3F9DB100FE4860 /* map_lindholmen.bmp */; };
 		5C3BA8C81A3FA54000FE4860 /* MapGesture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5C3BA8C71A3FA54000FE4860 /* MapGesture.cpp */; };
+		5C9E3FCC1A751EB700C43B69 /* loading.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5C9E3FCB1A751EAD00C43B69 /* loading.bmp */; };
+		5C9E3FCE1A75202300C43B69 /* route_01.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5C9E3FCD1A75201600C43B69 /* route_01.bmp */; };
 		5CAB237F1A3E3EDC0049AB34 /* HUD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5CAB237D1A3E3EDC0049AB34 /* HUD.cpp */; };
 		5CBD38AF1A40802D00B1368C /* course-lindholmen.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5CBD38AE1A40802600B1368C /* course-lindholmen.bmp */; };
 		F4779DAA1A3DABDC00A7CD88 /* TurnLeftGesture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F4779DA81A3DABDC00A7CD88 /* TurnLeftGesture.cpp */; };
@@ -134,9 +137,12 @@
 				F4DCBDA51A7518F80027788E /* arrow-right.bmp in CopyFiles */,
 				F4DCBDA01A7509520027788E /* stop-left.bmp in CopyFiles */,
 				F4DCBDA11A7509520027788E /* stop-right.bmp in CopyFiles */,
+				5C9E3FCC1A751EB700C43B69 /* loading.bmp in CopyFiles */,
+				5C2B31361A7543630047C58C /* recognizing.bmp in CopyFiles */,
 				F4A00B391A6FEDC0005468F7 /* arrow.bmp in CopyFiles */,
 				F4A00B371A6FE247005468F7 /* stop.bmp in CopyFiles */,
 				5C3BA8C21A3F9C0500FE4860 /* img_test.bmp in CopyFiles */,
+				5C9E3FCE1A75202300C43B69 /* route_01.bmp in CopyFiles */,
 				5C3BA8C61A3F9DB800FE4860 /* map_lindholmen.bmp in CopyFiles */,
 				5CBD38AF1A40802D00B1368C /* course-lindholmen.bmp in CopyFiles */,
 			);
@@ -198,12 +204,15 @@
 		0AB8ED0D18A9385B00F145E5 /* NiteVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NiteVersion.h; sourceTree = "<group>"; };
 		0AB8ED0E18A938AB00F145E5 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		0AB8ED1018A938B200F145E5 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
+		5C2B31351A75435F0047C58C /* recognizing.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = recognizing.bmp; path = Assets/recognizing.bmp; sourceTree = "<group>"; };
 		5C3BA8731A3EE44400FE4860 /* FlashlightGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlashlightGesture.h; sourceTree = "<group>"; };
 		5C3BA8741A3EE45100FE4860 /* FlashlightGesture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FlashlightGesture.cpp; sourceTree = "<group>"; };
 		5C3BA8BF1A3F9B2A00FE4860 /* img_test.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = img_test.bmp; sourceTree = "<group>"; };
 		5C3BA8C51A3F9DB100FE4860 /* map_lindholmen.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = map_lindholmen.bmp; sourceTree = "<group>"; };
 		5C3BA8C71A3FA54000FE4860 /* MapGesture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MapGesture.cpp; sourceTree = "<group>"; };
 		5C3BA8C91A3FA54A00FE4860 /* MapGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapGesture.h; sourceTree = "<group>"; };
+		5C9E3FCB1A751EAD00C43B69 /* loading.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = loading.bmp; path = Assets/loading.bmp; sourceTree = "<group>"; };
+		5C9E3FCD1A75201600C43B69 /* route_01.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = route_01.bmp; path = Assets/route_01.bmp; sourceTree = "<group>"; };
 		5CAB237D1A3E3EDC0049AB34 /* HUD.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HUD.cpp; sourceTree = "<group>"; };
 		5CAB237E1A3E3EDC0049AB34 /* HUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HUD.h; sourceTree = "<group>"; };
 		5CBD38AE1A40802600B1368C /* course-lindholmen.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = "course-lindholmen.bmp"; sourceTree = "<group>"; };
@@ -457,11 +466,14 @@
 				F4DCBDA31A7515530027788E /* arrow-right.bmp */,
 				F4DCBD9E1A7509260027788E /* stop-left.bmp */,
 				F4DCBD9F1A7509260027788E /* stop-right.bmp */,
+				5C9E3FCD1A75201600C43B69 /* route_01.bmp */,
 				F4A00B381A6FED9B005468F7 /* arrow.bmp */,
 				F4A00B331A6FDF2D005468F7 /* stop.bmp */,
+				5C2B31351A75435F0047C58C /* recognizing.bmp */,
 				5CBD38AE1A40802600B1368C /* course-lindholmen.bmp */,
 				5C3BA8C51A3F9DB100FE4860 /* map_lindholmen.bmp */,
 				5C3BA8BF1A3F9B2A00FE4860 /* img_test.bmp */,
+				5C9E3FCB1A751EAD00C43B69 /* loading.bmp */,
 			);
 			name = Images;
 			sourceTree = "<group>";

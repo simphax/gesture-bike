@@ -2,7 +2,7 @@
 //
 
 #define FULLSCREEN 0
-#define DEBUG 0
+#define DEBUG 1
 #define DEPTHCAMERA 0
 
 #include "stdafx.h"
@@ -126,14 +126,14 @@ void gl_KeyboardCallback(unsigned char key, int x, int y)
         debugGrid = !debugGrid;
     }
     
-    if(key == 'f')
+    if(key == 'r')
     {
-        hud->toggleFlashlight();
+        hud->drawRecognizing();
     }
     
     if(key == 'm')
     {
-        hud->toggleMap();
+        hud->switchMap();
     }
     
 }

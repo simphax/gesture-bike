@@ -16,36 +16,28 @@
 #include <cmath>        // std::abs
 
 
-#define GESTURETIMEOUT 3500
-#define HUDHEIGHT 160
-#define HUDWIDTH 640
+#define HUDHEIGHT 240
+#define HUDWIDTH 854
 
 class HUD
 {
 private:
+
     
-    //Remember flashlight state
-    bool isFlashlightOn;
-    float flashLightToggleTime;
-    
-    //Remember flashlight state
-    bool isMapOn;
-    float mapToggleTime;
-    
+    int currentMap;
     
     void drawCircle(float cx, float cy, float r, int num_segments);
-    
-    GLuint LoadTexture( const char * filename,  int width, int height);
+        
+    GLuint texture_map_1, texture_map_2, texture_loading,  texture_recognizing;
 
     
 public:
     HUD();
     void draw();
-    void drawFlashlight();
     void drawMap();
+    void drawRecognizing();
     void drawMessage(const char* string);
-    void toggleFlashlight();
-    void toggleMap();
+    void switchMap();
     
 };
 

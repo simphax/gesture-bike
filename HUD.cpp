@@ -13,16 +13,21 @@
 //Constructor
 HUD::HUD()
 {
-    isFlashlightOn = false;
-    isMapOn = false;
-    flashLightToggleTime = glutGet(GLUT_ELAPSED_TIME);
-    mapToggleTime = glutGet(GLUT_ELAPSED_TIME);
+    currentMap = 1;
+
+    //mapToggleTime = glutGet(GLUT_ELAPSED_TIME);
+    
+    texture_map_1 = GLHelper::LoadTexture( "route_01.bmp", HUDWIDTH, HUDHEIGHT );
+    texture_map_2 = GLHelper::LoadTexture( "route_01.bmp", HUDWIDTH, HUDHEIGHT );
+    texture_loading = GLHelper::LoadTexture( "img_test.bmp", 256, 256 );
+    texture_recognizing = GLHelper::LoadTexture( "recognizing.bmp", HUDWIDTH, HUDHEIGHT );
+
 }
 
 void HUD::draw()
 {
-    this->drawFlashlight();
-    this->drawMap();
+    this->drawRecognizing();
+    //this->drawMap();
     
 }
 
@@ -42,123 +47,31 @@ void HUD::drawMessage(const char *string)
 }
 
 
-void HUD::drawFlashlight()
-{
- 
-    if(isFlashlightOn)
-    {
-        glBegin( GL_POLYGON );
-        glColor3f(1.0 , 1.0 , 1.0);
-        glVertex3f(0.0f, 480.0f - (float)HUDHEIGHT, 0.0f);
-        glVertex3f(640.0f, 480.0f - (float)HUDHEIGHT, 0.0f);
-        glVertex3f(640.0f, 480.0f, 0.0f);
-        glVertex3f(0.0f, 480.0f, 0.0f);
-        glEnd();
-    }
 
-    
-}
 
 void HUD::drawMap()
 {
-    
-    if(!isMapOn) return;
-        
-    glEnable(GL_TEXTURE_2D);
-    
-    GLuint texture;
-    texture= GLHelper::LoadTexture( "course-lindholmen.bmp", HUDWIDTH, HUDHEIGHT );
-    
 
-    glColor3f(1.0, 1.0, 1.0);
+    GLHelper::DrawTexture(texture_map_1, HUDWIDTH, HUDHEIGHT, 0, 200, 1, false, false);
     
-    glBindTexture (GL_TEXTURE_2D, texture);
+}
+
+
+
+void HUD::drawRecognizing()
+{
     
-    glBegin(GL_QUADS);
-    glTexCoord2f(0.0f, 0.0f);
-    glVertex3f(0.0f, 480.0f, 0.0f);
+    GLHelper::DrawTexture(texture_loading, 256, 256, 0, 200, 1, false, false);
    
-    
-    glTexCoord2f(0.0f, 1.0f);
-     glVertex3f(0.0f, 480.0f - (float)HUDHEIGHT, 0.0f);
-    
-    glTexCoord2f(1.0f, 1.0f);
-    glVertex3f(640.0f, 480.0f - (float)HUDHEIGHT, 0.0f);
-    
-    
-    glTexCoord2f(1.0f, 0.0f);
-    glVertex3f(640.0f,480.0f, 0.0f);
-    glEnd();
-    
-    
-    
-    glDisable(GL_TEXTURE_2D);
-    
-    //this->drawCircle(320.0, 400.0, 40.0, 50);
+    //GLHelper::DrawTexture(texture_recognizing, HUDWIDTH, HUDHEIGHT, 0, 200, 1, false, false);
     
 }
 
 
-void HUD::toggleFlashlight(){
-    
-    float elapsedTime = 0;
-    
-    //Flashlight is off - turn it on
-    if(!isFlashlightOn)
-    {
-        //Don't turn on if it was turned off within the last 1 second
-        elapsedTime = glutGet(GLUT_ELAPSED_TIME) - flashLightToggleTime;
-        
-        if(elapsedTime > GESTURETIMEOUT)
-        {
-            isFlashlightOn = !isFlashlightOn;
-            flashLightToggleTime = glutGet(GLUT_ELAPSED_TIME);
-        }
-    }
-     //Flashlight is on - turn it off
-    else
-    {
-        //Don't turn off if it was turned on within the last 2 seconds
-        elapsedTime = glutGet(GLUT_ELAPSED_TIME) - flashLightToggleTime;
 
-        if(elapsedTime > GESTURETIMEOUT){
+void HUD::switchMap(){
 
-            //Turn on flashlight
-            isFlashlightOn = !isFlashlightOn;
-            flashLightToggleTime = glutGet(GLUT_ELAPSED_TIME);
-        }
-    }
-}
-
-void HUD::toggleMap(){
-    
-    float elapsedTime = 0;
-    
-    //Flashlight is off - turn it on
-    if(!isFlashlightOn)
-    {
-        //Don't turn on if it was turned off within the last 1 second
-        elapsedTime = glutGet(GLUT_ELAPSED_TIME) - mapToggleTime;
-        
-        if(elapsedTime > GESTURETIMEOUT)
-        {
-            isMapOn = !isMapOn;
-            mapToggleTime= glutGet(GLUT_ELAPSED_TIME);
-        }
-    }
-    //Flashlight is on - turn it off
-    else
-    {
-        //Don't turn off if it was turned on within the last 2 seconds
-        elapsedTime = glutGet(GLUT_ELAPSED_TIME) - mapToggleTime;
-        
-        if(elapsedTime > GESTURETIMEOUT){
-            
-            //Turn on flashlight
-            isMapOn = !isMapOn;
-            mapToggleTime = glutGet(GLUT_ELAPSED_TIME);
-        }
-    }
+        //Todo - switch maps on key press or re-regonition
 }
 
 
