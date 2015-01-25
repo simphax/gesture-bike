@@ -13,6 +13,8 @@
 //Simple Texture loading (BMP only)
 //SRC: http://stackoverflow.com/questions/12518111/how-to-load-a-bmp-on-glut-to-use-it-as-a-texture
 
+//The bmp reading code below is brittle, make sure that the width is divisible by 4!
+
 GLuint GLHelper::LoadTexture( const char * filename, int width, int height )
 {
     
