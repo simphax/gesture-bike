@@ -364,10 +364,10 @@ void gl_DisplayCallback()
 	if (!uTracker.isValid())
     {
         //For debug purposes
-        //Draw HUD
-        hud->draw();
         //Draw Awareness Markers
         drawAwarenessMarkers();
+        //Draw HUD
+        hud->draw();
 
     }
     else
@@ -384,10 +384,6 @@ void gl_DisplayCallback()
                 drawDepthTexture();
             }
             
-            //Draw HUD
-            hud->draw();
-            //Draw Awareness Markers
-            drawAwarenessMarkers();
             
 			const nite::Array<nite::UserData>& users = usersFrame.getUsers();
 
@@ -447,6 +443,9 @@ void gl_DisplayCallback()
                     if(activeGesture) {
                         activeGesture->draw();
                         activeGesture->hudMessage(hud);
+                    } else {
+                        //Draw Awareness Markers
+                        drawAwarenessMarkers();
                     }
                     
                     break;
@@ -458,6 +457,8 @@ void gl_DisplayCallback()
                 }
             }
             
+            //Draw HUD
+            hud->draw();
         }
         
 
