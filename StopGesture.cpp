@@ -18,7 +18,7 @@
 #define HAND_ELBOW_DELTA_Y 20
 #define HAND_Z_MIN 700
 
-#define STOP_IMG_WIDTH 540
+#define STOP_IMG_WIDTH 808
 #define STOP_IMG_HEIGHT 460
 
 StopGesture::StopGesture()
@@ -28,7 +28,8 @@ StopGesture::StopGesture()
     elbowShoulderDeltaYBuffer = new CircularBuffer(20);
     elbowShoulderDeltaXBuffer = new CircularBuffer(20);
     
-    texture = GLHelper::LoadTexture( "stop.bmp", STOP_IMG_WIDTH, STOP_IMG_HEIGHT );
+    this->textureLeft = GLHelper::LoadTexture( "stop-left.bmp", STOP_IMG_WIDTH, STOP_IMG_HEIGHT );
+    this->textureRight = GLHelper::LoadTexture( "stop-right.bmp", STOP_IMG_WIDTH, STOP_IMG_HEIGHT );
 }
 
 bool StopGesture::gestureDetect(nite::Skeleton *skeleton, nite::UserTracker *userTracker)
@@ -91,8 +92,8 @@ bool StopGesture::gestureDetect(nite::Skeleton *skeleton, nite::UserTracker *use
 void StopGesture::draw()
 {
     
-    GLHelper::DrawTexture(texture, STOP_IMG_WIDTH/2, STOP_IMG_HEIGHT/2, 0, 0, opacityTotal, false, false);
-    GLHelper::DrawTexture(texture, STOP_IMG_WIDTH/2, STOP_IMG_HEIGHT/2, 840 - STOP_IMG_WIDTH/2, 0, opacityTotal, false, false);
+    GLHelper::DrawTexture(this->textureLeft, STOP_IMG_WIDTH/2, STOP_IMG_HEIGHT/2, 0, 0, opacityTotal, false, false);
+    GLHelper::DrawTexture(this->textureRight, STOP_IMG_WIDTH/2, STOP_IMG_HEIGHT/2, 854 - STOP_IMG_WIDTH/2, 0, opacityTotal, false, false);
 
     this->animate();
     

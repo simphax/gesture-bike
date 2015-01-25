@@ -11,19 +11,19 @@
 #include <stdio.h>
 #include "GLHelper.h"
 
-#define ARROW_IMG_WIDTH 540
+#define ARROW_IMG_WIDTH 808
 #define ARROW_IMG_HEIGHT 460
 
 
 TurnRightGesture::TurnRightGesture() : TurnGesture(nite::JointType::JOINT_RIGHT_HAND, nite::JointType::JOINT_RIGHT_ELBOW, nite::JointType::JOINT_RIGHT_SHOULDER)
 {
-    texture = GLHelper::LoadTexture("arrow.bmp", ARROW_IMG_WIDTH, ARROW_IMG_HEIGHT);
+    texture = GLHelper::LoadTexture("arrow-right.bmp", ARROW_IMG_WIDTH, ARROW_IMG_HEIGHT);
 }
 
 
 void TurnRightGesture::draw()
 {
-    GLHelper::DrawTexture(texture, ARROW_IMG_WIDTH/2, ARROW_IMG_HEIGHT/2, 840-ARROW_IMG_WIDTH/2, 0, opacityTotal, true, false);
+    GLHelper::DrawTexture(texture, ARROW_IMG_WIDTH/2, ARROW_IMG_HEIGHT/2, 854-ARROW_IMG_WIDTH/2, 0, opacityTotal, false, false);
     
     this->animate();
 }

@@ -301,15 +301,15 @@ void drawAwarenessLine(float xOffset, float yOffset, float skew)
     
     //glRotated(100,135,30,0);
     
-    float width = 270;
+    float width = 376;
     float height = 30;
     
     glBegin( GL_POLYGON );
     
     glColor3f(0, 1.0, 0);
     glVertex3f(xOffset, yOffset, 0.0f);
-    glVertex3f(xOffset+270.0f, yOffset + skew, 0.0f);
-    glVertex3f(xOffset+270.0f, yOffset + skew + height, 0.0f);
+    glVertex3f(xOffset+width, yOffset + skew, 0.0f);
+    glVertex3f(xOffset+width, yOffset + skew + height, 0.0f);
     glVertex3f(xOffset, height + yOffset, 0.0f);
     glEnd();
     
@@ -330,19 +330,19 @@ void drawAwarenessMarkers()
     }
     
     for(int i=0; i<20; i++) {
-        drawAwarenessLine(570,i*60+animationOffset-100,30.0f);
+        drawAwarenessLine(478,i*60+animationOffset-100,30.0f);
     }
     
     frame++;
     
     glBegin( GL_POLYGON );
     glColor3f(0, 0, 0);
-    glVertex3f(0.0f, 230.0f, 0.0f);
-    glVertex3f(270.0f, 230.0f, 0.0f);
-    glVertex3f(270.0f, 480.0f, 0.0f);
+    glVertex3f(0.0f, 190.0f, 0.0f);
+    glVertex3f(854, 190.0f, 0.0f);
+    glVertex3f(854, 480.0f, 0.0f);
     glVertex3f(0.0f, 480.0f, 0.0f);
     glEnd();
-    
+    /*
     glBegin( GL_POLYGON );
     glColor3f(0, 0, 0);
     glVertex3f(570.0f, 230.0f, 0.0f);
@@ -350,7 +350,7 @@ void drawAwarenessMarkers()
     glVertex3f(570.0f + 270.0f, 480.0f, 0.0f);
     glVertex3f(570.0f, 480.0f, 0.0f);
     glEnd();
-    
+    */
 }
 
 
@@ -515,7 +515,7 @@ void gl_Setup(void) {
     glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
  
     #if FULLSCREEN
-        glutGameModeString("854x480:32@60");
+        glutGameModeString("1280x720:32@60");
         glutEnterGameMode();
     #else
         glutInitWindowSize(window_w, window_h);
@@ -572,7 +572,7 @@ int main(int argc, char* argv[])
             status = uTracker.create();
         }
     }
-	
+	isUserDetected = true;
 	printf("\r\n---------------------- OpenGL -------------------------\r\n");
 	printf("Initializing OpenGL ...\r\n");
     
