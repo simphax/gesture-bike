@@ -18,6 +18,7 @@
 
 #define HUDHEIGHT 240
 #define HUDWIDTH 854
+#define LOADINGWH 178
 
 class HUD
 {

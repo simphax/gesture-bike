@@ -29,6 +29,7 @@ GLuint GLHelper::LoadTexture( const char * filename, int width, int height )
     if ( file == NULL ) return 0;
     data = (unsigned char *)malloc( width * height * 3 );
     //int size = fseek(file,);
+    fread(data, 54, 1, file);
     fread( data, width * height * 3, 1, file );
     fclose( file );
     
@@ -69,33 +70,19 @@ void GLHelper::DrawTexture( GLuint texture, int width, int height, int x, int y,
     
     glBegin(GL_QUADS);
     
-
+    //coordinate system is flipped, the y anchor (0) is on the bottom left
+    
     glTexCoord2f(0.0f, 0.0f);
-    glVertex3f(0.0f, 480.0f, 0.0f);
-    
-    
-    glTexCoord2f(0.0f, 1.0f);
-    glVertex3f(0.0f, 480.0f - (float)HUDHEIGHT, 0.0f);
-    
-    glTexCoord2f(1.0f, 1.0f);
-    glVertex3f(640.0f, 480.0f - (float)HUDHEIGHT, 0.0f);
-    
-    
-    glTexCoord2f(1.0f, 0.0f);
-    glVertex3f(640.0f,480.0f, 0.0f);
-    
-    
-        glTexCoord2f(0.0f, 0.0f);
-    glVertex3f(x, height, 0.0f);
-    
-        glTexCoord2f(0.0f, 1.0f);
     glVertex3f(x, height + y, 0.0f);
     
-        glTexCoord2f(1.0f, 1.0f);
-    glVertex3f(x + width, height + y, 0.0f);
+    glTexCoord2f(0.0f, 1.0f);
+    glVertex3f(x, y, 0.0f);
     
-        glTexCoord2f(1.0f, 0.0f);
+    glTexCoord2f(1.0f, 1.0f);
     glVertex3f(x + width, y, 0.0f);
+    
+    glTexCoord2f(1.0f, 0.0f);
+    glVertex3f(x + width, height + y, 0.0f);
     glEnd();
     
     

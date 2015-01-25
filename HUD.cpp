@@ -19,15 +19,15 @@ HUD::HUD()
     
     texture_map_1 = GLHelper::LoadTexture( "route_01.bmp", HUDWIDTH, HUDHEIGHT );
     texture_map_2 = GLHelper::LoadTexture( "route_01.bmp", HUDWIDTH, HUDHEIGHT );
-    texture_loading = GLHelper::LoadTexture( "img_test.bmp", 256, 256 );
+    texture_loading = GLHelper::LoadTexture( "loading.bmp", LOADINGWH, LOADINGWH );
     texture_recognizing = GLHelper::LoadTexture( "recognizing.bmp", HUDWIDTH, HUDHEIGHT );
 
 }
 
 void HUD::draw()
 {
-    this->drawRecognizing();
-    //this->drawMap();
+    //this->drawRecognizing();
+    this->drawMap();
     
 }
 
@@ -61,8 +61,7 @@ void HUD::drawMap()
 void HUD::drawRecognizing()
 {
     
-    GLHelper::DrawTexture(texture_loading, 256, 256, 0, 200, 1, false, false);
-   
+    //GLHelper::DrawTexture(texture_loading, LOADINGWH, LOADINGWH, 0, 0, 1, false, false);
     //GLHelper::DrawTexture(texture_recognizing, HUDWIDTH, HUDHEIGHT, 0, 200, 1, false, false);
     
 }
