@@ -72,7 +72,7 @@ std::list<IGesture*> gestures;
 IGesture *activeGesture;
 
 //Heads up display class
-HUD *hud = new HUD();
+HUD *hud;
 
 
 char ReadLastCharOfLine()
@@ -587,6 +587,7 @@ int main(int argc, char* argv[])
     //gestures.push_back(new MapGesture());
     gestures.push_back(new TurnLeftGesture());
     gestures.push_back(new TurnRightGesture());
+    hud = new HUD();
     
 	printf("Starting OpenGL rendering process ...\r\n");
 	glutMainLoop();
