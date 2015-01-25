@@ -264,7 +264,6 @@ void gl_depthTextureSetup(nite::UserTrackerFrameRef &usersFrame)
 //Draw the depth texture (map the texture corners to window corners)
 void drawDepthTexture()
 {
-    glEnable(GL_TEXTURE_2D);
     
     // Create the OpenGL texture map
     glTexParameteri(GL_TEXTURE_2D,
@@ -290,7 +289,7 @@ void drawDepthTexture()
     
     glEnd();
     
-    glDisable(GL_TEXTURE_2D);
+    glBindTexture(GL_TEXTURE_2D, 1);
 }
 
 
@@ -573,7 +572,6 @@ int main(int argc, char* argv[])
             status = uTracker.create();
         }
     }
-    isUserDetected = true;
 	
 	printf("\r\n---------------------- OpenGL -------------------------\r\n");
 	printf("Initializing OpenGL ...\r\n");
