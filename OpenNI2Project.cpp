@@ -31,7 +31,7 @@ using namespace openni;
 
 #include "HUD.h"
 
-int window_w = 840;
+int window_w = 854;
 int window_h = 480;
 
 OniRGB888Pixel* gl_texture;
@@ -515,7 +515,7 @@ void gl_Setup(void) {
     glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
  
     #if FULLSCREEN
-        glutGameModeString("840x480:32@60");
+        glutGameModeString("854x480:32@60");
         glutEnterGameMode();
     #else
         glutInitWindowSize(window_w, window_h);
