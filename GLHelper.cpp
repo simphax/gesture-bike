@@ -74,19 +74,66 @@ void GLHelper::DrawTexture( GLuint texture, int width, int height, int x, int y,
     
     //coordinate system is flipped, the y anchor (0) is on the bottom left
     
-    glTexCoord2f(0.0f, 0.0f);
-    glVertex3f(x, height + y, 0.0f);
+    if(flipy && flipy){
+        glTexCoord2f(0.0f, 0.0f);
+        glVertex3f(x + width, y, 0.0f);
+        
+        glTexCoord2f(0.0f, 1.0f);
+        glVertex3f(x + width, height + y, 0.0f);
+        
+        glTexCoord2f(1.0f, 1.0f);
+        glVertex3f(x, height + y, 0.0f);
+        
+        glTexCoord2f(1.0f, 0.0f);
+        glVertex3f(x, y, 0.0f);
+        
+        
+    }else if(flipx){
+        glTexCoord2f(0.0f, 0.0f);
+        glVertex3f(x + width, height + y, 0.0f);
+        
+        glTexCoord2f(0.0f, 1.0f);
+        glVertex3f(x + width, y, 0.0f);
+       
+        
+        glTexCoord2f(1.0f, 1.0f);
+        glVertex3f(x, y, 0.0f);
+        
+        glTexCoord2f(1.0f, 0.0f);
+        glVertex3f(x, height + y, 0.0f);
+
+
+    }else if(flipy){
+        glTexCoord2f(0.0f, 0.0f);
+        glVertex3f(x, y, 0.0f);
+        
+        glTexCoord2f(0.0f, 1.0f);
+        glVertex3f(x, height + y, 0.0f);
+        
+        glTexCoord2f(1.0f, 1.0f);
+        glVertex3f(x + width, height + y, 0.0f);
+        
+        glTexCoord2f(1.0f, 0.0f);
+        glVertex3f(x + width, y, 0.0f);
+        
+
+    }else{
+        glTexCoord2f(0.0f, 0.0f);
+        glVertex3f(x, height + y, 0.0f);
+        
+        glTexCoord2f(0.0f, 1.0f);
+        glVertex3f(x, y, 0.0f);
+        
+        glTexCoord2f(1.0f, 1.0f);
+        glVertex3f(x + width, y, 0.0f);
+        
+        glTexCoord2f(1.0f, 0.0f);
+        glVertex3f(x + width, height + y, 0.0f);
+
+    }
+
     
-    glTexCoord2f(0.0f, 1.0f);
-    glVertex3f(x, y, 0.0f);
-    
-    glTexCoord2f(1.0f, 1.0f);
-    glVertex3f(x + width, y, 0.0f);
-    
-    glTexCoord2f(1.0f, 0.0f);
-    glVertex3f(x + width, height + y, 0.0f);
     glEnd();
-    
     
     glBindTexture (GL_TEXTURE_2D, 1);
     

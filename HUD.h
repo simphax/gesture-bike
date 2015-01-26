@@ -25,6 +25,9 @@ private:
     
     int currentMap;
     
+    int loadingRotationAngle;
+    float lastFrameTime;
+    
     void drawCircle(float cx, float cy, float r, int num_segments);
         
     GLuint texture_map_1, texture_map_2, texture_loading,  texture_recognizing;
@@ -37,6 +40,7 @@ public:
     void drawRecognizing();
     void drawMessage(const char* string);
     void switchMap();
+    void animate();
     
 };
 

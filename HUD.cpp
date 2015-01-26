@@ -23,7 +23,9 @@
 HUD::HUD()
 {
     currentMap = 1;
-
+    loadingRotationAngle = 0;
+    lastFrameTime = 0;
+    
     //mapToggleTime = glutGet(GLUT_ELAPSED_TIME);
     
     texture_map_1 = GLHelper::LoadTexture( "route_01.bmp", MAP_IMG_WIDTH, MAP_IMG_HEIGHT );
@@ -70,14 +72,30 @@ void HUD::drawMap()
 void HUD::drawRecognizing()
 {
     
-    GLHelper::DrawTexture(texture_loading, LOADING_IMG_WIDTH, LOADING_IMG_HEIGHT, 0, 0, 1, false, false);
-    GLHelper::DrawTexture(texture_recognizing, RECOGNIZING_IMG_WIDTH, RECOGNIZING_IMG_HEIGHT, 0, 200, 1, false, false);
     
+    
+    
+    //Rotation of loading graphic
+    glPushMatrix(); //Save the current matrix.
+    //Change the current matrix.
+    glTranslatef(430, 350, 0);
+    glRotatef(loadingRotationAngle, 0, 0, 1);
+    
+    GLHelper::DrawTexture(texture_loading, LOADING_IMG_WIDTH, LOADING_IMG_HEIGHT, -90, -90, 1, false, false);
+    
+    //Reset the current matrix to the one that was saved.
+    glPopMatrix();
+    
+    GLHelper::DrawTexture(texture_recognizing, RECOGNIZING_IMG_WIDTH, RECOGNIZING_IMG_HEIGHT, 310, 450, 1, false, false);
+
+    
+    this->animate();
 }
 
 
 
-void HUD::switchMap(){
+void HUD::switchMap()
+{
 
         //Todo - switch maps on key press or re-regonition
 }
@@ -99,4 +117,15 @@ void HUD::drawCircle(float cx, float cy, float r, int num_segments)
         
     } 
     glEnd(); 
+}
+
+void HUD::animate()
+{
+    if(lastFrameTime + 10 < glutGet(GLUT_ELAPSED_TIME) ) {
+        
+        
+        loadingRotationAngle += 2;
+        
+        lastFrameTime = glutGet(GLUT_ELAPSED_TIME);
+    }
 }
