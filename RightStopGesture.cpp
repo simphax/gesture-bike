@@ -92,6 +92,7 @@ bool RightStopGesture::gestureDetect(nite::Skeleton *skeleton, nite::UserTracker
 void RightStopGesture::draw()
 {
     
+    GLHelper::DrawBlackBox(854, 240,0, 0);
     GLHelper::DrawTexture(this->textureLeft, STOP_IMG_WIDTH/2, STOP_IMG_HEIGHT/2, 0, 0, opacityTotal, false, false);
     GLHelper::DrawTexture(this->textureRight, STOP_IMG_WIDTH/2, STOP_IMG_HEIGHT/2, 854 - STOP_IMG_WIDTH/2, 0, opacityTotal, false, false);
     

@@ -35,10 +35,16 @@ HUD::HUD()
 
 }
 
-void HUD::draw()
+void HUD::draw(bool userDetected)
 {
+    
     this->drawRecognizing();
-    //this->drawMap();
+    
+    if(userDetected){
+        this->drawMap();
+    }
+    
+    
     
 }
 
@@ -62,8 +68,13 @@ void HUD::drawMessage(const char *string)
 
 void HUD::drawMap()
 {
+    if(currentMap == 1){
+        GLHelper::DrawTexture(texture_map_1, MAP_IMG_WIDTH, MAP_IMG_HEIGHT, 200, 260, 1, false, false);
+    }else{
+        GLHelper::DrawTexture(texture_map_2, MAP_IMG_WIDTH, MAP_IMG_HEIGHT, 200, 260, 1, false, false);
+    }
 
-    GLHelper::DrawTexture(texture_map_1, MAP_IMG_WIDTH, MAP_IMG_HEIGHT, 0, 200, 1, false, false);
+    
     
 }
 
@@ -97,9 +108,13 @@ void HUD::drawRecognizing()
 void HUD::switchMap()
 {
 
-        //Todo - switch maps on key press or re-regonition
+    if (currentMap == 1){
+        currentMap = 2;
+    }else{
+        currentMap = 1;
+    }
+    
 }
-
 
 
 void HUD::drawCircle(float cx, float cy, float r, int num_segments)

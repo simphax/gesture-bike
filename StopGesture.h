@@ -30,6 +30,7 @@ private:
     float lastFrameTime = 0;
     GLuint textureLeft;
     GLuint textureRight;
+    GLuint textureNormal;
     
     void animate();
     

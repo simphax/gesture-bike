@@ -128,8 +128,9 @@ void gl_KeyboardCallback(unsigned char key, int x, int y)
     
     if(key == 'r')
     {
-        hud->drawRecognizing();
+        isUserDetected = !isUserDetected;
     }
+
     
     if(key == 'm')
     {
@@ -367,7 +368,7 @@ void gl_DisplayCallback()
         //Draw Awareness Markers
         drawAwarenessMarkers();
         //Draw HUD
-        hud->draw();
+        hud->draw(isUserDetected);
 
     }
     else
@@ -403,9 +404,9 @@ void gl_DisplayCallback()
                         hud->toggleFlashlight();
                     }
                     */
+                    
                     //User detected
                     isUserDetected = true;
-
                     
                     
                     //showDetectionMessage();
@@ -458,7 +459,7 @@ void gl_DisplayCallback()
             }
             
             //Draw HUD
-            hud->draw();
+            hud->draw(isUserDetected);
         }
         
 
@@ -573,7 +574,7 @@ int main(int argc, char* argv[])
             status = uTracker.create();
         }
     }
-	isUserDetected = true;
+	isUserDetected = false;
 	printf("\r\n---------------------- OpenGL -------------------------\r\n");
 	printf("Initializing OpenGL ...\r\n");
     

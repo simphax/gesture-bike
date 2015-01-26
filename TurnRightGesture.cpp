@@ -23,6 +23,7 @@ TurnRightGesture::TurnRightGesture() : TurnGesture(nite::JointType::JOINT_RIGHT_
 
 void TurnRightGesture::draw()
 {
+    GLHelper::DrawBlackBox(854, 240,0, 0);
     GLHelper::DrawTexture(texture, ARROW_IMG_WIDTH/2, ARROW_IMG_HEIGHT/2, 854-ARROW_IMG_WIDTH/2, 0, opacityTotal, false, false);
     
     this->animate();

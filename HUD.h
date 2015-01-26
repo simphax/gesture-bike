@@ -35,7 +35,7 @@ private:
     
 public:
     HUD();
-    void draw();
+    void draw(bool userDetected);
     void drawMap();
     void drawRecognizing();
     void drawMessage(const char* string);

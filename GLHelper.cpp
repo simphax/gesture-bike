@@ -138,3 +138,16 @@ void GLHelper::DrawTexture( GLuint texture, int width, int height, int x, int y,
     glBindTexture (GL_TEXTURE_2D, 1);
     
 }
+
+
+void GLHelper::DrawBlackBox(int width, int height, int y, int x)
+{
+    /* HUD square signal */
+    glBegin( GL_POLYGON );
+    glColor3f(0.0, 0.0, 0.0);
+    glVertex3f(x, height + y, 0.0f);
+    glVertex3f(x, y, 0.0f);
+    glVertex3f(x + width, y, 0.0f);
+    glVertex3f(x + width, height + y, 0.0f);
+    glEnd();
+}

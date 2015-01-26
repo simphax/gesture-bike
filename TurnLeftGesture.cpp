@@ -25,7 +25,9 @@ TurnLeftGesture::TurnLeftGesture() : TurnGesture(nite::JointType::JOINT_LEFT_HAN
 void TurnLeftGesture::draw()
 {
     
+    GLHelper::DrawBlackBox(854, 240,0, 0);
     GLHelper::DrawTexture(texture, ARROW_IMG_WIDTH/2, ARROW_IMG_HEIGHT/2, 0, 0, opacityTotal, false, false);
+
     
     this->animate();
     
