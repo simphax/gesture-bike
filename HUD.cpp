@@ -9,6 +9,15 @@
 #include "HUD.h"
 #include "GLHelper.h"
 
+#define HUD_HEIGHT 240
+#define HUD_WIDTH 854
+#define LOADING_IMG_WIDTH 180
+#define LOADING_IMG_HEIGHT 180
+#define MAP_IMG_WIDTH 472
+#define MAP_IMG_HEIGHT 220
+#define RECOGNIZING_IMG_WIDTH 244
+#define RECOGNIZING_IMG_HEIGHT 25
+
 
 //Constructor
 HUD::HUD()
@@ -17,17 +26,17 @@ HUD::HUD()
 
     //mapToggleTime = glutGet(GLUT_ELAPSED_TIME);
     
-    texture_map_1 = GLHelper::LoadTexture( "route_01.bmp", HUDWIDTH, HUDHEIGHT );
-    texture_map_2 = GLHelper::LoadTexture( "route_01.bmp", HUDWIDTH, HUDHEIGHT );
-    texture_loading = GLHelper::LoadTexture( "loading.bmp", LOADINGWH, LOADINGWH );
-    texture_recognizing = GLHelper::LoadTexture( "recognizing.bmp", HUDWIDTH, HUDHEIGHT );
+    texture_map_1 = GLHelper::LoadTexture( "route_01.bmp", MAP_IMG_WIDTH, MAP_IMG_HEIGHT );
+    texture_map_2 = GLHelper::LoadTexture( "route_01.bmp", MAP_IMG_WIDTH, MAP_IMG_HEIGHT );
+    texture_loading = GLHelper::LoadTexture( "loading.bmp", LOADING_IMG_WIDTH, LOADING_IMG_HEIGHT );
+    texture_recognizing = GLHelper::LoadTexture( "recognizing.bmp", RECOGNIZING_IMG_WIDTH, RECOGNIZING_IMG_HEIGHT );
 
 }
 
 void HUD::draw()
 {
-    //this->drawRecognizing();
-    this->drawMap();
+    this->drawRecognizing();
+    //this->drawMap();
     
 }
 
@@ -52,7 +61,7 @@ void HUD::drawMessage(const char *string)
 void HUD::drawMap()
 {
 
-    GLHelper::DrawTexture(texture_map_1, HUDWIDTH, HUDHEIGHT, 0, 200, 1, false, false);
+    GLHelper::DrawTexture(texture_map_1, MAP_IMG_WIDTH, MAP_IMG_HEIGHT, 0, 200, 1, false, false);
     
 }
 
@@ -61,8 +70,8 @@ void HUD::drawMap()
 void HUD::drawRecognizing()
 {
     
-    //GLHelper::DrawTexture(texture_loading, LOADINGWH, LOADINGWH, 0, 0, 1, false, false);
-    //GLHelper::DrawTexture(texture_recognizing, HUDWIDTH, HUDHEIGHT, 0, 200, 1, false, false);
+    GLHelper::DrawTexture(texture_loading, LOADING_IMG_WIDTH, LOADING_IMG_HEIGHT, 0, 0, 1, false, false);
+    GLHelper::DrawTexture(texture_recognizing, RECOGNIZING_IMG_WIDTH, RECOGNIZING_IMG_HEIGHT, 0, 200, 1, false, false);
     
 }
 
