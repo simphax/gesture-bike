@@ -3,7 +3,7 @@
 
 #define FULLSCREEN 1
 #define DEBUG 1
-#define DEPTHCAMERA 1
+#define DEPTHCAMERA 0
 
 #include "stdafx.h"
 // General headers

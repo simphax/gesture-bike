@@ -41,6 +41,8 @@
 		5C3BA8C21A3F9C0500FE4860 /* img_test.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5C3BA8BF1A3F9B2A00FE4860 /* img_test.bmp */; };
 		5C3BA8C61A3F9DB800FE4860 /* map_lindholmen.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5C3BA8C51A3F9DB100FE4860 /* map_lindholmen.bmp */; };
 		5C3BA8C81A3FA54000FE4860 /* MapGesture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5C3BA8C71A3FA54000FE4860 /* MapGesture.cpp */; };
+		5C5FD8931A77F98400B1C11A /* route_02.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84AD08641A77F7F300A29E09 /* route_02.bmp */; };
+		5C5FD8941A77F98600B1C11A /* route_01.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84AD08661A77F84E00A29E09 /* route_01.bmp */; };
 		5C9E3FCC1A751EB700C43B69 /* loading.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5C9E3FCB1A751EAD00C43B69 /* loading.bmp */; };
 		5CAB237F1A3E3EDC0049AB34 /* HUD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5CAB237D1A3E3EDC0049AB34 /* HUD.cpp */; };
 		5CBD38AF1A40802D00B1368C /* course-lindholmen.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5CBD38AE1A40802600B1368C /* course-lindholmen.bmp */; };
@@ -145,6 +147,8 @@
 				F4A00B371A6FE247005468F7 /* stop.bmp in CopyFiles */,
 				5C3BA8C21A3F9C0500FE4860 /* img_test.bmp in CopyFiles */,
 				5C3BA8C61A3F9DB800FE4860 /* map_lindholmen.bmp in CopyFiles */,
+				5C5FD8941A77F98600B1C11A /* route_01.bmp in CopyFiles */,
+				5C5FD8931A77F98400B1C11A /* route_02.bmp in CopyFiles */,
 				84ADE96A1A77E56700496A44 /* route_02_220_NOK.bmp in CopyFiles */,
 				84ADE9691A77E56500496A44 /* route_01_220_NOK.bmp in CopyFiles */,
 				84ADE9681A77E56200496A44 /* route_01_216_NOK.bmp in CopyFiles */,
