@@ -34,6 +34,9 @@ using namespace openni;
 int window_w = 854;
 int window_h = 480;
 
+int camera_w = 640;
+int camera_h = 480;
+
 OniRGB888Pixel* gl_texture;
 
 //NiTE vars
@@ -213,22 +216,22 @@ void gl_depthTextureSetup(nite::UserTrackerFrameRef &usersFrame)
     int colors[] = {16777215,
         14565387, 32255, 7996159, 16530175, 8373026, 14590399, 7062435, 13951499, 55807};
     resizeFactor = std::min(
-                            (window_w / (double)depthFrame.getWidth()),
-                            (window_h / (double)depthFrame.getHeight()));
-    texture_x = (unsigned int)(window_w -
+                            (camera_w / (double)depthFrame.getWidth()),
+                            (camera_h / (double)depthFrame.getHeight()));
+    texture_x = (unsigned int)(camera_w -
                                (resizeFactor * depthFrame.getWidth())) / 2;
-    texture_y = (unsigned int)(window_h -
+    texture_y = (unsigned int)(camera_h -
                                (resizeFactor * depthFrame.getHeight())) / 2;
     
     nite::UserMap usersMap = usersFrame.getUserMap();
     
     for	(unsigned int y = 0;
-         y < (window_h - 2 * texture_y); ++y)
+         y < (camera_h - 2 * texture_y); ++y)
     {
         OniRGB888Pixel* texturePixel = gl_texture +
-        ((y + texture_y) * window_w) + texture_x;
+        ((y + texture_y) * camera_w) + texture_x;
         for	(unsigned int x = 0;
-             x < (window_w - 2 * texture_x);
+             x < (camera_w - 2 * texture_x);
              ++x, ++texturePixel)
         {
             DepthPixel* depthPixel =
@@ -270,7 +273,7 @@ void drawDepthTexture()
     glTexParameteri(GL_TEXTURE_2D,
                     0x8191, GL_TRUE); // 0x8191 = GL_GENERATE_MIPMAP
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB,
-                 window_w, window_h,	0, GL_RGB,
+                 camera_w, camera_h,	0, GL_RGB,
                  GL_UNSIGNED_BYTE, gl_texture);
     
     
