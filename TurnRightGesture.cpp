@@ -14,17 +14,22 @@
 #define ARROW_IMG_WIDTH 808
 #define ARROW_IMG_HEIGHT 460
 
+#define ARROW_NORMAL_IMG_WIDTH 540
+#define ARROW_NORMAL_IMG_HEIGHT 460
 
 TurnRightGesture::TurnRightGesture() : TurnGesture(nite::JointType::JOINT_RIGHT_HAND, nite::JointType::JOINT_RIGHT_ELBOW, nite::JointType::JOINT_RIGHT_SHOULDER)
 {
     texture = GLHelper::LoadTexture("arrow-right.bmp", ARROW_IMG_WIDTH, ARROW_IMG_HEIGHT);
+    textureNormal = GLHelper::LoadTexture("arrow.bmp", ARROW_NORMAL_IMG_WIDTH, ARROW_NORMAL_IMG_HEIGHT);
 }
 
 
 void TurnRightGesture::draw()
 {
-    GLHelper::DrawBlackBox(854, 240,0, 0);
     GLHelper::DrawTexture(texture, ARROW_IMG_WIDTH/2, ARROW_IMG_HEIGHT/2, 854-ARROW_IMG_WIDTH/2, 0, opacityTotal, false, false);
+    
+    //HUD Small version
+    GLHelper::DrawTexture(textureNormal, ARROW_NORMAL_IMG_WIDTH/3, ARROW_NORMAL_IMG_HEIGHT/3, 674, 300, opacityTotal, true, false);
     
     this->animate();
 }

@@ -21,6 +21,9 @@
 #define STOP_IMG_WIDTH 808
 #define STOP_IMG_HEIGHT 460
 
+#define STOP_IMG_NORMAL_WIDTH 540
+#define STOP_IMG_NORMAL_HEIGHT 460
+
 RightStopGesture::RightStopGesture()
 {
     handElbowDeltaXBuffer = new CircularBuffer(20);
@@ -30,6 +33,7 @@ RightStopGesture::RightStopGesture()
     
     this->textureLeft = GLHelper::LoadTexture( "stop-left.bmp", STOP_IMG_WIDTH, STOP_IMG_HEIGHT );
     this->textureRight = GLHelper::LoadTexture( "stop-right.bmp", STOP_IMG_WIDTH, STOP_IMG_HEIGHT );
+    this->textureNormal = GLHelper::LoadTexture( "stop.bmp", STOP_IMG_NORMAL_WIDTH, STOP_IMG_NORMAL_HEIGHT );
 }
 
 bool RightStopGesture::gestureDetect(nite::Skeleton *skeleton, nite::UserTracker *userTracker)
@@ -92,9 +96,13 @@ bool RightStopGesture::gestureDetect(nite::Skeleton *skeleton, nite::UserTracker
 void RightStopGesture::draw()
 {
     
-    GLHelper::DrawBlackBox(854, 240,0, 0);
     GLHelper::DrawTexture(this->textureLeft, STOP_IMG_WIDTH/2, STOP_IMG_HEIGHT/2, 0, 0, opacityTotal, false, false);
     GLHelper::DrawTexture(this->textureRight, STOP_IMG_WIDTH/2, STOP_IMG_HEIGHT/2, 854 - STOP_IMG_WIDTH/2, 0, opacityTotal, false, false);
+    
+    //HUD small stop signs
+    GLHelper::DrawTexture(this->textureNormal, STOP_IMG_NORMAL_WIDTH/3, STOP_IMG_NORMAL_HEIGHT/3, 0, 300, opacityTotal, false, false);
+    
+    GLHelper::DrawTexture(this->textureNormal, STOP_IMG_NORMAL_WIDTH/3, STOP_IMG_NORMAL_HEIGHT/3, 674, 300, opacityTotal, false, false);
     
     this->animate();
 }

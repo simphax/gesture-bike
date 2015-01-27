@@ -25,6 +25,7 @@ private:
     void animate();
     
     GLuint texture;
+    GLuint textureNormal;
     
 public:
     TurnRightGesture();
