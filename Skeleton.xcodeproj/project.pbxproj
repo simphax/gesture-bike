@@ -42,7 +42,6 @@
 		5C3BA8C61A3F9DB800FE4860 /* map_lindholmen.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5C3BA8C51A3F9DB100FE4860 /* map_lindholmen.bmp */; };
 		5C3BA8C81A3FA54000FE4860 /* MapGesture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5C3BA8C71A3FA54000FE4860 /* MapGesture.cpp */; };
 		5C9E3FCC1A751EB700C43B69 /* loading.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5C9E3FCB1A751EAD00C43B69 /* loading.bmp */; };
-		5C9E3FCE1A75202300C43B69 /* route_01.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5C9E3FCD1A75201600C43B69 /* route_01.bmp */; };
 		5CAB237F1A3E3EDC0049AB34 /* HUD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5CAB237D1A3E3EDC0049AB34 /* HUD.cpp */; };
 		5CBD38AF1A40802D00B1368C /* course-lindholmen.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5CBD38AE1A40802600B1368C /* course-lindholmen.bmp */; };
 		84ADE9681A77E56200496A44 /* route_01_216_NOK.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84ADE9651A77E52100496A44 /* route_01_216_NOK.bmp */; };
@@ -145,7 +144,6 @@
 				F4A00B391A6FEDC0005468F7 /* arrow.bmp in CopyFiles */,
 				F4A00B371A6FE247005468F7 /* stop.bmp in CopyFiles */,
 				5C3BA8C21A3F9C0500FE4860 /* img_test.bmp in CopyFiles */,
-				5C9E3FCE1A75202300C43B69 /* route_01.bmp in CopyFiles */,
 				5C3BA8C61A3F9DB800FE4860 /* map_lindholmen.bmp in CopyFiles */,
 				84ADE96A1A77E56700496A44 /* route_02_220_NOK.bmp in CopyFiles */,
 				84ADE9691A77E56500496A44 /* route_01_220_NOK.bmp in CopyFiles */,
@@ -218,10 +216,11 @@
 		5C3BA8C71A3FA54000FE4860 /* MapGesture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MapGesture.cpp; sourceTree = "<group>"; };
 		5C3BA8C91A3FA54A00FE4860 /* MapGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapGesture.h; sourceTree = "<group>"; };
 		5C9E3FCB1A751EAD00C43B69 /* loading.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = loading.bmp; path = Assets/loading.bmp; sourceTree = "<group>"; };
-		5C9E3FCD1A75201600C43B69 /* route_01.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = route_01.bmp; path = Assets/route_01.bmp; sourceTree = "<group>"; };
 		5CAB237D1A3E3EDC0049AB34 /* HUD.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HUD.cpp; sourceTree = "<group>"; };
 		5CAB237E1A3E3EDC0049AB34 /* HUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HUD.h; sourceTree = "<group>"; };
 		5CBD38AE1A40802600B1368C /* course-lindholmen.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = "course-lindholmen.bmp"; sourceTree = "<group>"; };
+		84AD08641A77F7F300A29E09 /* route_02.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = route_02.bmp; path = Assets/route_02.bmp; sourceTree = "<group>"; };
+		84AD08661A77F84E00A29E09 /* route_01.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = route_01.bmp; path = Assets/route_01.bmp; sourceTree = "<group>"; };
 		84ADE9651A77E52100496A44 /* route_01_216_NOK.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = route_01_216_NOK.bmp; path = Assets/route_01_216_NOK.bmp; sourceTree = "<group>"; };
 		84ADE9661A77E52100496A44 /* route_01_220_NOK.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = route_01_220_NOK.bmp; path = Assets/route_01_220_NOK.bmp; sourceTree = "<group>"; };
 		84ADE9671A77E52100496A44 /* route_02_220_NOK.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = route_02_220_NOK.bmp; path = Assets/route_02_220_NOK.bmp; sourceTree = "<group>"; };
@@ -471,6 +470,8 @@
 		5C3BA8C01A3F9B9500FE4860 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				84AD08661A77F84E00A29E09 /* route_01.bmp */,
+				84AD08641A77F7F300A29E09 /* route_02.bmp */,
 				84ADE9651A77E52100496A44 /* route_01_216_NOK.bmp */,
 				84ADE9661A77E52100496A44 /* route_01_220_NOK.bmp */,
 				84ADE9671A77E52100496A44 /* route_02_220_NOK.bmp */,
@@ -478,7 +479,6 @@
 				F4DCBDA31A7515530027788E /* arrow-right.bmp */,
 				F4DCBD9E1A7509260027788E /* stop-left.bmp */,
 				F4DCBD9F1A7509260027788E /* stop-right.bmp */,
-				5C9E3FCD1A75201600C43B69 /* route_01.bmp */,
 				F4A00B381A6FED9B005468F7 /* arrow.bmp */,
 				F4A00B331A6FDF2D005468F7 /* stop.bmp */,
 				5C2B31351A75435F0047C58C /* recognizing.bmp */,

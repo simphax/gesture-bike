@@ -1,9 +1,9 @@
 // OpenNI2Project.cpp : Defines the entry point for the console application.
 //
 
-#define FULLSCREEN 0
+#define FULLSCREEN 1
 #define DEBUG 1
-#define DEPTHCAMERA 0
+#define DEPTHCAMERA 1
 
 #include "stdafx.h"
 // General headers
