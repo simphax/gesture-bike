@@ -13,8 +13,8 @@
 #define HUD_WIDTH 854
 #define LOADING_IMG_WIDTH 180
 #define LOADING_IMG_HEIGHT 180
-#define MAP_IMG_WIDTH 472
-#define MAP_IMG_HEIGHT 220
+#define MAP_IMG_WIDTH 480
+#define MAP_IMG_HEIGHT 216
 #define RECOGNIZING_IMG_WIDTH 244
 #define RECOGNIZING_IMG_HEIGHT 25
 
@@ -28,7 +28,7 @@ HUD::HUD()
     
     //mapToggleTime = glutGet(GLUT_ELAPSED_TIME);
     
-    texture_map_1 = GLHelper::LoadTexture( "route_01.bmp", MAP_IMG_WIDTH, MAP_IMG_HEIGHT );
+    texture_map_1 = GLHelper::LoadTexture( "route_01_216_NOK.bmp", MAP_IMG_WIDTH, MAP_IMG_HEIGHT );
     texture_map_2 = GLHelper::LoadTexture( "route_01.bmp", MAP_IMG_WIDTH, MAP_IMG_HEIGHT );
     texture_loading = GLHelper::LoadTexture( "loading.bmp", LOADING_IMG_WIDTH, LOADING_IMG_HEIGHT );
     texture_recognizing = GLHelper::LoadTexture( "recognizing.bmp", RECOGNIZING_IMG_WIDTH, RECOGNIZING_IMG_HEIGHT );
