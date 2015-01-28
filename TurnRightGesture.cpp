@@ -17,7 +17,7 @@
 #define ARROW_NORMAL_IMG_WIDTH 540
 #define ARROW_NORMAL_IMG_HEIGHT 460
 
-TurnRightGesture::TurnRightGesture() : TurnGesture(nite::JointType::JOINT_RIGHT_HAND, nite::JointType::JOINT_RIGHT_ELBOW, nite::JointType::JOINT_RIGHT_SHOULDER)
+TurnRightGesture::TurnRightGesture() : TurnGesture(nite::JointType::JOINT_RIGHT_HAND, nite::JointType::JOINT_RIGHT_ELBOW, nite::JointType::JOINT_RIGHT_SHOULDER, false)
 {
     texture = GLHelper::LoadTexture("arrow-right.bmp", ARROW_IMG_WIDTH, ARROW_IMG_HEIGHT);
     textureNormal = GLHelper::LoadTexture("arrow.bmp", ARROW_NORMAL_IMG_WIDTH, ARROW_NORMAL_IMG_HEIGHT);

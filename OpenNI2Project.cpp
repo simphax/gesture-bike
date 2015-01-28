@@ -1,9 +1,9 @@
 // OpenNI2Project.cpp : Defines the entry point for the console application.
 //
 
-#define FULLSCREEN 1
+#define FULLSCREEN 0
 #define DEBUG 1
-#define DEPTHCAMERA 0
+#define DEPTHCAMERA 1
 
 #include "stdafx.h"
 // General headers
@@ -149,6 +149,8 @@ void gl_IdleCallback()
 
 void drawSkeleton(nite::Skeleton user_skel){
     
+    glBindTexture(GL_TEXTURE_2D, 1);
+    
     glBegin( GL_POINTS );
     glColor3f( 1.f, 0.f, 0.f );
     
@@ -283,13 +285,13 @@ void drawDepthTexture()
     glVertex3f(0.0f, 0.0f, 0.0f);
     
     glTexCoord2f(0.0f, 1.0f);
-    glVertex3f(0.0f, (float)window_h, 0.0f);
+    glVertex3f(0.0f, (float)camera_w, 0.0f);
     
     glTexCoord2f(1.0f, 1.0f);
-    glVertex3f((float)window_w,(float)window_h, 0.0f);
+    glVertex3f((float)camera_w,(float)camera_h, 0.0f);
     
     glTexCoord2f(1.0f, 0.0f);
-    glVertex3f((float)window_w, 0.0f, 0.0f);
+    glVertex3f((float)camera_w, 0.0f, 0.0f);
     
     glEnd();
     
@@ -384,23 +386,27 @@ void gl_DisplayCallback()
 			
             gl_depthTextureSetup(usersFrame);
 
+            
+            
             if(debugSkeleton) {
                 drawDepthTexture();
             }
             
-            
 			const nite::Array<nite::UserData>& users = usersFrame.getUsers();
-
             //Loop through all detected users
 			for (int i = 0; i < users.getSize(); ++i)
 			{
 				if (users[i].isNew())
 				{
-					uTracker.startSkeletonTracking(users[i].getId());
+                    uTracker.startSkeletonTracking(users[i].getId());
+                    uTracker.setSkeletonSmoothingFactor(0.95f);
+                
 				}
+                
 				nite::Skeleton user_skel = users[i].getSkeleton();
 				if (user_skel.getState() == nite::SKELETON_TRACKED)
 				{
+                    
                     //First time user is detected
                     /*if(!isUserDetected)
                     {
@@ -414,13 +420,10 @@ void gl_DisplayCallback()
                     
                     //showDetectionMessage();
                     
-                    if(debugSkeleton) {
-                        drawSkeleton(user_skel);
-                    }
-                    
                     //Loop through all available gestures
                     for(IGesture *gesture : gestures)
                     {
+                        
                         
                         if(gesture->gestureDetect(&user_skel, &uTracker)) {
                             
@@ -449,7 +452,14 @@ void gl_DisplayCallback()
                         activeGesture->hudMessage(hud);
                     } else {
                         //Draw Awareness Markers
-                        drawAwarenessMarkers();
+                        //drawAwarenessMarkers();
+                    }
+                    
+                    //Draw HUD
+                    hud->draw(isUserDetected);
+                    
+                    if(debugSkeleton) {
+                        drawSkeleton(user_skel);
                     }
                     
                     break;
@@ -461,8 +471,7 @@ void gl_DisplayCallback()
                 }
             }
             
-            //Draw HUD
-            hud->draw(isUserDetected);
+            
         }
         
 
@@ -585,8 +594,8 @@ int main(int argc, char* argv[])
     gl_Setup();
     
     //Add Gestures in order of priority
-    gestures.push_back(new StopGesture());
-    gestures.push_back(new RightStopGesture());
+    //gestures.push_back(new StopGesture());
+    //gestures.push_back(new RightStopGesture());
     //gestures.push_back(new FlashlightGesture());
     //gestures.push_back(new MapGesture());
     gestures.push_back(new TurnLeftGesture());

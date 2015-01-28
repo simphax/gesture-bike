@@ -10,18 +10,32 @@
 #include <GLUT/GLUT.h>
 #include <stdio.h>
 
+/* With Stop Gesture
 #define ELBOW_HOLD_FRAMES_THRESHOLD 10
 #define HAND_HOLD_FRAMES_THRESHOLD 8
 #define ELBOW_GESTURE_DELTA_Y 40
 #define HAND_GESTURE_DELTA_Y 40
 #define Z_MIN 800
+*/
 
+#define ELBOW_HOLD_FRAMES_THRESHOLD 6
+#define HAND_HOLD_FRAMES_THRESHOLD 4
+#define ELBOW_GESTURE_DELTA_X 30
+#define ELBOW_GESTURE_DELTA_Y 40
+#define HAND_GESTURE_DELTA_Y 60
 
-TurnGesture::TurnGesture(nite::JointType handJoint, nite::JointType elbowJoint, nite::JointType shoulderJoint)
+#define Z_MIN 900
+
+TurnGesture::TurnGesture(nite::JointType handJoint, nite::JointType elbowJoint, nite::JointType shoulderJoint, bool isLeft)
 {
     this->handJoint = handJoint;
     this->elbowJoint = elbowJoint;
     this->shoulderJoint = shoulderJoint;
+    
+    this->isLeft = isLeft;
+    
+    elbowDeltaXBuffer = new CircularBuffer(10);
+    
     elbowDeltaYBuffer = new CircularBuffer(20);
     handDeltaYBuffer = new CircularBuffer(10);
 }
@@ -57,17 +71,32 @@ bool TurnGesture::gestureDetect(nite::Skeleton *skeleton, nite::UserTracker *use
             if(status == nite::STATUS_OK) {
                 //printf("Left shoulder: %f\n",leftShoulderY);
                 
+                
+                //Fill Buffers
+                if(this->isLeft){
+                    elbowDeltaXBuffer->add(shoulderX-elbowX);
+                }else{
+                    elbowDeltaXBuffer->add(elbowX-shoulderX);
+                }
+                
                 elbowDeltaYBuffer->add(abs(shoulderY-elbowY));
                 handDeltaYBuffer->add(abs(shoulderY-handY));
                 
+            
+                //Get Deltas
+                float elbowDeltaX = elbowDeltaXBuffer->getAvg();
                 
                 float elbowDeltaY = elbowDeltaYBuffer->getAvg();
                 float handDeltaY = handDeltaYBuffer->getAvg();
-                //printf("DeltaY: %f\n", leftDeltaY);
+                
+                
+                //if (this->isLeft)
+                //printf("Should DeltaX: %f\n", elbowDeltaX);
                 //printf("elbowDeltaY: %f\n", elbowDeltaY);
                 //printf("handDeltaY: %f\n", handDeltaY);
                 
-                if(elbowDeltaY < ELBOW_GESTURE_DELTA_Y) {
+                
+                if(elbowDeltaY < ELBOW_GESTURE_DELTA_Y && elbowDeltaX > ELBOW_GESTURE_DELTA_X) {
                     elbowGestureCount++;
                     
                 } else {

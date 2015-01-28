@@ -45,6 +45,8 @@
 		5C5FD8941A77F98600B1C11A /* route_01.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84AD08661A77F84E00A29E09 /* route_01.bmp */; };
 		5C9E3FCC1A751EB700C43B69 /* loading.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5C9E3FCB1A751EAD00C43B69 /* loading.bmp */; };
 		5CAB237F1A3E3EDC0049AB34 /* HUD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5CAB237D1A3E3EDC0049AB34 /* HUD.cpp */; };
+		5CAF35C41A79503E001F849C /* kuggen_route_01.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5CAF35C21A795038001F849C /* kuggen_route_01.bmp */; };
+		5CAF35C51A79503F001F849C /* kuggen_route_02.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5CAF35C31A795038001F849C /* kuggen_route_02.bmp */; };
 		5CBD38AF1A40802D00B1368C /* course-lindholmen.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5CBD38AE1A40802600B1368C /* course-lindholmen.bmp */; };
 		84ADE9681A77E56200496A44 /* route_01_216_NOK.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84ADE9651A77E52100496A44 /* route_01_216_NOK.bmp */; };
 		84ADE9691A77E56500496A44 /* route_01_220_NOK.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84ADE9661A77E52100496A44 /* route_01_220_NOK.bmp */; };
@@ -152,6 +154,8 @@
 				84ADE96A1A77E56700496A44 /* route_02_220_NOK.bmp in CopyFiles */,
 				84ADE9691A77E56500496A44 /* route_01_220_NOK.bmp in CopyFiles */,
 				84ADE9681A77E56200496A44 /* route_01_216_NOK.bmp in CopyFiles */,
+				5CAF35C41A79503E001F849C /* kuggen_route_01.bmp in CopyFiles */,
+				5CAF35C51A79503F001F849C /* kuggen_route_02.bmp in CopyFiles */,
 				5CBD38AF1A40802D00B1368C /* course-lindholmen.bmp in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -222,6 +226,8 @@
 		5C9E3FCB1A751EAD00C43B69 /* loading.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = loading.bmp; path = Assets/loading.bmp; sourceTree = "<group>"; };
 		5CAB237D1A3E3EDC0049AB34 /* HUD.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HUD.cpp; sourceTree = "<group>"; };
 		5CAB237E1A3E3EDC0049AB34 /* HUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HUD.h; sourceTree = "<group>"; };
+		5CAF35C21A795038001F849C /* kuggen_route_01.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = kuggen_route_01.bmp; sourceTree = "<group>"; };
+		5CAF35C31A795038001F849C /* kuggen_route_02.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = kuggen_route_02.bmp; sourceTree = "<group>"; };
 		5CBD38AE1A40802600B1368C /* course-lindholmen.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = "course-lindholmen.bmp"; sourceTree = "<group>"; };
 		84AD08641A77F7F300A29E09 /* route_02.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = route_02.bmp; path = Assets/route_02.bmp; sourceTree = "<group>"; };
 		84AD08661A77F84E00A29E09 /* route_01.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = route_01.bmp; path = Assets/route_01.bmp; sourceTree = "<group>"; };
@@ -474,6 +480,8 @@
 		5C3BA8C01A3F9B9500FE4860 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				5CAF35C21A795038001F849C /* kuggen_route_01.bmp */,
+				5CAF35C31A795038001F849C /* kuggen_route_02.bmp */,
 				84AD08661A77F84E00A29E09 /* route_01.bmp */,
 				84AD08641A77F7F300A29E09 /* route_02.bmp */,
 				84ADE9651A77E52100496A44 /* route_01_216_NOK.bmp */,

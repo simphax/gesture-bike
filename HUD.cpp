@@ -28,8 +28,8 @@ HUD::HUD()
     
     //mapToggleTime = glutGet(GLUT_ELAPSED_TIME);
     
-    texture_map_1 = GLHelper::LoadTexture( "route_01.bmp", MAP_IMG_WIDTH, MAP_IMG_HEIGHT );
-    texture_map_2 = GLHelper::LoadTexture( "route_02.bmp", MAP_IMG_WIDTH, MAP_IMG_HEIGHT );
+    texture_map_1 = GLHelper::LoadTexture( "kuggen_route_01.bmp", MAP_IMG_WIDTH, MAP_IMG_HEIGHT );
+    texture_map_2 = GLHelper::LoadTexture( "kuggen_route_02.bmp", MAP_IMG_WIDTH, MAP_IMG_HEIGHT );
     texture_loading = GLHelper::LoadTexture( "loading.bmp", LOADING_IMG_WIDTH, LOADING_IMG_HEIGHT );
     texture_recognizing = GLHelper::LoadTexture( "recognizing.bmp", RECOGNIZING_IMG_WIDTH, RECOGNIZING_IMG_HEIGHT );
 
@@ -85,7 +85,6 @@ void HUD::drawRecognizing()
     
     
     
-    
     //Rotation of loading graphic
     glPushMatrix(); //Save the current matrix.
     //Change the current matrix.
@@ -97,7 +96,7 @@ void HUD::drawRecognizing()
     //Reset the current matrix to the one that was saved.
     glPopMatrix();
     
-    GLHelper::DrawTexture(texture_recognizing, RECOGNIZING_IMG_WIDTH, RECOGNIZING_IMG_HEIGHT, 310, 450, 1, false, false);
+    GLHelper::DrawTexture(texture_recognizing, RECOGNIZING_IMG_WIDTH, RECOGNIZING_IMG_HEIGHT, 310, 440, 1, false, false);
 
     
     this->animate();

@@ -19,14 +19,17 @@ private:
     //Counts the amount of frames that the user holds up the left arm
     int handGestureCount = 0;
     int elbowGestureCount = 0;
+    bool isLeft;
     
+    CircularBuffer *elbowDeltaXBuffer;
+
     CircularBuffer *elbowDeltaYBuffer;
     CircularBuffer *handDeltaYBuffer;
     
     nite::JointType handJoint, elbowJoint, shoulderJoint;
     
 public:
-    TurnGesture(nite::JointType handJoint, nite::JointType elbowJoint, nite::JointType shoulderJoint);
+    TurnGesture(nite::JointType handJoint, nite::JointType elbowJoint, nite::JointType shoulderJoint, bool isLeft);
     bool gestureDetect(nite::Skeleton *skeleton, nite::UserTracker *userTracker);
 };
 
