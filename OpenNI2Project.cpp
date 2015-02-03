@@ -1,11 +1,18 @@
 // OpenNI2Project.cpp : Defines the entry point for the console application.
 //
 
-#define FULLSCREEN 0
-#define DEBUG 1
-#define DEPTHCAMERA 0
 
 #include "stdafx.h"
+
+
+#define FULLSCREEN 1
+#define DEBUG 0
+#define DEPTHCAMERA 0
+#define MAPONLY 1
+
+
+
+
 // General headers
 #include <stdio.h>
 #include <list>
@@ -53,7 +60,7 @@ long double gestureStartTime = 0;
 
 //Debug help
 #if DEBUG
-bool debugSkeleton = true;
+bool debugSkeleton = false;
 bool debugGestures = false;
 bool debugGrid = false;
 #else
@@ -373,7 +380,7 @@ void gl_DisplayCallback()
         //Draw Awareness Markers
         drawAwarenessMarkers();
         //Draw HUD
-        hud->draw(isUserDetected);
+        hud->draw(isUserDetected  ||  MAPONLY);
 
     }
     else
@@ -452,11 +459,10 @@ void gl_DisplayCallback()
                         activeGesture->hudMessage(hud);
                     } else {
                         //Draw Awareness Markers
-                        //drawAwarenessMarkers();
+                        drawAwarenessMarkers();
                     }
                     
-                    //Draw HUD
-                    hud->draw(isUserDetected);
+                   
                     
                     if(debugSkeleton) {
                         drawSkeleton(user_skel);
@@ -474,6 +480,8 @@ void gl_DisplayCallback()
             
         }
         
+        //Draw HUD
+        hud->draw(isUserDetected ||  MAPONLY);
 
 	}
     
@@ -596,13 +604,16 @@ int main(int argc, char* argv[])
     glutInit(&argc, (char**)argv);
     gl_Setup();
     
+    if(!MAPONLY)
+    {
     //Add Gestures in order of priority
-    gestures.push_back(new StopGesture());
-    gestures.push_back(new RightStopGesture());
+    //gestures.push_back(new StopGesture());
+    //gestures.push_back(new RightStopGesture());
     //gestures.push_back(new FlashlightGesture());
     //gestures.push_back(new MapGesture());
-    //gestures.push_back(new TurnLeftGesture());
-    //gestures.push_back(new TurnRightGesture());
+    gestures.push_back(new TurnLeftGesture());
+    gestures.push_back(new TurnRightGesture());
+    }
     hud = new HUD();
     
 	printf("Starting OpenGL rendering process ...\r\n");
