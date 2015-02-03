@@ -66,7 +66,7 @@ GLuint GLHelper::LoadTexture( const char * filename, int width, int height )
 
 void GLHelper::DrawTexture( GLuint texture, int width, int height, int x, int y, float opacity , bool flipx, bool flipy)
 {
-    glColor3f(1.0 * opacity, 1.0 * opacity, 1.0 * opacity);
+    glColor4f(1.0 * opacity, 1.0 * opacity, 1.0 * opacity, opacity);
     
     glBindTexture (GL_TEXTURE_2D, texture);
     

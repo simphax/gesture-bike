@@ -3,7 +3,7 @@
 
 #define FULLSCREEN 0
 #define DEBUG 1
-#define DEPTHCAMERA 1
+#define DEPTHCAMERA 0
 
 #include "stdafx.h"
 // General headers
@@ -549,6 +549,9 @@ void gl_Setup(void) {
     
     glEnable(GL_TEXTURE_2D);
     
+    glEnable(GL_BLEND);// you enable blending function
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    
     // Setup the OpenGL viewpoint
     glMatrixMode(GL_PROJECTION);
     glPushMatrix();
@@ -594,12 +597,12 @@ int main(int argc, char* argv[])
     gl_Setup();
     
     //Add Gestures in order of priority
-    //gestures.push_back(new StopGesture());
-    //gestures.push_back(new RightStopGesture());
+    gestures.push_back(new StopGesture());
+    gestures.push_back(new RightStopGesture());
     //gestures.push_back(new FlashlightGesture());
     //gestures.push_back(new MapGesture());
-    gestures.push_back(new TurnLeftGesture());
-    gestures.push_back(new TurnRightGesture());
+    //gestures.push_back(new TurnLeftGesture());
+    //gestures.push_back(new TurnRightGesture());
     hud = new HUD();
     
 	printf("Starting OpenGL rendering process ...\r\n");

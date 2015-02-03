@@ -19,13 +19,15 @@ private:
     //Animation Properties
     float xTranslation = 0;
     float opacityTotal = 0;
+    float opacity1 = 0;
+    float opacity2 = 0;
+    float opacity3 = 0;
     signed int opacityDelta = 1;
     float lastFrameTime = 0;
     
     void animate();
     
-    GLuint texture;
-    GLuint textureNormal;
+    GLuint arrow1, arrow2, arrow3, arrowHUD1, arrowHUD2, arrowHUD3;
     
 public:
     TurnLeftGesture();
