@@ -7,8 +7,8 @@
 
 #define FULLSCREEN 1
 #define DEBUG 0
-#define DEPTHCAMERA 0
-#define MAPONLY 1
+#define DEPTHCAMERA 1
+#define MAPONLY 0
 
 
 

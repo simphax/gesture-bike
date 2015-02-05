@@ -18,13 +18,13 @@
 #define Z_MIN 800
 */
 
-#define ELBOW_HOLD_FRAMES_THRESHOLD 6
-#define HAND_HOLD_FRAMES_THRESHOLD 4
-#define ELBOW_GESTURE_DELTA_X 30
-#define ELBOW_GESTURE_DELTA_Y 40
-#define HAND_GESTURE_DELTA_Y 60
+#define ELBOW_HOLD_FRAMES_THRESHOLD 3
+#define HAND_HOLD_FRAMES_THRESHOLD 0
+#define ELBOW_GESTURE_DELTA_X 40
+#define ELBOW_GESTURE_DELTA_Y 60
+#define HAND_GESTURE_DELTA_Y 200
 
-#define Z_MIN 900
+#define Z_MIN 800
 
 TurnGesture::TurnGesture(nite::JointType handJoint, nite::JointType elbowJoint, nite::JointType shoulderJoint, bool isLeft)
 {
