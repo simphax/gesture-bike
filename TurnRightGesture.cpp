@@ -75,7 +75,7 @@ void TurnRightGesture::animate()
             opacity1 = 0;
         }
 
-        opacityTotal += opacityDelta * 0.01;
+        opacityTotal += opacityDelta * 0.02;
         
         lastFrameTime = glutGet(GLUT_ELAPSED_TIME);
     }

@@ -5,9 +5,9 @@
 #include "stdafx.h"
 
 
-#define FULLSCREEN 1
-#define DEBUG 0
-#define DEPTHCAMERA 1
+#define FULLSCREEN 0
+#define DEBUG 1
+#define DEPTHCAMERA 0
 #define MAPONLY 0
 
 
@@ -15,7 +15,7 @@
 
 // General headers
 #include <stdio.h>
-#include <list>
+#include <vector>
 
 // OpenNI2 headers
 #include "OpenNI.h"
@@ -77,7 +77,7 @@ bool isUserDetected = false;
 #define GESTURE_DRAW_TIME 3
 
 //List of all available gestures
-std::list<IGesture*> gestures;
+std::vector<IGesture*> gestures;
 
 //The last detected gesture
 IGesture *activeGesture;
@@ -147,6 +147,44 @@ void gl_KeyboardCallback(unsigned char key, int x, int y)
     {
         hud->switchMap();
     }
+    
+    
+    
+    if(key == '1')
+    {
+        activeGesture = gestures[1];
+        gestureStartTime = time(0);
+    }
+    
+    
+    if(key == '2')
+    {
+        activeGesture = gestures[2];
+        gestureStartTime = time(0);
+    }
+    
+    
+    if(key == '3')
+    {
+        activeGesture = gestures[3];
+        gestureStartTime = time(0);
+    }
+    
+    
+    if(key == '4')
+    {
+        activeGesture = gestures[4];
+        gestureStartTime = time(0);
+    }
+    
+    
+    
+    if(key == '5')
+    {
+        activeGesture = gestures[5];
+        gestureStartTime = time(0);
+    }
+    
     
 }
 
@@ -375,118 +413,25 @@ void gl_DisplayCallback()
     glBindTexture(GL_TEXTURE_2D, 1);
     
 
-	if (!uTracker.isValid())
-    {
-        //For debug purposes
-        //Draw Awareness Markers
-        drawAwarenessMarkers();
-        //Draw HUD
-        hud->draw(isUserDetected  ||  MAPONLY);
 
-    }
-    else
-	{
+
         
-		nite::UserTrackerFrameRef usersFrame;
-		status = uTracker.readFrame(&usersFrame);
-		if (status == nite::STATUS_OK && usersFrame.isValid())
-		{
-			
-            gl_depthTextureSetup(usersFrame);
-
-            
-            
-            if(debugSkeleton) {
-                drawDepthTexture();
-            }
-            
-			const nite::Array<nite::UserData>& users = usersFrame.getUsers();
-            //Loop through all detected users
-			for (int i = 0; i < users.getSize(); ++i)
-			{
-				if (users[i].isNew())
-				{
-                    uTracker.startSkeletonTracking(users[i].getId());
-                    uTracker.setSkeletonSmoothingFactor(0.95f);
-                
-				}
-                
-				nite::Skeleton user_skel = users[i].getSkeleton();
-				if (user_skel.getState() == nite::SKELETON_TRACKED)
-				{
-                    
-                    //First time user is detected
-                    /*if(!isUserDetected)
-                    {
-                        hud->toggleFlashlight();
-                    }
-                    */
-                    
-                    //User detected
-                    isUserDetected = true;
-                    
-                    
-                    //showDetectionMessage();
-                    
-                    //Loop through all available gestures
-                    for(IGesture *gesture : gestures)
-                    {
-                        
-                        
-                        if(gesture->gestureDetect(&user_skel, &uTracker)) {
-                            
-                            //Reset draw parameters when switching gestures
-                            if(gesture != activeGesture){
-                                gesture->resetDraw();
-                            }
-                            
-                            //Activate gesture
-                            activeGesture = gesture;
-                            gestureStartTime = time(0);
-                            
-                            break;
-
-                        }
-                    }
-                    
-                    //Show the graphics for 2 seconds
-                    if(time(0) - gestureStartTime > GESTURE_DRAW_TIME) {
-                        activeGesture = NULL;
-                    }
-                    
-                    //Only draw graphics for the last detected gesture
-                    if(activeGesture) {
-                        activeGesture->draw();
-                        activeGesture->hudMessage(hud);
-                    } else {
-                        //Draw Awareness Markers
-                        drawAwarenessMarkers();
-                    }
-                    
-                   
-                    
-                    if(debugSkeleton) {
-                        drawSkeleton(user_skel);
-                    }
-                    
-                    break;
-                    
-				}
-                else
-                {
-                    isUserDetected = false;
-                }
-            }
-            
-            
+        //Show the graphics for 2 seconds
+        if(time(0) - gestureStartTime > GESTURE_DRAW_TIME) {
+            activeGesture = NULL;
         }
         
-        //Draw HUD
-        hud->draw(isUserDetected ||  MAPONLY);
+        //Only draw graphics for the last detected gesture
+        if(activeGesture) {
+            activeGesture->draw();
+            activeGesture->hudMessage(hud);
+        } else {
+            //Draw Awareness Markers
+            drawAwarenessMarkers();
+        }
+        
 
-	}
     
-
     
     
     if(debugGestures){
@@ -605,16 +550,15 @@ int main(int argc, char* argv[])
     glutInit(&argc, (char**)argv);
     gl_Setup();
     
-    if(!MAPONLY)
-    {
+
     //Add Gestures in order of priority
-    //gestures.push_back(new StopGesture());
-    //gestures.push_back(new RightStopGesture());
-    //gestures.push_back(new HazardGesture());
+    gestures.push_back(new StopGesture());
+    gestures.push_back(new RightStopGesture());
+    gestures.push_back(new HazardGesture());
     gestures.push_back(new PassingGesture());
     gestures.push_back(new TurnLeftGesture());
     gestures.push_back(new TurnRightGesture());
-    }
+    
 
     hud = new HUD();
     
