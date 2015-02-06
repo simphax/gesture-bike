@@ -71,7 +71,7 @@ bool debugGrid = false;
 #endif
 
 //User Detected
-bool isUserDetected = false;
+bool isUserDetected = true;
 
 //Time to consider a gesture active
 #define GESTURE_DRAW_TIME 3
@@ -415,7 +415,8 @@ void gl_DisplayCallback()
 
 
 
-        
+   
+
         //Show the graphics for 2 seconds
         if(time(0) - gestureStartTime > GESTURE_DRAW_TIME) {
             activeGesture = NULL;
@@ -425,11 +426,14 @@ void gl_DisplayCallback()
         if(activeGesture) {
             activeGesture->draw();
             activeGesture->hudMessage(hud);
-        } else {
-            //Draw Awareness Markers
-            drawAwarenessMarkers();
+        }   //Draw Awareness Markers
+        else{
+            
+             drawAwarenessMarkers();
+           
         }
-        
+    
+    hud->draw(true);
 
     
     
@@ -543,7 +547,6 @@ int main(int argc, char* argv[])
             status = uTracker.create();
         }
     }
-	isUserDetected = false;
 	printf("\r\n---------------------- OpenGL -------------------------\r\n");
 	printf("Initializing OpenGL ...\r\n");
     
