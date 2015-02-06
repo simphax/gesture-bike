@@ -5,7 +5,7 @@
 #include "stdafx.h"
 
 
-#define FULLSCREEN 0
+#define FULLSCREEN 1
 #define DEBUG 1
 #define DEPTHCAMERA 0
 #define MAPONLY 0
@@ -413,8 +413,6 @@ void gl_DisplayCallback()
     glBindTexture(GL_TEXTURE_2D, 1);
     
 
-
-
    
 
         //Show the graphics for 2 seconds
@@ -435,7 +433,6 @@ void gl_DisplayCallback()
     
     hud->draw(true);
 
-    
     
     
     if(debugGestures){

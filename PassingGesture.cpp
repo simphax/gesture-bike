@@ -95,7 +95,7 @@ bool PassingGesture::gestureDetect(nite::Skeleton *skeleton, nite::UserTracker *
 void PassingGesture::draw()
 {
     
-    GLHelper::DrawTexture(this->texture, Passing_IMG_WIDTH/2, Passing_IMG_HEIGHT/2, 0, 0, 1, false, false);
+    GLHelper::DrawTexture(this->texture, Passing_IMG_WIDTH/2, Passing_IMG_HEIGHT/2, 0, 0, 1, false, true);
 
     GLHelper::DrawBlackBox(Passing_IMG_WIDTH/2, Passing_IMG_HEIGHT/2, yDisplace, 0);
     
@@ -117,10 +117,10 @@ void PassingGesture::animate()
 {
     if(lastFrameTime + FRAMETIME < glutGet(GLUT_ELAPSED_TIME) ) {
         
-        yDisplace -= 3;
+        yDisplace += 3;
         
         
-        if(yDisplace <= -300) {
+        if(yDisplace >= 300) {
             yDisplace = 0;
         }
         

@@ -96,8 +96,8 @@ bool RightStopGesture::gestureDetect(nite::Skeleton *skeleton, nite::UserTracker
 void RightStopGesture::draw()
 {
     
-    GLHelper::DrawTexture(this->textureLeft, STOP_IMG_WIDTH/2, STOP_IMG_HEIGHT/2, 0, 0, opacityTotal, false, false);
-    GLHelper::DrawTexture(this->textureRight, STOP_IMG_WIDTH/2, STOP_IMG_HEIGHT/2, 854 - STOP_IMG_WIDTH/2, 0, opacityTotal, false, false);
+    GLHelper::DrawTexture(this->textureLeft, STOP_IMG_WIDTH/2, STOP_IMG_HEIGHT/2, 0, 0, opacityTotal, false, true);
+    GLHelper::DrawTexture(this->textureRight, STOP_IMG_WIDTH/2, STOP_IMG_HEIGHT/2, 854 - STOP_IMG_WIDTH/2, 0, opacityTotal, false, true);
     
     //HUD small stop signs
     GLHelper::DrawTexture(this->textureNormal, STOP_IMG_NORMAL_WIDTH/3, STOP_IMG_NORMAL_HEIGHT/3, 0, 300, opacityTotal, false, false);
