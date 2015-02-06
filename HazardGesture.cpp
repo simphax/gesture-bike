@@ -95,8 +95,8 @@ bool HazardGesture::gestureDetect(nite::Skeleton *skeleton, nite::UserTracker *u
 void HazardGesture::draw()
 {
     
-    GLHelper::DrawTexture(this->texture, Hazard_IMG_WIDTH/2, Hazard_IMG_HEIGHT/2, 0, 0, opacityTotal, false, false);
-    GLHelper::DrawTexture(this->texture, Hazard_IMG_WIDTH/2, Hazard_IMG_HEIGHT/2, 854 - Hazard_IMG_WIDTH/2, 0, opacityTotal, true, false);
+    GLHelper::DrawTexture(this->texture, Hazard_IMG_WIDTH/2, Hazard_IMG_HEIGHT/2, 0, 0, opacityTotal, false, true);
+    GLHelper::DrawTexture(this->texture, Hazard_IMG_WIDTH/2, Hazard_IMG_HEIGHT/2, 854 - Hazard_IMG_WIDTH/2, 0, opacityTotal, true, true);
 
     //HUD small Hazard signs
     GLHelper::DrawTexture(this->textureHUD, Hazard_IMG_HUD_WIDTH/3, Hazard_IMG_HUD_HEIGHT/3, 0, 300, opacityTotal, false, false);
