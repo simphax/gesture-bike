@@ -22,6 +22,7 @@
 #include "NiTE.h"
 using namespace openni;
 
+
 // GLUT headers
 #include <GLUT/GLUT.h>
 #include <algorithm>
@@ -32,8 +33,8 @@ using namespace openni;
 #include "TurnRightGesture.h"
 #include "StopGesture.h"
 #include "RightStopGesture.h"
-#include "FlashlightGesture.h"
-#include "MapGesture.h"
+#include "HazardGesture.h"
+#include "PassingGesture.h"
 
 
 #include "HUD.h"
@@ -575,7 +576,7 @@ void gl_Setup(void) {
 int main(int argc, char* argv[])
 {
 
-
+    
     if(DEPTHCAMERA)
     {
         printf("\r\n----------------- NiTE & User Tracker -------------------\r\n");
@@ -609,11 +610,12 @@ int main(int argc, char* argv[])
     //Add Gestures in order of priority
     //gestures.push_back(new StopGesture());
     //gestures.push_back(new RightStopGesture());
-    //gestures.push_back(new FlashlightGesture());
-    //gestures.push_back(new MapGesture());
+    //gestures.push_back(new HazardGesture());
+    gestures.push_back(new PassingGesture());
     gestures.push_back(new TurnLeftGesture());
     gestures.push_back(new TurnRightGesture());
     }
+
     hud = new HUD();
     
 	printf("Starting OpenGL rendering process ...\r\n");
