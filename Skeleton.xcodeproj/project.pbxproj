@@ -52,6 +52,8 @@
 		5CAF35C41A79503E001F849C /* kuggen_route_01.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5CAF35C21A795038001F849C /* kuggen_route_01.bmp */; };
 		5CAF35C51A79503F001F849C /* kuggen_route_02.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5CAF35C31A795038001F849C /* kuggen_route_02.bmp */; };
 		5CBD38AF1A40802D00B1368C /* course-lindholmen.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5CBD38AE1A40802600B1368C /* course-lindholmen.bmp */; };
+		5CD7FB371B31B3E2002DDB9E /* gpslog.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5CD7FB361B31B3DC002DDB9E /* gpslog.txt */; };
+		5CD7FB481B31B564002DDB9E /* libnmea.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CD7FB471B31B564002DDB9E /* libnmea.a */; };
 		5CEE76A81A801E2400BBFC18 /* arrow-1.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5CEE76A21A80159200BBFC18 /* arrow-1.bmp */; };
 		5CEE76A91A801E2600BBFC18 /* arrow-2.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5CEE76A31A80159200BBFC18 /* arrow-2.bmp */; };
 		5CEE76AA1A801E2700BBFC18 /* arrow-3.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5CEE76A41A80159200BBFC18 /* arrow-3.bmp */; };
@@ -149,6 +151,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				5CD7FB371B31B3E2002DDB9E /* gpslog.txt in CopyFiles */,
 				F4DCBDA41A7518F80027788E /* arrow-left.bmp in CopyFiles */,
 				F4DCBDA51A7518F80027788E /* arrow-right.bmp in CopyFiles */,
 				F4DCBDA01A7509520027788E /* stop-left.bmp in CopyFiles */,
@@ -253,6 +256,34 @@
 		5CAF35C21A795038001F849C /* kuggen_route_01.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = kuggen_route_01.bmp; sourceTree = "<group>"; };
 		5CAF35C31A795038001F849C /* kuggen_route_02.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = kuggen_route_02.bmp; sourceTree = "<group>"; };
 		5CBD38AE1A40802600B1368C /* course-lindholmen.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = "course-lindholmen.bmp"; sourceTree = "<group>"; };
+		5CD7FB261B31B0EC002DDB9E /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
+		5CD7FB271B31B0EC002DDB9E /* context.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = context.h; sourceTree = "<group>"; };
+		5CD7FB281B31B0EC002DDB9E /* generate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = generate.h; sourceTree = "<group>"; };
+		5CD7FB291B31B0EC002DDB9E /* generator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = generator.h; sourceTree = "<group>"; };
+		5CD7FB2A1B31B0EC002DDB9E /* gmath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gmath.h; sourceTree = "<group>"; };
+		5CD7FB2B1B31B0EC002DDB9E /* info.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = info.h; sourceTree = "<group>"; };
+		5CD7FB2C1B31B0EC002DDB9E /* nmea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nmea.h; sourceTree = "<group>"; };
+		5CD7FB2D1B31B0EC002DDB9E /* parse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = parse.h; sourceTree = "<group>"; };
+		5CD7FB2E1B31B0EC002DDB9E /* parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = parser.h; sourceTree = "<group>"; };
+		5CD7FB2F1B31B0EC002DDB9E /* sentence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sentence.h; sourceTree = "<group>"; };
+		5CD7FB301B31B0EC002DDB9E /* time.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = time.h; sourceTree = "<group>"; };
+		5CD7FB311B31B0EC002DDB9E /* tok.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tok.h; sourceTree = "<group>"; };
+		5CD7FB321B31B0EC002DDB9E /* units.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = units.h; sourceTree = "<group>"; };
+		5CD7FB361B31B3DC002DDB9E /* gpslog.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = gpslog.txt; sourceTree = "<group>"; };
+		5CD7FB391B31B47D002DDB9E /* config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
+		5CD7FB3A1B31B47D002DDB9E /* context.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = context.h; sourceTree = "<group>"; };
+		5CD7FB3B1B31B47D002DDB9E /* generate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = generate.h; sourceTree = "<group>"; };
+		5CD7FB3C1B31B47D002DDB9E /* generator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = generator.h; sourceTree = "<group>"; };
+		5CD7FB3D1B31B47D002DDB9E /* gmath.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gmath.h; sourceTree = "<group>"; };
+		5CD7FB3E1B31B47D002DDB9E /* info.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = info.h; sourceTree = "<group>"; };
+		5CD7FB3F1B31B47D002DDB9E /* nmea.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = nmea.h; sourceTree = "<group>"; };
+		5CD7FB401B31B47D002DDB9E /* parse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = parse.h; sourceTree = "<group>"; };
+		5CD7FB411B31B47D002DDB9E /* parser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = parser.h; sourceTree = "<group>"; };
+		5CD7FB421B31B47D002DDB9E /* sentence.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sentence.h; sourceTree = "<group>"; };
+		5CD7FB431B31B47D002DDB9E /* time.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = time.h; sourceTree = "<group>"; };
+		5CD7FB441B31B47D002DDB9E /* tok.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = tok.h; sourceTree = "<group>"; };
+		5CD7FB451B31B47D002DDB9E /* units.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = units.h; sourceTree = "<group>"; };
+		5CD7FB471B31B564002DDB9E /* libnmea.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libnmea.a; path = nmea/libnmea.a; sourceTree = "<group>"; };
 		5CEE76A21A80159200BBFC18 /* arrow-1.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = "arrow-1.bmp"; path = "Assets/arrow-1.bmp"; sourceTree = "<group>"; };
 		5CEE76A31A80159200BBFC18 /* arrow-2.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = "arrow-2.bmp"; path = "Assets/arrow-2.bmp"; sourceTree = "<group>"; };
 		5CEE76A41A80159200BBFC18 /* arrow-3.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = "arrow-3.bmp"; path = "Assets/arrow-3.bmp"; sourceTree = "<group>"; };
@@ -292,6 +323,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5CD7FB481B31B564002DDB9E /* libnmea.a in Frameworks */,
 				0AB8ED1118A938B200F145E5 /* GLUT.framework in Frameworks */,
 				0AB8ED0F18A938AB00F145E5 /* OpenGL.framework in Frameworks */,
 				0AB8ECCF18A9357800F145E5 /* libNiTE2.jni.dylib in Frameworks */,
@@ -321,6 +353,7 @@
 				0AB8ECEC18A937F200F145E5 /* Includes */,
 				0AB8ECA518A9346100F145E5 /* Frameworks */,
 				0AB8EC9A18A9341600F145E5 /* Products */,
+				5CD7FB351B31B3DC002DDB9E /* Data */,
 				5C3BA8C01A3F9B9500FE4860 /* Images */,
 			);
 			sourceTree = "<group>";
@@ -336,6 +369,8 @@
 		0AB8ECA518A9346100F145E5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5CD7FB471B31B564002DDB9E /* libnmea.a */,
+				5CD7FB381B31B47D002DDB9E /* nmea */,
 				0AB8ED1018A938B200F145E5 /* GLUT.framework */,
 				0AB8ED0E18A938AB00F145E5 /* OpenGL.framework */,
 				0AB8ECBE18A934BC00F145E5 /* NiTE */,
@@ -414,6 +449,7 @@
 		0AB8ECEC18A937F200F145E5 /* Includes */ = {
 			isa = PBXGroup;
 			children = (
+				5CD7FB251B31B0EC002DDB9E /* nmea */,
 				0AB8ECEE18A9381D00F145E5 /* NiTE */,
 				0AB8ECED18A9380100F145E5 /* OpenNI */,
 			);
@@ -540,6 +576,54 @@
 				5C9E3FCB1A751EAD00C43B69 /* loading.bmp */,
 			);
 			name = Images;
+			sourceTree = "<group>";
+		};
+		5CD7FB251B31B0EC002DDB9E /* nmea */ = {
+			isa = PBXGroup;
+			children = (
+				5CD7FB261B31B0EC002DDB9E /* config.h */,
+				5CD7FB271B31B0EC002DDB9E /* context.h */,
+				5CD7FB281B31B0EC002DDB9E /* generate.h */,
+				5CD7FB291B31B0EC002DDB9E /* generator.h */,
+				5CD7FB2A1B31B0EC002DDB9E /* gmath.h */,
+				5CD7FB2B1B31B0EC002DDB9E /* info.h */,
+				5CD7FB2C1B31B0EC002DDB9E /* nmea.h */,
+				5CD7FB2D1B31B0EC002DDB9E /* parse.h */,
+				5CD7FB2E1B31B0EC002DDB9E /* parser.h */,
+				5CD7FB2F1B31B0EC002DDB9E /* sentence.h */,
+				5CD7FB301B31B0EC002DDB9E /* time.h */,
+				5CD7FB311B31B0EC002DDB9E /* tok.h */,
+				5CD7FB321B31B0EC002DDB9E /* units.h */,
+			);
+			path = nmea;
+			sourceTree = "<group>";
+		};
+		5CD7FB351B31B3DC002DDB9E /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				5CD7FB361B31B3DC002DDB9E /* gpslog.txt */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		5CD7FB381B31B47D002DDB9E /* nmea */ = {
+			isa = PBXGroup;
+			children = (
+				5CD7FB391B31B47D002DDB9E /* config.h */,
+				5CD7FB3A1B31B47D002DDB9E /* context.h */,
+				5CD7FB3B1B31B47D002DDB9E /* generate.h */,
+				5CD7FB3C1B31B47D002DDB9E /* generator.h */,
+				5CD7FB3D1B31B47D002DDB9E /* gmath.h */,
+				5CD7FB3E1B31B47D002DDB9E /* info.h */,
+				5CD7FB3F1B31B47D002DDB9E /* nmea.h */,
+				5CD7FB401B31B47D002DDB9E /* parse.h */,
+				5CD7FB411B31B47D002DDB9E /* parser.h */,
+				5CD7FB421B31B47D002DDB9E /* sentence.h */,
+				5CD7FB431B31B47D002DDB9E /* time.h */,
+				5CD7FB441B31B47D002DDB9E /* tok.h */,
+				5CD7FB451B31B47D002DDB9E /* units.h */,
+			);
+			path = nmea;
 			sourceTree = "<group>";
 		};
 		F4779DAE1A3DC03C00A7CD88 /* Gestures */ = {
@@ -709,10 +793,12 @@
 		0AB8ECA318A9341600F145E5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					./OpenNI2/Drivers,
 					.,
+					"$(PROJECT_DIR)/nmea",
 				);
 				PRODUCT_NAME = Skeleton;
 				SDKROOT = macosx;
@@ -722,10 +808,12 @@
 		0AB8ECA418A9341600F145E5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					./OpenNI2/Drivers,
 					.,
+					"$(PROJECT_DIR)/nmea",
 				);
 				PRODUCT_NAME = Skeleton;
 				SDKROOT = macosx;
