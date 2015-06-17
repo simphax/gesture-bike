@@ -5,8 +5,8 @@
 #include "stdafx.h"
 
 
-#define FULLSCREEN 0
-#define DEBUG 0
+#define FULLSCREEN 1
+#define DEBUG 1
 #define DEPTHCAMERA 0
 #define MAPONLY 0
 
@@ -15,7 +15,7 @@
 
 // General headers
 #include <stdio.h>
-#include <list>
+#include <vector>
 
 // OpenNI2 headers
 #include "OpenNI.h"
@@ -71,13 +71,13 @@ bool debugGrid = false;
 #endif
 
 //User Detected
-bool isUserDetected = false;
+bool isUserDetected = true;
 
 //Time to consider a gesture active
 #define GESTURE_DRAW_TIME 3
 
 //List of all available gestures
-std::list<IGesture*> gestures;
+std::vector<IGesture*> gestures;
 
 //The last detected gesture
 IGesture *activeGesture;
@@ -88,37 +88,37 @@ HUD *hud;
 
 char ReadLastCharOfLine()
 {
-    int newChar = 0;
-    int lastChar;
-    fflush(stdout);
-    do
-    {
-        lastChar = newChar;
-        newChar = getchar();
-    }
-    while ((newChar != '\n')
-           && (newChar != EOF));
-    return (char)lastChar;
+	int newChar = 0;
+	int lastChar;
+	fflush(stdout);
+	do 
+	{
+		lastChar = newChar;
+		newChar = getchar();
+	}
+	while ((newChar != '\n') 
+		&& (newChar != EOF));
+	return (char)lastChar;
 }
 
 bool HandleStatus(nite::Status status)
 {
-    if (status == nite::STATUS_OK)
-        return true;
-    printf("ERROR: #%d, %s", status,
-           OpenNI::getExtendedError());
-    ReadLastCharOfLine();
-    return false;
+	if (status == nite::STATUS_OK)
+		return true;
+	printf("ERROR: #%d, %s", status,
+		OpenNI::getExtendedError());
+	ReadLastCharOfLine();
+	return false;
 }
 
 void gl_KeyboardCallback(unsigned char key, int x, int y)
 {
-    if (key == 27) // ESC Key
-    {
-        uTracker.destroy();
-        nite::NiTE::shutdown();
-        exit(0);
-    }
+	if (key == 27) // ESC Key
+	{
+		uTracker.destroy();
+		nite::NiTE::shutdown();
+		exit(0);
+	}
     if (key == 'd')
     {
         debugSkeleton = !debugSkeleton;
@@ -141,18 +141,56 @@ void gl_KeyboardCallback(unsigned char key, int x, int y)
     {
         isUserDetected = !isUserDetected;
     }
-    
+
     
     if(key == 'm')
     {
         hud->switchMap();
     }
     
+    
+    
+    if(key == '1')
+    {
+        activeGesture = gestures[1];
+        gestureStartTime = time(0);
+    }
+    
+    
+    if(key == '2')
+    {
+        activeGesture = gestures[2];
+        gestureStartTime = time(0);
+    }
+    
+    
+    if(key == '3')
+    {
+        activeGesture = gestures[3];
+        gestureStartTime = time(0);
+    }
+    
+    
+    if(key == '4')
+    {
+        activeGesture = gestures[4];
+        gestureStartTime = time(0);
+    }
+    
+    
+    
+    if(key == '5')
+    {
+        activeGesture = gestures[5];
+        gestureStartTime = time(0);
+    }
+    
+    
 }
 
 void gl_IdleCallback()
 {
-    glutPostRedisplay();
+	glutPostRedisplay();
 }
 
 void drawSkeleton(nite::Skeleton user_skel){
@@ -357,14 +395,14 @@ void drawAwarenessMarkers()
     glVertex3f(0.0f, 480.0f, 0.0f);
     glEnd();
     /*
-     glBegin( GL_POLYGON );
-     glColor3f(0, 0, 0);
-     glVertex3f(570.0f, 230.0f, 0.0f);
-     glVertex3f(570.0f + 270.0f, 230.0f, 0.0f);
-     glVertex3f(570.0f + 270.0f, 480.0f, 0.0f);
-     glVertex3f(570.0f, 480.0f, 0.0f);
-     glEnd();
-     */
+    glBegin( GL_POLYGON );
+    glColor3f(0, 0, 0);
+    glVertex3f(570.0f, 230.0f, 0.0f);
+    glVertex3f(570.0f + 270.0f, 230.0f, 0.0f);
+    glVertex3f(570.0f + 270.0f, 480.0f, 0.0f);
+    glVertex3f(570.0f, 480.0f, 0.0f);
+    glEnd();
+    */
 }
 
 
@@ -374,119 +412,27 @@ void gl_DisplayCallback()
     glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glBindTexture(GL_TEXTURE_2D, 1);
     
-    
-    if (!uTracker.isValid())
-    {
-        //For debug purposes
-        //Draw Awareness Markers
-        drawAwarenessMarkers();
-        //Draw HUD
-        hud->draw(isUserDetected  ||  MAPONLY);
-        
-    }
-    else
-    {
-        
-        nite::UserTrackerFrameRef usersFrame;
-        status = uTracker.readFrame(&usersFrame);
-        if (status == nite::STATUS_OK && usersFrame.isValid())
-        {
-            
-            gl_depthTextureSetup(usersFrame);
-            
-            
-            
-            if(debugSkeleton) {
-                drawDepthTexture();
-            }
-            
-            const nite::Array<nite::UserData>& users = usersFrame.getUsers();
-            //Loop through all detected users
-            for (int i = 0; i < users.getSize(); ++i)
-            {
-                if (users[i].isNew())
-                {
-                    uTracker.startSkeletonTracking(users[i].getId());
-                    uTracker.setSkeletonSmoothingFactor(0.95f);
-                    
-                }
-                
-                nite::Skeleton user_skel = users[i].getSkeleton();
-                if (user_skel.getState() == nite::SKELETON_TRACKED)
-                {
-                    
-                    //First time user is detected
-                    /*if(!isUserDetected)
-                     {
-                     hud->toggleFlashlight();
-                     }
-                     */
-                    
-                    //User detected
-                    isUserDetected = true;
-                    
-                    
-                    //showDetectionMessage();
-                    
-                    //Loop through all available gestures
-                    for(IGesture *gesture : gestures)
-                    {
-                        
-                        
-                        if(gesture->gestureDetect(&user_skel, &uTracker)) {
-                            
-                            //Reset draw parameters when switching gestures
-                            if(gesture != activeGesture){
-                                gesture->resetDraw();
-                            }
-                            
-                            //Activate gesture
-                            activeGesture = gesture;
-                            gestureStartTime = time(0);
-                            
-                            break;
-                            
-                        }
-                    }
-                    
-                    //Show the graphics for 2 seconds
-                    if(time(0) - gestureStartTime > GESTURE_DRAW_TIME) {
-                        activeGesture = NULL;
-                    }
-                    
-                    //Only draw graphics for the last detected gesture
-                    if(activeGesture) {
-                        activeGesture->draw();
-                        activeGesture->hudMessage(hud);
-                    } else {
-                        //Draw Awareness Markers
-                        drawAwarenessMarkers();
-                    }
-                    
-                    
-                    
-                    if(debugSkeleton) {
-                        drawSkeleton(user_skel);
-                    }
-                    
-                    break;
-                    
-                }
-                else
-                {
-                    isUserDetected = false;
-                }
-            }
-            
-            
+
+   
+
+        //Show the graphics for 2 seconds
+        if(time(0) - gestureStartTime > GESTURE_DRAW_TIME) {
+            activeGesture = NULL;
         }
         
-        //Draw HUD
-        hud->draw(isUserDetected ||  MAPONLY);
-        
-    }
+        //Only draw graphics for the last detected gesture
+        if(activeGesture) {
+            activeGesture->draw();
+            activeGesture->hudMessage(hud);
+        }   //Draw Awareness Markers
+        else{
+            
+             drawAwarenessMarkers();
+           
+        }
     
-    
+    hud->draw(true);
+
     
     
     if(debugGestures){
@@ -522,7 +468,7 @@ void gl_DisplayCallback()
     
     glColor3f( 1.f, 1.f, 1.f );
     glutSwapBuffers();
-    
+
 }
 
 
@@ -536,14 +482,14 @@ void gl_Setup(void) {
     gl_texture = (OniRGB888Pixel*)malloc(window_w * window_h * sizeof(OniRGB888Pixel));
     
     glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
-    
-#if FULLSCREEN
-    glutGameModeString("1280x720:32@60");
-    glutEnterGameMode();
-#else
-    glutInitWindowSize(window_w, window_h);
-    glutCreateWindow ("Gesture Bike App");
-#endif
+ 
+    #if FULLSCREEN
+        glutGameModeString("1280x720:32@60");
+        glutEnterGameMode();
+    #else
+        glutInitWindowSize(window_w, window_h);
+        glutCreateWindow ("Gesture Bike App");
+    #endif
     
     
     //Skeleton tracking point sizes
@@ -575,7 +521,7 @@ void gl_Setup(void) {
 
 int main(int argc, char* argv[])
 {
-    
+
     
     if(DEPTHCAMERA)
     {
@@ -588,7 +534,7 @@ int main(int argc, char* argv[])
         while (!HandleStatus(status)){
             sleep(1);
             status = nite::NiTE::initialize();
-            
+
         }
         
         printf("Creating a user tracker object ...\r\n");
@@ -598,28 +544,27 @@ int main(int argc, char* argv[])
             status = uTracker.create();
         }
     }
-    isUserDetected = false;
-    printf("\r\n---------------------- OpenGL -------------------------\r\n");
-    printf("Initializing OpenGL ...\r\n");
+	printf("\r\n---------------------- OpenGL -------------------------\r\n");
+	printf("Initializing OpenGL ...\r\n");
     
     glutInit(&argc, (char**)argv);
     gl_Setup();
     
-    if(!MAPONLY)
-    {
-        //Add Gestures in order of priority
-        //gestures.push_back(new StopGesture());
-        //gestures.push_back(new RightStopGesture());
-        //gestures.push_back(new HazardGesture());
-        gestures.push_back(new PassingGesture());
-        gestures.push_back(new TurnLeftGesture());
-        gestures.push_back(new TurnRightGesture());
-    }
+
+    //Add Gestures in order of priority
+    gestures.push_back(new StopGesture());
+    gestures.push_back(new RightStopGesture());
+    gestures.push_back(new HazardGesture());
+    gestures.push_back(new PassingGesture());
+    gestures.push_back(new TurnLeftGesture());
+    gestures.push_back(new TurnRightGesture());
     
+
     hud = new HUD();
     
-    printf("Starting OpenGL rendering process ...\r\n");
-    glutMainLoop();
-    
-    return 0;
+	printf("Starting OpenGL rendering process ...\r\n");
+	glutMainLoop();
+
+	return 0;
 }
+
