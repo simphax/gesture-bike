@@ -350,8 +350,7 @@ void drawAwarenessLine(float xOffset, float yOffset, float skew, bool mirrorDraw
     float maxWidth = 376;
     float height = 30;
     
-    width = currentGPSSpeed * 20;
-
+    width = currentGPSSpeed * 10 + 100;
     
     
     glBegin( GL_POLYGON );
@@ -360,14 +359,24 @@ void drawAwarenessLine(float xOffset, float yOffset, float skew, bool mirrorDraw
     if(mirrorDrawDirection)
     {
         glVertex3f(maxWidth, yOffset, 0.0f);
+        
+        glColor3f(1.0, 1.0, 0);
         glVertex3f(maxWidth-width, yOffset - skew, 0.0f);
+        
+        
         glVertex3f(maxWidth-width, yOffset - skew + height, 0.0f);
+        
+        glColor3f(0, 1.0, 0);
         glVertex3f(maxWidth, height + yOffset, 0.0f);
     }else
     {
         glVertex3f(xOffset, yOffset, 0.0f);
+        
+        glColor3f(1.0, 1.0, 0);
         glVertex3f(xOffset+width, yOffset + skew, 0.0f);
         glVertex3f(xOffset+width, yOffset + skew + height, 0.0f);
+        
+        glColor3f(0, 1.0, 0);
         glVertex3f(xOffset, height + yOffset, 0.0f);
     }
     
@@ -398,6 +407,7 @@ void drawAwarenessMarkers()
     
     frame++;
     
+    //Black box to cover up the lines
     glBegin( GL_POLYGON );
     glColor3f(0, 0, 0);
     glVertex3f(0.0f, 190.0f, 0.0f);
@@ -405,15 +415,8 @@ void drawAwarenessMarkers()
     glVertex3f(854, 480.0f, 0.0f);
     glVertex3f(0.0f, 480.0f, 0.0f);
     glEnd();
-    /*
-     glBegin( GL_POLYGON );
-     glColor3f(0, 0, 0);
-     glVertex3f(570.0f, 230.0f, 0.0f);
-     glVertex3f(570.0f + 270.0f, 230.0f, 0.0f);
-     glVertex3f(570.0f + 270.0f, 480.0f, 0.0f);
-     glVertex3f(570.0f, 480.0f, 0.0f);
-     glEnd();
-     */
+    
+    
 }
 
 
@@ -487,7 +490,7 @@ void gpsRead()
         nmea_parse(&parser, &c[0], sizet, &info);
         nmea_info2pos(&info, &dpos);
         
-        //currentGPSSpeed = info.speed;
+        currentGPSSpeed = info.speed;
         /*printf(
                "Speed: %f, Lon: %f, Sig: %d, Fix: %d\n",
                info.speed, dpos.lon, info.sig, info.fix

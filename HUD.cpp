@@ -44,6 +44,15 @@ void HUD::draw(bool userDetected, float speed)
         this->drawMap();
     }
     
+    this->drawStoppingLines(speed);
+    
+
+    //char message[25];
+    
+    // convert 123 to string [buf]
+    //itoa(speed,message, 10);
+    
+    this->drawMessage("30 km/h");
     
     
 }
@@ -62,6 +71,64 @@ void HUD::drawMessage(const char *string)
     }
     
 }
+
+
+//Draw lines that grow according to the speed (taller line = longer stopping distance)
+void HUD::drawStoppingLines(float speed)
+{
+    
+
+    
+    float width = 80;
+    
+    //Saturate at 20km/h
+    
+    float height = HUD_HEIGHT - speed * HUD_HEIGHT/20;
+    
+    if (height < 0 )
+    {
+        height = 0;
+    }
+    
+    //Left
+    glBegin( GL_POLYGON );
+    glColor3f(0, 1.0, 0);
+    glVertex3f(0, 480.0f, 0.0f);
+    glVertex3f(0+width, 480.0f , 0.0f);
+    glColor3f(1.0, 1.0, 0);
+    glVertex3f(0+width, 480.0f  - HUD_HEIGHT, 0.0f);
+    glVertex3f(0, 480.0f - HUD_HEIGHT , 0.0f);
+    glEnd();
+    
+    glBegin( GL_POLYGON );
+    glColor3f(0, 0.0, 0);
+    glVertex3f(0, 480.0f  - HUD_HEIGHT + height , 0.0f);
+    glVertex3f(0+width, 480.0f  - HUD_HEIGHT + height , 0.0f);
+    glVertex3f(0+width, 480.0f - HUD_HEIGHT, 0.0f);
+    glVertex3f(0, 480.0f  - HUD_HEIGHT , 0.0f);
+    glEnd();
+    
+    
+    //Right
+    glBegin( GL_POLYGON );
+    glColor3f(0, 1.0, 0);
+    glVertex3f(HUD_WIDTH, 480.0f, 0.0f);
+    glVertex3f(HUD_WIDTH-width, 480.0f , 0.0f);
+    glColor3f(1.0, 1.0, 0);
+    glVertex3f(HUD_WIDTH-width, 480.0f  - HUD_HEIGHT, 0.0f);
+    glVertex3f(HUD_WIDTH, 480.0f - HUD_HEIGHT , 0.0f);
+    glEnd();
+    
+    glBegin( GL_POLYGON );
+    glColor3f(0, 0.0, 0);
+    glVertex3f(HUD_WIDTH, 480.0f  - HUD_HEIGHT + height , 0.0f);
+    glVertex3f(HUD_WIDTH-width, 480.0f  - HUD_HEIGHT + height , 0.0f);
+    glVertex3f(HUD_WIDTH-width, 480.0f - HUD_HEIGHT, 0.0f);
+    glVertex3f(HUD_WIDTH, 480.0f  - HUD_HEIGHT , 0.0f);
+    glEnd();
+    
+}
+
 
 
 
