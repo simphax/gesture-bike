@@ -35,7 +35,7 @@ HUD::HUD()
 
 }
 
-void HUD::draw(bool userDetected)
+void HUD::draw(bool userDetected, float speed)
 {
     
     this->drawRecognizing();

@@ -11,10 +11,15 @@
 #define MAPONLY 0
 
 
-
-
 // General headers
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <errno.h>
+#include <termios.h>
+#include <sys/ioctl.h>
 #include <list>
 
 // OpenNI2 headers
@@ -88,6 +93,20 @@ IGesture *activeGesture;
 HUD *hud;
 
 
+//GPS and NMEA Lib
+struct termios tio;
+struct termios stdio;
+struct termios old_stdio;
+int tty_fd;
+char c[2048];
+int sizet;
+nmeaINFO info;
+nmeaPARSER parser;
+nmeaPOS dpos;
+
+float currentGPSSpeed = 0;
+
+
 char ReadLastCharOfLine()
 {
     int newChar = 0;
@@ -148,6 +167,16 @@ void gl_KeyboardCallback(unsigned char key, int x, int y)
     if(key == 'm')
     {
         hud->switchMap();
+    }
+    
+    if(key == ']')
+    {
+        currentGPSSpeed ++;
+    }
+    
+    if(key == '[')
+    {
+        currentGPSSpeed --;
     }
     
 }
@@ -309,7 +338,7 @@ void drawDepthTexture()
 }
 
 
-void drawAwarenessLine(float xOffset, float yOffset, float skew)
+void drawAwarenessLine(float xOffset, float yOffset, float skew, bool mirrorDrawDirection)
 {
     /* Left square */
     //save matrix
@@ -318,18 +347,36 @@ void drawAwarenessLine(float xOffset, float yOffset, float skew)
     //glRotated(100,135,30,0);
     
     float width = 376;
+    float maxWidth = 376;
     float height = 30;
     
+    width = currentGPSSpeed * 20;
+
+    
+    
     glBegin( GL_POLYGON );
-    
     glColor3f(0, 1.0, 0);
-    glVertex3f(xOffset, yOffset, 0.0f);
-    glVertex3f(xOffset+width, yOffset + skew, 0.0f);
-    glVertex3f(xOffset+width, yOffset + skew + height, 0.0f);
-    glVertex3f(xOffset, height + yOffset, 0.0f);
+    
+    if(mirrorDrawDirection)
+    {
+        glVertex3f(maxWidth, yOffset, 0.0f);
+        glVertex3f(maxWidth-width, yOffset - skew, 0.0f);
+        glVertex3f(maxWidth-width, yOffset - skew + height, 0.0f);
+        glVertex3f(maxWidth, height + yOffset, 0.0f);
+    }else
+    {
+        glVertex3f(xOffset, yOffset, 0.0f);
+        glVertex3f(xOffset+width, yOffset + skew, 0.0f);
+        glVertex3f(xOffset+width, yOffset + skew + height, 0.0f);
+        glVertex3f(xOffset, height + yOffset, 0.0f);
+    }
+    
+    
+
+    
+
+    
     glEnd();
-    
-    
     glPopMatrix();
 }
 
@@ -341,12 +388,12 @@ void drawAwarenessMarkers()
     
     int animationOffset = frame * 4 % 120;
     
-    for(int i=0; i<20; i++) {
-        drawAwarenessLine(0,i*60+animationOffset-100,-30.0f);
+    for(int i=0; i<10; i++) {
+        drawAwarenessLine(0,i*60-animationOffset-100,-30.0f, true);
     }
     
-    for(int i=0; i<20; i++) {
-        drawAwarenessLine(478,i*60+animationOffset-100,30.0f);
+    for(int i=0; i<10; i++) {
+        drawAwarenessLine(478,i*60-animationOffset-100,30.0f, false);
     }
     
     frame++;
@@ -370,8 +417,106 @@ void drawAwarenessMarkers()
 }
 
 
+
+void trace(const char *str, int str_size)
+{
+    //printf("Trace: ");
+    //write(1, str, str_size);
+    //printf("\n");
+}
+void error(const char *str, int str_size)
+{
+    printf("Error: ");
+    write(1, str, str_size);
+    printf("\n");
+}
+
+
+
+void gpsStartup()
+{
+    
+    //NMEA Library setup
+    nmea_property()->trace_func = &trace;
+    nmea_property()->error_func = &error;
+    
+    nmea_zero_INFO(&info);
+    nmea_parser_init(&parser);
+    
+    
+    //USB Serial Read
+    tcgetattr(STDOUT_FILENO,&old_stdio);
+    memset(&stdio,0,sizeof(stdio));
+    stdio.c_iflag=0;
+    stdio.c_oflag=0;
+    stdio.c_cflag=0;
+    stdio.c_lflag=0;
+    stdio.c_cc[VMIN]=1;
+    stdio.c_cc[VTIME]=0;
+    tcsetattr(STDOUT_FILENO,TCSANOW,&stdio);
+    tcsetattr(STDOUT_FILENO,TCSAFLUSH,&stdio);
+    fcntl(STDIN_FILENO, F_SETFL, O_NONBLOCK);       // make the reads non-blocking
+    
+    memset(&tio,0,sizeof(tio));
+    tio.c_iflag=0;
+    tio.c_oflag=0;
+    tio.c_cflag=CS8|CREAD|CLOCAL;           // 8n1, see termios.h for more information
+    tio.c_lflag=0;
+    tio.c_cc[VMIN]=1;
+    tio.c_cc[VTIME]=5;
+    
+    tty_fd=open("/dev/tty.usbserial", O_RDWR | O_NONBLOCK);
+    cfsetospeed(&tio,B9600);            // 9600 baud
+    cfsetispeed(&tio,B9600);            // 9600 baud
+    
+    tcsetattr(tty_fd,TCSANOW,&tio);
+    
+    
+    
+}
+
+
+void gpsRead()
+{
+    // if new data is available on the serial port, print it out
+    sizet =  (int)read(tty_fd,c,100);
+    
+    if(sizet > 0)
+    {
+        
+        nmea_parse(&parser, &c[0], sizet, &info);
+        nmea_info2pos(&info, &dpos);
+        
+        //currentGPSSpeed = info.speed;
+        /*printf(
+               "Speed: %f, Lon: %f, Sig: %d, Fix: %d\n",
+               info.speed, dpos.lon, info.sig, info.fix
+               );
+        */
+        
+        
+    }
+}
+
+
+void gpsShutdown()
+{
+    close(tty_fd);
+    tcsetattr(STDOUT_FILENO,TCSANOW,&old_stdio);
+    nmea_parser_destroy(&parser);
+}
+
+
+
+
+
+
+
 void gl_DisplayCallback()
 {
+    
+    gpsRead();
+    
     // Clear the OpenGL buffers
     glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glBindTexture(GL_TEXTURE_2D, 1);
@@ -383,7 +528,7 @@ void gl_DisplayCallback()
         //Draw Awareness Markers
         drawAwarenessMarkers();
         //Draw HUD
-        hud->draw(isUserDetected  ||  MAPONLY);
+        hud->draw(isUserDetected  ||  MAPONLY, currentGPSSpeed);
         
     }
     else
@@ -484,7 +629,7 @@ void gl_DisplayCallback()
         }
         
         //Draw HUD
-        hud->draw(isUserDetected ||  MAPONLY);
+        hud->draw(isUserDetected ||  MAPONLY, currentGPSSpeed);
         
     }
     
@@ -574,74 +719,6 @@ void gl_Setup(void) {
     glBindTexture(GL_TEXTURE_2D, 1);
 }
 
-void trace(const char *str, int str_size)
-{
-    printf("Trace: ");
-    write(1, str, str_size);
-    printf("\n");
-}
-void error(const char *str, int str_size)
-{
-    printf("Error: ");
-    write(1, str, str_size);
-    printf("\n");
-}
-
-void gpsTest()
-{
-    
-    nmeaINFO info;
-    nmeaPARSER parser;
-    FILE *file;
-    char buff[2048];
-    int size, it = 0;
-    nmeaPOS dpos;
-    
-    file = fopen("gpslog.txt", "rb");
-    
-    /*if(!file)
-    {
-        return -1;
-    }*/
-    
-    nmea_property()->trace_func = &trace;
-    nmea_property()->error_func = &error;
-    
-    nmea_zero_INFO(&info);
-    nmea_parser_init(&parser);
-    
-    /*
-     while(1)
-     {
-     */
-    
-    while(!feof(file))
-    {
-        size = (int)fread(&buff[0], 1, 100, file);
-        
-        nmea_parse(&parser, &buff[0], size, &info);
-        
-        nmea_info2pos(&info, &dpos);
-        
-        printf(
-               "%03d, Lat: %f, Lon: %f, Sig: %d, Fix: %d\n",
-               it++, dpos.lat, dpos.lon, info.sig, info.fix
-               );
-    }
-    
-    fseek(file, 0, SEEK_SET);
-    
-    /*
-     }
-     */
-    
-    nmea_parser_destroy(&parser);
-    fclose(file);
-    
-}
-
-
-
 
 int main(int argc, char* argv[])
 {
@@ -689,9 +766,17 @@ int main(int argc, char* argv[])
     hud = new HUD();
     
     printf("Starting OpenGL rendering process ...\r\n");
+
     
-    gpsTest();
+    gpsStartup();
+
     glutMainLoop();
+    
+    gpsShutdown();
+    
+    
+    
+    
     
     return 0;
 }
