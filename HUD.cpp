@@ -20,8 +20,10 @@
 
 
 //Constructor
-HUD::HUD()
+HUD::HUD(int width, int height)
 {
+    this->HUDwidth = width;
+    this->HUDheight = height;
     currentMap = 1;
     loadingRotationAngle = 0;
     lastFrameTime = 0;
@@ -52,7 +54,7 @@ void HUD::draw(bool userDetected, float speed)
     // convert 123 to string [buf]
     //itoa(speed,message, 10);
     
-    this->drawMessage("30 km/h");
+    //this->drawMessage("30 km/h");
     
     
 }
@@ -83,7 +85,7 @@ void HUD::drawStoppingLines(float speed)
     
     //Saturate at 20km/h
     
-    float height = HUD_HEIGHT - speed * HUD_HEIGHT/20;
+    float height = this->HUDheight - speed * this->HUDheight/20;
     
     if (height < 0 )
     {
@@ -96,35 +98,35 @@ void HUD::drawStoppingLines(float speed)
     glVertex3f(0, 480.0f, 0.0f);
     glVertex3f(0+width, 480.0f , 0.0f);
     glColor3f(1.0, 1.0, 0);
-    glVertex3f(0+width, 480.0f  - HUD_HEIGHT, 0.0f);
-    glVertex3f(0, 480.0f - HUD_HEIGHT , 0.0f);
+    glVertex3f(0+width, 480.0f  - this->HUDheight, 0.0f);
+    glVertex3f(0, 480.0f - this->HUDheight , 0.0f);
     glEnd();
     
     glBegin( GL_POLYGON );
     glColor3f(0, 0.0, 0);
-    glVertex3f(0, 480.0f  - HUD_HEIGHT + height , 0.0f);
-    glVertex3f(0+width, 480.0f  - HUD_HEIGHT + height , 0.0f);
-    glVertex3f(0+width, 480.0f - HUD_HEIGHT, 0.0f);
-    glVertex3f(0, 480.0f  - HUD_HEIGHT , 0.0f);
+    glVertex3f(0, 480.0f  - this->HUDheight + height , 0.0f);
+    glVertex3f(0+width, 480.0f  - this->HUDheight + height , 0.0f);
+    glVertex3f(0+width, 480.0f - this->HUDheight, 0.0f);
+    glVertex3f(0, 480.0f  - this->HUDheight , 0.0f);
     glEnd();
     
     
     //Right
     glBegin( GL_POLYGON );
     glColor3f(0, 1.0, 0);
-    glVertex3f(HUD_WIDTH, 480.0f, 0.0f);
-    glVertex3f(HUD_WIDTH-width, 480.0f , 0.0f);
+    glVertex3f(this->HUDwidth, 480.0f, 0.0f);
+    glVertex3f(this->HUDwidth-width, 480.0f , 0.0f);
     glColor3f(1.0, 1.0, 0);
-    glVertex3f(HUD_WIDTH-width, 480.0f  - HUD_HEIGHT, 0.0f);
-    glVertex3f(HUD_WIDTH, 480.0f - HUD_HEIGHT , 0.0f);
+    glVertex3f(this->HUDwidth-width, 480.0f  - this->HUDheight, 0.0f);
+    glVertex3f(this->HUDwidth, 480.0f - this->HUDheight , 0.0f);
     glEnd();
     
     glBegin( GL_POLYGON );
     glColor3f(0, 0.0, 0);
-    glVertex3f(HUD_WIDTH, 480.0f  - HUD_HEIGHT + height , 0.0f);
-    glVertex3f(HUD_WIDTH-width, 480.0f  - HUD_HEIGHT + height , 0.0f);
-    glVertex3f(HUD_WIDTH-width, 480.0f - HUD_HEIGHT, 0.0f);
-    glVertex3f(HUD_WIDTH, 480.0f  - HUD_HEIGHT , 0.0f);
+    glVertex3f(this->HUDwidth, 480.0f  - this->HUDheight + height , 0.0f);
+    glVertex3f(this->HUDwidth-width, 480.0f  - this->HUDheight + height , 0.0f);
+    glVertex3f(this->HUDwidth-width, 480.0f - this->HUDheight, 0.0f);
+    glVertex3f(this->HUDwidth, 480.0f  - this->HUDheight , 0.0f);
     glEnd();
     
 }

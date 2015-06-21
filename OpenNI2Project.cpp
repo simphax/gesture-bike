@@ -8,8 +8,8 @@
 #define FULLSCREEN 0
 #define DEBUG 0
 #define DEPTHCAMERA 0
-#define MAPONLY 0
-
+#define HUDONLY 1
+#define ENABLEGPS 0
 
 // General headers
 #include <stdio.h>
@@ -518,6 +518,7 @@ void gpsShutdown()
 void gl_DisplayCallback()
 {
     
+    if(ENABLEGPS)
     gpsRead();
     
     // Clear the OpenGL buffers
@@ -531,7 +532,7 @@ void gl_DisplayCallback()
         //Draw Awareness Markers
         drawAwarenessMarkers();
         //Draw HUD
-        hud->draw(isUserDetected  ||  MAPONLY, currentGPSSpeed);
+        hud->draw(isUserDetected  ||  HUDONLY, currentGPSSpeed);
         
     }
     else
@@ -632,7 +633,7 @@ void gl_DisplayCallback()
         }
         
         //Draw HUD
-        hud->draw(isUserDetected ||  MAPONLY, currentGPSSpeed);
+        hud->draw(isUserDetected ||  HUDONLY, currentGPSSpeed);
         
     }
     
@@ -674,8 +675,6 @@ void gl_DisplayCallback()
     glutSwapBuffers();
     
 }
-
-
 
 
 
@@ -755,26 +754,34 @@ int main(int argc, char* argv[])
     glutInit(&argc, (char**)argv);
     gl_Setup();
     
-    if(!MAPONLY)
+    if(!HUDONLY)
     {
         //Add Gestures in order of priority
-        //gestures.push_back(new StopGesture());
+        gestures.push_back(new StopGesture());
         //gestures.push_back(new RightStopGesture());
         //gestures.push_back(new HazardGesture());
-        gestures.push_back(new PassingGesture());
+        //gestures.push_back(new PassingGesture());
         gestures.push_back(new TurnLeftGesture());
         gestures.push_back(new TurnRightGesture());
+        
+        hud = new HUD(854, 240);
+    
+    }else{
+        
+        hud = new HUD(854, 480);
     }
     
-    hud = new HUD();
     
     printf("Starting OpenGL rendering process ...\r\n");
 
-    
+    if(ENABLEGPS)
     gpsStartup();
 
+    
     glutMainLoop();
     
+    
+    if(ENABLEGPS)
     gpsShutdown();
     
     

@@ -22,6 +22,8 @@ class HUD
 {
 private:
 
+    int HUDwidth;
+    int HUDheight;
     
     int currentMap;
     
@@ -34,7 +36,7 @@ private:
 
     
 public:
-    HUD();
+    HUD(int width, int height);
     void draw(bool userDetected, float speed);
     void drawMap();
     void drawStoppingLines(float speed);
