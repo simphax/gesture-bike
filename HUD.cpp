@@ -28,8 +28,8 @@ HUD::HUD(int width, int height)
     
     //mapToggleTime = glutGet(GLUT_ELAPSED_TIME);
     
-    texture_map_1 = GLHelper::LoadTexture( "kuggen_route_01.bmp", MAP_IMG_WIDTH, MAP_IMG_HEIGHT );
-    texture_map_2 = GLHelper::LoadTexture( "kuggen_route_02.bmp", MAP_IMG_WIDTH, MAP_IMG_HEIGHT );
+    texture_map_1 = GLHelper::LoadTexture( "route1_proj.bmp", MAP_IMG_WIDTH, MAP_IMG_HEIGHT );
+    texture_map_2 = GLHelper::LoadTexture( "route2_proj.bmp", MAP_IMG_WIDTH, MAP_IMG_HEIGHT );
     texture_loading = GLHelper::LoadTexture( "loading.bmp", LOADING_IMG_WIDTH, LOADING_IMG_HEIGHT );
     texture_recognizing = GLHelper::LoadTexture( "recognizing.bmp", RECOGNIZING_IMG_WIDTH, RECOGNIZING_IMG_HEIGHT );
 
@@ -45,7 +45,7 @@ void HUD::draw(bool userDetected, float speed)
         this->drawRecognizing();
     }
     
-    //this->drawStoppingLines(speed);
+    this->drawStoppingLines(speed);
     
 
     //char message[25];
@@ -96,7 +96,7 @@ void HUD::drawStoppingLines(float speed)
     glColor3f(0, 1.0, 0);
     glVertex3f(0, 480.0f, 0.0f);
     glVertex3f(0+width, 480.0f , 0.0f);
-    glColor3f(1.0, 1.0, 0);
+    glColor3f(1.0, 0, 0);
     glVertex3f(0+width, 480.0f  - this->HUDheight, 0.0f);
     glVertex3f(0, 480.0f - this->HUDheight , 0.0f);
     glEnd();
@@ -115,7 +115,7 @@ void HUD::drawStoppingLines(float speed)
     glColor3f(0, 1.0, 0);
     glVertex3f(this->HUDwidth, 480.0f, 0.0f);
     glVertex3f(this->HUDwidth-width, 480.0f , 0.0f);
-    glColor3f(1.0, 1.0, 0);
+    glColor3f(1.0, 0, 0);
     glVertex3f(this->HUDwidth-width, 480.0f  - this->HUDheight, 0.0f);
     glVertex3f(this->HUDwidth, 480.0f - this->HUDheight , 0.0f);
     glEnd();

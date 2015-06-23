@@ -40,7 +40,7 @@
 // EXPERIMENT TOGGLES
 #define ENVELOPE 1
 #define GESTURES 0
-#define SPLITVIEW 1
+#define SPLITVIEW 0
 
 
 //DEBUG TOGGLES
@@ -89,12 +89,12 @@ using namespace openni;
 
 
 //16:10 displays
-int window_w = 854;
-int window_h = 534;
+//int window_w = 854;
+//int window_h = 534;
 
 //16:9 displays
-//int window_w = 854;
-//int window_h = 480;
+int window_w = 854;
+int window_h = 480;
 
 int camera_w = 640;
 int camera_h = 480;
@@ -151,7 +151,9 @@ nmeaINFO info;
 nmeaPARSER parser;
 nmeaPOS dpos;
 
-float currentGPSSpeed = 0;
+float GPSSpeed = 0;
+float GPSLatitude = 0;
+float GPSLongitude = 0;
 
 
 char ReadLastCharOfLine()
@@ -218,12 +220,12 @@ void gl_KeyboardCallback(unsigned char key, int x, int y)
     
     if(key == ']')
     {
-        currentGPSSpeed ++;
+        GPSSpeed ++;
     }
     
     if(key == '[')
     {
-        currentGPSSpeed --;
+        GPSSpeed --;
     }
     
 }
@@ -397,7 +399,7 @@ void drawSafetyLines(float xOffset, float yOffset, float skew, bool mirrorDrawDi
     float maxWidth = 376;
     float height = 30;
     
-    width = currentGPSSpeed * 10 + 100;
+    width = GPSSpeed * 10 + 100;
     
     
     glBegin( GL_POLYGON );
@@ -407,7 +409,7 @@ void drawSafetyLines(float xOffset, float yOffset, float skew, bool mirrorDrawDi
     {
         glVertex3f(maxWidth, yOffset, 0.0f);
         
-        glColor3f(1.0, 1.0, 0);
+        glColor3f(1.0, 0, 0);
         glVertex3f(maxWidth-width, yOffset - skew, 0.0f);
         
         
@@ -419,7 +421,7 @@ void drawSafetyLines(float xOffset, float yOffset, float skew, bool mirrorDrawDi
     {
         glVertex3f(xOffset, yOffset, 0.0f);
         
-        glColor3f(1.0, 1.0, 0);
+        glColor3f(1.0, 0, 0);
         glVertex3f(xOffset+width, yOffset + skew, 0.0f);
         glVertex3f(xOffset+width, yOffset + skew + height, 0.0f);
         
@@ -443,11 +445,11 @@ void drawSafetyEnvelope()
     int animationOffset = frame * 4 % 120;
     
     for(int i=0; i<10; i++) {
-        drawSafetyLines(0,i*60-animationOffset-100,-30.0f, true);
+        drawSafetyLines(0,i*60-animationOffset+20,-30.0f, true);
     }
     
     for(int i=0; i<10; i++) {
-        drawSafetyLines(478,i*60-animationOffset-100,30.0f, false);
+        drawSafetyLines(478,i*60-animationOffset+20,30.0f, false);
     }
     
     frame++;
@@ -534,7 +536,7 @@ void gpsRead()
         nmea_parse(&parser, &c[0], sizet, &info);
         nmea_info2pos(&info, &dpos);
         
-        currentGPSSpeed = info.speed;
+        GPSSpeed = info.speed;
         /*printf(
                "Speed: %f, Lon: %f, Sig: %d, Fix: %d\n",
                info.speed, dpos.lon, info.sig, info.fix
@@ -657,7 +659,7 @@ void gl_DisplayCallback()
     drawSafetyEnvelope();
     
     //Draw HUD
-    hud->draw(isUserDetected  ||  !GESTURES, currentGPSSpeed);
+    hud->draw(isUserDetected  ||  !GESTURES, GPSSpeed);
     
     
     
