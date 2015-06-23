@@ -2,16 +2,57 @@
 //
 
 
-#include "stdafx.h"
+/*
+ Input Experiment
+ --------------------
+ 1. Butons
+ - ENVELOPE OFF
+ - GESTURES OFF
+ - SPLITVIEW ON
+ 
+ 2. Gestures
+ - ENVELOPE ON
+ - GESTURES ON
+ - SPLITVIEW ON
+ 
+ 
+ Output Experiment
+ --------------------
+ 1. Projector
+ - ENVELOPE ON
+ - GESTURES OFF
+ - SPLITVIEW ON
+ 2. HUD
+ - ENVELOPE OFF
+ - GESTURES OFF
+ - SPLIT SCREEN OFF
+ 
+ 
+ Visibility Study
+ --------------------
+ - GESTURES ON
+ - SPLITVIEW ON
+ - ENVELOPE ON
+ 
+ */
 
 
+// EXPERIMENT TOGGLES
+#define ENVELOPE 1
+#define GESTURES 0
+#define SPLITVIEW 1
+
+
+//DEBUG TOGGLES
 #define FULLSCREEN 0
-#define DEBUG 0
 #define DEPTHCAMERA 0
-#define HUDONLY 1
+#define DEBUG 0
 #define ENABLEGPS 0
 
+
+
 // General headers
+#include "stdafx.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -46,8 +87,14 @@ using namespace openni;
 
 #include "HUD.h"
 
+
+//16:10 displays
 int window_w = 854;
-int window_h = 480;
+int window_h = 534;
+
+//16:9 displays
+//int window_w = 854;
+//int window_h = 480;
 
 int camera_w = 640;
 int camera_h = 480;
@@ -338,7 +385,7 @@ void drawDepthTexture()
 }
 
 
-void drawAwarenessLine(float xOffset, float yOffset, float skew, bool mirrorDrawDirection)
+void drawSafetyLines(float xOffset, float yOffset, float skew, bool mirrorDrawDirection)
 {
     /* Left square */
     //save matrix
@@ -391,18 +438,16 @@ void drawAwarenessLine(float xOffset, float yOffset, float skew, bool mirrorDraw
 
 int frame=0;
 
-void drawAwarenessMarkers()
+void drawSafetyEnvelope()
 {
-    if (!isUserDetected) return;
-    
     int animationOffset = frame * 4 % 120;
     
     for(int i=0; i<10; i++) {
-        drawAwarenessLine(0,i*60-animationOffset-100,-30.0f, true);
+        drawSafetyLines(0,i*60-animationOffset-100,-30.0f, true);
     }
     
     for(int i=0; i<10; i++) {
-        drawAwarenessLine(478,i*60-animationOffset-100,30.0f, false);
+        drawSafetyLines(478,i*60-animationOffset-100,30.0f, false);
     }
     
     frame++;
@@ -415,7 +460,6 @@ void drawAwarenessMarkers()
     glVertex3f(854, 480.0f, 0.0f);
     glVertex3f(0.0f, 480.0f, 0.0f);
     glEnd();
-    
     
 }
 
@@ -526,26 +570,16 @@ void gl_DisplayCallback()
     glBindTexture(GL_TEXTURE_2D, 1);
     
     
-    if (!uTracker.isValid())
-    {
-        //For debug purposes
-        //Draw Awareness Markers
-        drawAwarenessMarkers();
-        //Draw HUD
-        hud->draw(isUserDetected  ||  HUDONLY, currentGPSSpeed);
-        
-    }
-    else
+    
+    //START USER DETECT
+    if (uTracker.isValid())
     {
         
         nite::UserTrackerFrameRef usersFrame;
         status = uTracker.readFrame(&usersFrame);
         if (status == nite::STATUS_OK && usersFrame.isValid())
         {
-            
             gl_depthTextureSetup(usersFrame);
-            
-            
             
             if(debugSkeleton) {
                 drawDepthTexture();
@@ -566,23 +600,12 @@ void gl_DisplayCallback()
                 if (user_skel.getState() == nite::SKELETON_TRACKED)
                 {
                     
-                    //First time user is detected
-                    /*if(!isUserDetected)
-                     {
-                     hud->toggleFlashlight();
-                     }
-                     */
-                    
                     //User detected
                     isUserDetected = true;
-                    
-                    
-                    //showDetectionMessage();
                     
                     //Loop through all available gestures
                     for(IGesture *gesture : gestures)
                     {
-                        
                         
                         if(gesture->gestureDetect(&user_skel, &uTracker)) {
                             
@@ -609,12 +632,9 @@ void gl_DisplayCallback()
                     if(activeGesture) {
                         activeGesture->draw();
                         activeGesture->hudMessage(hud);
-                    } else {
-                        //Draw Awareness Markers
-                        drawAwarenessMarkers();
                     }
                     
-                    
+
                     
                     if(debugSkeleton) {
                         drawSkeleton(user_skel);
@@ -628,15 +648,16 @@ void gl_DisplayCallback()
                     isUserDetected = false;
                 }
             }
-            
-            
         }
-        
-        //Draw HUD
-        hud->draw(isUserDetected ||  HUDONLY, currentGPSSpeed);
-        
     }
+    //END USER DETECT
     
+    //Draw Safety Envelope
+    if(ENVELOPE)
+    drawSafetyEnvelope();
+    
+    //Draw HUD
+    hud->draw(isUserDetected  ||  !GESTURES, currentGPSSpeed);
     
     
     
@@ -754,22 +775,27 @@ int main(int argc, char* argv[])
     glutInit(&argc, (char**)argv);
     gl_Setup();
     
-    if(!HUDONLY)
+    if(GESTURES)
     {
         //Add Gestures in order of priority
         gestures.push_back(new StopGesture());
-        //gestures.push_back(new RightStopGesture());
+        gestures.push_back(new RightStopGesture());
         //gestures.push_back(new HazardGesture());
         //gestures.push_back(new PassingGesture());
         gestures.push_back(new TurnLeftGesture());
         gestures.push_back(new TurnRightGesture());
         
-        hud = new HUD(854, 240);
-    
-    }else{
         
-        hud = new HUD(854, 480);
+    
     }
+    
+    
+    if(SPLITVIEW){
+        hud = new HUD(window_w, window_h/2);
+    }else{
+        hud = new HUD(window_w, window_h);
+    }
+    
     
     
     printf("Starting OpenGL rendering process ...\r\n");

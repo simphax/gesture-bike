@@ -9,8 +9,6 @@
 #include "HUD.h"
 #include "GLHelper.h"
 
-#define HUD_HEIGHT 240
-#define HUD_WIDTH 854
 #define LOADING_IMG_WIDTH 180
 #define LOADING_IMG_HEIGHT 180
 #define MAP_IMG_WIDTH 480
@@ -40,13 +38,14 @@ HUD::HUD(int width, int height)
 void HUD::draw(bool userDetected, float speed)
 {
     
-    this->drawRecognizing();
     
     if(userDetected){
         this->drawMap();
+    }else{
+        this->drawRecognizing();
     }
     
-    this->drawStoppingLines(speed);
+    //this->drawStoppingLines(speed);
     
 
     //char message[25];
@@ -138,9 +137,9 @@ void HUD::drawStoppingLines(float speed)
 void HUD::drawMap()
 {
     if(currentMap == 1){
-        GLHelper::DrawTexture(texture_map_1, MAP_IMG_WIDTH, MAP_IMG_HEIGHT, 200, 260, 1, false, false);
+        GLHelper::DrawTexture(texture_map_1, MAP_IMG_WIDTH, MAP_IMG_HEIGHT, 200, this->HUDheight - MAP_IMG_HEIGHT, 1, false, false);
     }else{
-        GLHelper::DrawTexture(texture_map_2, MAP_IMG_WIDTH, MAP_IMG_HEIGHT, 200, 260, 1, false, false);
+        GLHelper::DrawTexture(texture_map_2, MAP_IMG_WIDTH, MAP_IMG_HEIGHT, 200, this->HUDheight - MAP_IMG_HEIGHT, 1, false, false);
     }
 
     
