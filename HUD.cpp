@@ -13,15 +13,18 @@
 #define LOADING_IMG_HEIGHT 180
 #define MAP_IMG_WIDTH 480
 #define MAP_IMG_HEIGHT 216
+#define MAP_IMG_HEIGHT_HUD 480
 #define RECOGNIZING_IMG_WIDTH 244
 #define RECOGNIZING_IMG_HEIGHT 25
 
 
 //Constructor
-HUD::HUD(int width, int height)
+HUD::HUD(int width, int height, bool splitView)
 {
     this->HUDwidth = width;
     this->HUDheight = height;
+    this->splitView = splitView;
+    
     currentMap = 1;
     loadingRotationAngle = 0;
     lastFrameTime = 0;
@@ -30,6 +33,8 @@ HUD::HUD(int width, int height)
     
     texture_map_1 = GLHelper::LoadTexture( "route1_proj.bmp", MAP_IMG_WIDTH, MAP_IMG_HEIGHT );
     texture_map_2 = GLHelper::LoadTexture( "route2_proj.bmp", MAP_IMG_WIDTH, MAP_IMG_HEIGHT );
+    texture_map_3 = GLHelper::LoadTexture( "route1_hud.bmp", MAP_IMG_WIDTH, MAP_IMG_HEIGHT_HUD );
+    texture_map_4 = GLHelper::LoadTexture( "route2_hud.bmp", MAP_IMG_WIDTH, MAP_IMG_HEIGHT_HUD );
     texture_loading = GLHelper::LoadTexture( "loading.bmp", LOADING_IMG_WIDTH, LOADING_IMG_HEIGHT );
     texture_recognizing = GLHelper::LoadTexture( "recognizing.bmp", RECOGNIZING_IMG_WIDTH, RECOGNIZING_IMG_HEIGHT );
 
@@ -136,10 +141,19 @@ void HUD::drawStoppingLines(float speed)
 
 void HUD::drawMap()
 {
-    if(currentMap == 1){
-        GLHelper::DrawTexture(texture_map_1, MAP_IMG_WIDTH, MAP_IMG_HEIGHT, 200, this->HUDheight - MAP_IMG_HEIGHT, 1, false, false);
-    }else{
-        GLHelper::DrawTexture(texture_map_2, MAP_IMG_WIDTH, MAP_IMG_HEIGHT, 200, this->HUDheight - MAP_IMG_HEIGHT, 1, false, false);
+    
+    switch(currentMap){
+        case 2  :
+           GLHelper::DrawTexture(texture_map_2, MAP_IMG_WIDTH, MAP_IMG_HEIGHT, 200, this->HUDheight - MAP_IMG_HEIGHT, 1, false, false);
+            break;
+        case 3  :
+            GLHelper::DrawTexture(texture_map_3, MAP_IMG_WIDTH, MAP_IMG_HEIGHT_HUD, 200, this->HUDheight - MAP_IMG_HEIGHT_HUD, 1, false, false);
+            break;
+        case 4  :
+            GLHelper::DrawTexture(texture_map_4, MAP_IMG_WIDTH, MAP_IMG_HEIGHT_HUD, 200, this->HUDheight - MAP_IMG_HEIGHT_HUD, 1, false, false);
+            break;
+        default : //1
+            GLHelper::DrawTexture(texture_map_1, MAP_IMG_WIDTH, MAP_IMG_HEIGHT, 200, this->HUDheight - MAP_IMG_HEIGHT, 1, false, false);
     }
 
     
@@ -175,12 +189,17 @@ void HUD::drawRecognizing()
 void HUD::switchMap()
 {
 
-    if (currentMap == 1){
-        currentMap = 2;
-    }else{
+    currentMap ++;
+    
+    if (currentMap > 4){
         currentMap = 1;
     }
     
+}
+
+void HUD::switchView()
+{
+    splitView = !splitView;
 }
 
 

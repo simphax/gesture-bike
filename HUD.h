@@ -25,6 +25,8 @@ private:
     int HUDwidth;
     int HUDheight;
     
+    bool splitView;
+    
     int currentMap;
     
     int loadingRotationAngle;
@@ -32,17 +34,18 @@ private:
     
     void drawCircle(float cx, float cy, float r, int num_segments);
         
-    GLuint texture_map_1, texture_map_2, texture_loading,  texture_recognizing;
+    GLuint texture_map_1, texture_map_2, texture_map_3, texture_map_4, texture_loading,  texture_recognizing;
 
     
 public:
-    HUD(int width, int height);
+    HUD(int width, int height, bool splitView);
     void draw(bool userDetected, float speed);
     void drawMap();
     void drawStoppingLines(float speed);
     void drawRecognizing();
     void drawMessage(const char* string);
     void switchMap();
+    void switchView();
     void animate();
     
 };

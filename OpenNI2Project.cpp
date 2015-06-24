@@ -38,9 +38,10 @@
 
 
 // EXPERIMENT TOGGLES
-#define ENVELOPE 1
-#define GESTURES 0
-#define SPLITVIEW 0
+bool envelopeEnabled = true;
+bool gesturesEnabled = true;
+bool splitviewEnabled = false;
+
 
 
 //DEBUG TOGGLES
@@ -202,7 +203,7 @@ void gl_KeyboardCallback(unsigned char key, int x, int y)
         
         debugGestures = !debugGestures;
     }
-    if(key == 'h')
+    if(key == 'o')
     {
         debugGrid = !debugGrid;
     }
@@ -218,6 +219,11 @@ void gl_KeyboardCallback(unsigned char key, int x, int y)
         hud->switchMap();
     }
     
+    if(key == 'h')
+    {
+        hud->switchView();
+    }
+    
     if(key == ']')
     {
         GPSSpeed ++;
@@ -227,6 +233,7 @@ void gl_KeyboardCallback(unsigned char key, int x, int y)
     {
         GPSSpeed --;
     }
+
     
 }
 
@@ -655,11 +662,11 @@ void gl_DisplayCallback()
     //END USER DETECT
     
     //Draw Safety Envelope
-    if(ENVELOPE)
+    if(envelopeEnabled && activeGesture == NULL)
     drawSafetyEnvelope();
     
     //Draw HUD
-    hud->draw(isUserDetected  ||  !GESTURES, GPSSpeed);
+    hud->draw(isUserDetected  ||  !gesturesEnabled, GPSSpeed);
     
     
     
@@ -777,7 +784,7 @@ int main(int argc, char* argv[])
     glutInit(&argc, (char**)argv);
     gl_Setup();
     
-    if(GESTURES)
+    if(gesturesEnabled)
     {
         //Add Gestures in order of priority
         gestures.push_back(new StopGesture());
@@ -792,12 +799,7 @@ int main(int argc, char* argv[])
     }
     
     
-    if(SPLITVIEW){
-        hud = new HUD(window_w, window_h/2);
-    }else{
-        hud = new HUD(window_w, window_h);
-    }
-    
+    hud = new HUD(window_w, window_h, splitviewEnabled);
     
     
     printf("Starting OpenGL rendering process ...\r\n");
