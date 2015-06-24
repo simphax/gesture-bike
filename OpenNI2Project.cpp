@@ -39,7 +39,7 @@
 
 // EXPERIMENT TOGGLES
 bool envelopeEnabled = true;
-bool gesturesEnabled = true;
+bool gesturesEnabled = false;
 bool splitviewEnabled = false;
 
 
@@ -203,7 +203,7 @@ void gl_KeyboardCallback(unsigned char key, int x, int y)
         
         debugGestures = !debugGestures;
     }
-    if(key == 'o')
+    if(key == 'h')
     {
         debugGrid = !debugGrid;
     }
@@ -219,7 +219,7 @@ void gl_KeyboardCallback(unsigned char key, int x, int y)
         hud->switchMap();
     }
     
-    if(key == 'h')
+    if(key == 's')
     {
         hud->switchView();
     }
@@ -662,7 +662,7 @@ void gl_DisplayCallback()
     //END USER DETECT
     
     //Draw Safety Envelope
-    if(envelopeEnabled && activeGesture == NULL)
+    if(envelopeEnabled && activeGesture == NULL && splitviewEnabled)
     drawSafetyEnvelope();
     
     //Draw HUD

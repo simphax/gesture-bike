@@ -83,13 +83,17 @@ void HUD::drawMessage(const char *string)
 void HUD::drawStoppingLines(float speed)
 {
     
-
+    float heightStart = this->HUDheight;
+    
+    if(splitView){
+        heightStart = this->HUDheight/2;
+    }
     
     float width = 80;
     
     //Saturate at 20km/h
     
-    float height = this->HUDheight - speed * this->HUDheight/20;
+    float height = heightStart - speed * heightStart/20;
     
     if (height < 0 )
     {
@@ -102,16 +106,16 @@ void HUD::drawStoppingLines(float speed)
     glVertex3f(0, 480.0f, 0.0f);
     glVertex3f(0+width, 480.0f , 0.0f);
     glColor3f(1.0, 0, 0);
-    glVertex3f(0+width, 480.0f  - this->HUDheight, 0.0f);
-    glVertex3f(0, 480.0f - this->HUDheight , 0.0f);
+    glVertex3f(0+width, 480.0f  - heightStart, 0.0f);
+    glVertex3f(0, 480.0f - heightStart , 0.0f);
     glEnd();
     
     glBegin( GL_POLYGON );
     glColor3f(0, 0.0, 0);
-    glVertex3f(0, 480.0f  - this->HUDheight + height , 0.0f);
-    glVertex3f(0+width, 480.0f  - this->HUDheight + height , 0.0f);
-    glVertex3f(0+width, 480.0f - this->HUDheight, 0.0f);
-    glVertex3f(0, 480.0f  - this->HUDheight , 0.0f);
+    glVertex3f(0, 480.0f  - heightStart + height , 0.0f);
+    glVertex3f(0+width, 480.0f  - heightStart + height , 0.0f);
+    glVertex3f(0+width, 480.0f - heightStart, 0.0f);
+    glVertex3f(0, 480.0f  - heightStart , 0.0f);
     glEnd();
     
     
@@ -121,16 +125,16 @@ void HUD::drawStoppingLines(float speed)
     glVertex3f(this->HUDwidth, 480.0f, 0.0f);
     glVertex3f(this->HUDwidth-width, 480.0f , 0.0f);
     glColor3f(1.0, 0, 0);
-    glVertex3f(this->HUDwidth-width, 480.0f  - this->HUDheight, 0.0f);
-    glVertex3f(this->HUDwidth, 480.0f - this->HUDheight , 0.0f);
+    glVertex3f(this->HUDwidth-width, 480.0f  - heightStart, 0.0f);
+    glVertex3f(this->HUDwidth, 480.0f - heightStart , 0.0f);
     glEnd();
     
     glBegin( GL_POLYGON );
     glColor3f(0, 0.0, 0);
-    glVertex3f(this->HUDwidth, 480.0f  - this->HUDheight + height , 0.0f);
-    glVertex3f(this->HUDwidth-width, 480.0f  - this->HUDheight + height , 0.0f);
-    glVertex3f(this->HUDwidth-width, 480.0f - this->HUDheight, 0.0f);
-    glVertex3f(this->HUDwidth, 480.0f  - this->HUDheight , 0.0f);
+    glVertex3f(this->HUDwidth, 480.0f  - heightStart + height , 0.0f);
+    glVertex3f(this->HUDwidth-width, 480.0f  - heightStart + height , 0.0f);
+    glVertex3f(this->HUDwidth-width, 480.0f - heightStart, 0.0f);
+    glVertex3f(this->HUDwidth, 480.0f  - heightStart , 0.0f);
     glEnd();
     
 }
@@ -144,16 +148,16 @@ void HUD::drawMap()
     
     switch(currentMap){
         case 2  :
-           GLHelper::DrawTexture(texture_map_2, MAP_IMG_WIDTH, MAP_IMG_HEIGHT, 200, this->HUDheight - MAP_IMG_HEIGHT, 1, false, false);
+           GLHelper::DrawTexture(texture_map_2, MAP_IMG_WIDTH, MAP_IMG_HEIGHT, 187, this->HUDheight - MAP_IMG_HEIGHT, 1, false, false);
             break;
         case 3  :
-            GLHelper::DrawTexture(texture_map_3, MAP_IMG_WIDTH, MAP_IMG_HEIGHT_HUD, 200, this->HUDheight - MAP_IMG_HEIGHT_HUD, 1, false, false);
+            GLHelper::DrawTexture(texture_map_3, MAP_IMG_WIDTH, MAP_IMG_HEIGHT_HUD, 187, this->HUDheight - MAP_IMG_HEIGHT_HUD, 1, false, false);
             break;
         case 4  :
-            GLHelper::DrawTexture(texture_map_4, MAP_IMG_WIDTH, MAP_IMG_HEIGHT_HUD, 200, this->HUDheight - MAP_IMG_HEIGHT_HUD, 1, false, false);
+            GLHelper::DrawTexture(texture_map_4, MAP_IMG_WIDTH, MAP_IMG_HEIGHT_HUD, 187, this->HUDheight - MAP_IMG_HEIGHT_HUD, 1, false, false);
             break;
         default : //1
-            GLHelper::DrawTexture(texture_map_1, MAP_IMG_WIDTH, MAP_IMG_HEIGHT, 200, this->HUDheight - MAP_IMG_HEIGHT, 1, false, false);
+            GLHelper::DrawTexture(texture_map_1, MAP_IMG_WIDTH, MAP_IMG_HEIGHT, 187, this->HUDheight - MAP_IMG_HEIGHT, 1, false, false);
     }
 
     
