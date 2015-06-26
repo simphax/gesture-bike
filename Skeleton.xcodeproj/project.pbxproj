@@ -41,6 +41,7 @@
 		5C2BD21D1B39F3C20026E688 /* route2_proj.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5C2BD21C1B39F3BA0026E688 /* route2_proj.bmp */; };
 		5C2BD2201B39F5A70026E688 /* route1_hud.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5C2BD21F1B39F59A0026E688 /* route1_hud.bmp */; };
 		5C2BD2211B39F5A90026E688 /* route2_hud.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5C2BD21E1B39F5940026E688 /* route2_hud.bmp */; };
+		5C2BD2231B3DC47D0026E688 /* route_test.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5C2BD2221B3DC47C0026E688 /* route_test.bmp */; };
 		5C3BA8C21A3F9C0500FE4860 /* img_test.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5C3BA8BF1A3F9B2A00FE4860 /* img_test.bmp */; };
 		5C3BA8C61A3F9DB800FE4860 /* map_lindholmen.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5C3BA8C51A3F9DB100FE4860 /* map_lindholmen.bmp */; };
 		5C94B08E1A810EFA008C642A /* HazardGesture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5C94B08C1A810EFA008C642A /* HazardGesture.cpp */; };
@@ -149,6 +150,7 @@
 			dstSubfolderSpec = 7;
 			files = (
 				5CD7FB371B31B3E2002DDB9E /* gpslog.txt in CopyFiles */,
+				5C2BD2231B3DC47D0026E688 /* route_test.bmp in CopyFiles */,
 				5C2BD2211B39F5A90026E688 /* route2_hud.bmp in CopyFiles */,
 				5C2BD2201B39F5A70026E688 /* route1_hud.bmp in CopyFiles */,
 				5C2BD21D1B39F3C20026E688 /* route2_proj.bmp in CopyFiles */,
@@ -238,6 +240,7 @@
 		5C2BD21C1B39F3BA0026E688 /* route2_proj.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = route2_proj.bmp; path = Assets/route2_proj.bmp; sourceTree = "<group>"; };
 		5C2BD21E1B39F5940026E688 /* route2_hud.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = route2_hud.bmp; path = Assets/route2_hud.bmp; sourceTree = "<group>"; };
 		5C2BD21F1B39F59A0026E688 /* route1_hud.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = route1_hud.bmp; path = Assets/route1_hud.bmp; sourceTree = "<group>"; };
+		5C2BD2221B3DC47C0026E688 /* route_test.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = route_test.bmp; path = Assets/route_test.bmp; sourceTree = "<group>"; };
 		5C3BA8BF1A3F9B2A00FE4860 /* img_test.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = img_test.bmp; sourceTree = "<group>"; };
 		5C3BA8C51A3F9DB100FE4860 /* map_lindholmen.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = map_lindholmen.bmp; sourceTree = "<group>"; };
 		5C7550F61A810AD200722FC0 /* hazard-hud.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = "hazard-hud.bmp"; path = "Assets/hazard-hud.bmp"; sourceTree = "<group>"; };
@@ -544,6 +547,7 @@
 		5C3BA8C01A3F9B9500FE4860 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				5C2BD2221B3DC47C0026E688 /* route_test.bmp */,
 				5C2BD21F1B39F59A0026E688 /* route1_hud.bmp */,
 				5C2BD21E1B39F5940026E688 /* route2_hud.bmp */,
 				5C2BD21C1B39F3BA0026E688 /* route2_proj.bmp */,

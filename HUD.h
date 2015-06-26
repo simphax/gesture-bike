@@ -9,6 +9,9 @@
 #ifndef __Skeleton__HUD__
 #define __Skeleton__HUD__
 
+#define FRAMETIME 10
+
+
 #include <GLUT/GLUT.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -30,18 +33,29 @@ private:
     int currentMap;
     
     int loadingRotationAngle;
+    float radiusMultiplier;
+    
     float lastFrameTime;
     
-    void drawCircle(float cx, float cy, float r, int num_segments);
-        
-    GLuint texture_map_1, texture_map_2, texture_map_3, texture_map_4, texture_loading,  texture_recognizing;
+    //void drawCircle(float cx, float cy, float r, int num_segments);
+    
+    GLuint mapTextures [5];
+    GLuint texture_loading,  texture_recognizing;
 
+    //4 maps 4 values: West/East Longitude + North/South Latitude, Width, and Height of Map (in that order)
+    float mapData [5][6];
+
+    void drawCircle(float x, float y, float radius);
+    void drawFlashligh();
+    
+    
     
 public:
     HUD(int width, int height, bool splitView);
-    void draw(bool userDetected, float speed);
+    void draw(bool userDetected, float speed, float latitude, float longitude);
     void drawMap();
     void drawStoppingLines(float speed);
+    void drawGPSlocation(float latitude, float longitude);
     void drawRecognizing();
     void drawMessage(const char* string);
     void switchMap();

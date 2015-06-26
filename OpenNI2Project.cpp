@@ -39,7 +39,7 @@
 
 // EXPERIMENT TOGGLES
 bool envelopeEnabled = true;
-bool gesturesEnabled = false;
+bool gesturesEnabled = true;
 bool splitviewEnabled = false;
 
 
@@ -48,7 +48,7 @@ bool splitviewEnabled = false;
 #define FULLSCREEN 0
 #define DEPTHCAMERA 0
 #define DEBUG 0
-#define ENABLEGPS 0
+#define ENABLEGPS 1
 
 
 
@@ -532,6 +532,28 @@ void gpsStartup()
 }
 
 
+/*
+ * Convert a NMEA decimal-decimal degree value into degrees/minutes/seconds
+ * First. convert the decimal-decimal value to a decimal:
+ * 5144.3855 (ddmm.mmmm) = 51 44.3855 = 51 + 44.3855/60 = 51.7397583 degrees
+ *
+ * Then convert the decimal to degrees, minutes seconds:
+ * 51 degress + .7397583 * 60 = 44.385498 = 44 minutes
+ * .385498 = 23.1 seconds
+ * Result: 51 44' 23.1"
+ *
+ * @return String value of the decimal degree, using the proper units
+ */
+double decimalToDecimalDegrees(double value) {
+    double degValue = value / 100;
+    int degrees = (int) degValue;
+    double decMinutesSeconds = ((degValue - degrees)) / .60;
+    double decimal = degrees +decMinutesSeconds;
+
+    return decimal;
+}
+
+
 void gpsRead()
 {
     // if new data is available on the serial port, print it out
@@ -544,9 +566,12 @@ void gpsRead()
         nmea_info2pos(&info, &dpos);
         
         GPSSpeed = info.speed;
+        GPSLongitude = decimalToDecimalDegrees(info.lon);
+        GPSLatitude = decimalToDecimalDegrees(info.lat);
+        
         /*printf(
-               "Speed: %f, Lon: %f, Sig: %d, Fix: %d\n",
-               info.speed, dpos.lon, info.sig, info.fix
+               "Speed: %f, LonD: %f, , LonI: %f, Sig: %d, Fix: %d\n",
+               info.speed, decimalToDecimalDegrees(info.lon), decimalToDecimalDegrees(info.lat), info.sig, info.fix
                );
         */
         
@@ -666,7 +691,7 @@ void gl_DisplayCallback()
     drawSafetyEnvelope();
     
     //Draw HUD
-    hud->draw(isUserDetected  ||  !gesturesEnabled, GPSSpeed);
+    hud->draw(isUserDetected  ||  !gesturesEnabled, GPSSpeed, GPSLatitude, GPSLongitude);
     
     
     
