@@ -36,8 +36,8 @@ HUD::HUD(int width, int height, bool splitView)
     mapData[0][1] = 11.9710527; //East Longitude
     mapData[0][2] = 57.7010824; //North Latitude
     mapData[0][3] = 57.6973903; //South Latitude
-    mapData[0][4] = 220; //Width
-    mapData[0][5] = 220; //Height
+    mapData[0][4] = 280; //Width
+    mapData[0][5] = 280; //Height
     
     
     //route_2_proj
@@ -45,8 +45,8 @@ HUD::HUD(int width, int height, bool splitView)
     mapData[1][1] = 11.9737778; //East Longitude
     mapData[1][2] = 57.7019137; //North Latitude
     mapData[1][3] = 57.6985083; //South Latitude
-    mapData[1][4] = 220; //Width
-    mapData[1][5] = 220; //Height
+    mapData[1][4] = 260; //Width
+    mapData[1][5] = 260; //Height
     
     //route_1_hud
     mapData[2][0] = 11.9641433; //West Longitude
@@ -94,7 +94,7 @@ void HUD::draw(bool userDetected, float speed, float latitude, float longitude)
     if(userDetected){
         this->drawFlashligh();
         this->drawMap();
-        this->drawGPSlocation(latitude, longitude);
+        this->drawGPSlocation(latitude, longitude, speed);
     }else{
         this->drawRecognizing();
     }
@@ -131,12 +131,12 @@ void HUD::drawMessage(const char *string)
 }
 
 //Displays message in the HUD
-void HUD::drawGPSlocation(float latitude, float longitude)
+void HUD::drawGPSlocation(float latitude, float longitude, float speed)
 {
     
     //Testing
-    //latitude = 57.6871977;
-    //longitude = 11.9930511;
+    latitude = 57.6871977;
+    longitude = 11.9930511;
     
     //Get x and y from lon and lat
     int x = (int)((mapData[currentMap][1] - longitude) / (mapData[currentMap][1] - mapData[currentMap][0]) * mapData[currentMap][4]);
@@ -152,9 +152,10 @@ void HUD::drawGPSlocation(float latitude, float longitude)
     float radius = mapData[currentMap][4] / 40;
     
     //printf("X position: %f: \n",radiusMultiplier);
-
-    this->drawCircle(x, y,radius);
-    this->drawCircle(x, y,radius/2);
+    float gpsLagWithSpeed = speed / 10;
+    
+    this->drawCircle(x, y,radius * gpsLagWithSpeed);
+    this->drawCircle(x, y,radius/2 *gpsLagWithSpeed);
     
     
 
@@ -263,8 +264,8 @@ void HUD::drawFlashligh()
     glColor3f(1.0, 1.0, 1.0);
     glVertex3f(187, this->HUDheight , 0.0f);
     glVertex3f(187+480, this->HUDheight , 0.0f);
-    glVertex3f(187+480, this->HUDheight - 220, 0.0f);
-    glVertex3f(187,  this->HUDheight-220 , 0.0f);
+    glVertex3f(187+480, this->HUDheight - 280, 0.0f);
+    glVertex3f(187,  this->HUDheight- 280 , 0.0f);
     glEnd();
 
 }

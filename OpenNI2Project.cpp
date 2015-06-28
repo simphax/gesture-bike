@@ -38,15 +38,15 @@
 
 
 // EXPERIMENT TOGGLES
-bool envelopeEnabled = true;
-bool gesturesEnabled = true;
-bool splitviewEnabled = true;
+bool envelopeEnabled = false;
+bool gesturesEnabled = false;
+bool splitviewEnabled = false;
 
 
 
 //DEBUG TOGGLES
-#define FULLSCREEN 1
-#define DEPTHCAMERA 1
+#define FULLSCREEN 0
+#define DEPTHCAMERA 0
 #define DEBUG 0
 #define ENABLEGPS 1
 

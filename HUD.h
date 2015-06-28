@@ -55,7 +55,7 @@ public:
     void draw(bool userDetected, float speed, float latitude, float longitude);
     void drawMap();
     void drawStoppingLines(float speed);
-    void drawGPSlocation(float latitude, float longitude);
+    void drawGPSlocation(float latitude, float longitude, float speed);
     void drawRecognizing();
     void drawMessage(const char* string);
     void switchMap();
