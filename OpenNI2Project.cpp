@@ -40,13 +40,13 @@
 // EXPERIMENT TOGGLES
 bool envelopeEnabled = true;
 bool gesturesEnabled = true;
-bool splitviewEnabled = false;
+bool splitviewEnabled = true;
 
 
 
 //DEBUG TOGGLES
-#define FULLSCREEN 0
-#define DEPTHCAMERA 0
+#define FULLSCREEN 1
+#define DEPTHCAMERA 1
 #define DEBUG 0
 #define ENABLEGPS 1
 
@@ -222,6 +222,7 @@ void gl_KeyboardCallback(unsigned char key, int x, int y)
     if(key == 's')
     {
         hud->switchView();
+        envelopeEnabled = !envelopeEnabled;
     }
     
     if(key == ']')

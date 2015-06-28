@@ -77,7 +77,7 @@ HUD::HUD(int width, int height, bool splitView)
     mapTextures[0] = GLHelper::LoadTexture( "route1_proj.bmp", mapData[0][4], mapData[0][5] );
     mapTextures[1] = GLHelper::LoadTexture( "route2_proj.bmp", mapData[1][4], mapData[1][5] );
     mapTextures[2] = GLHelper::LoadTexture( "route1_hud.bmp", mapData[2][4], mapData[2][5] );
-    mapTextures[3] = GLHelper::LoadTexture( "route1_hud.bmp", mapData[3][4], mapData[3][5] );
+    mapTextures[3] = GLHelper::LoadTexture( "route2_hud.bmp", mapData[3][4], mapData[3][5] );
     mapTextures[4] = GLHelper::LoadTexture( "route_test.bmp", mapData[4][4], mapData[4][5] );
 
     texture_loading = GLHelper::LoadTexture( "loading.bmp", LOADING_IMG_WIDTH, LOADING_IMG_HEIGHT );
@@ -151,9 +151,10 @@ void HUD::drawGPSlocation(float latitude, float longitude)
     
     float radius = mapData[currentMap][4] / 40;
     
-    printf("X position: %f: \n",radiusMultiplier);
+    //printf("X position: %f: \n",radiusMultiplier);
 
     this->drawCircle(x, y,radius);
+    this->drawCircle(x, y,radius/2);
     
     
 
@@ -162,7 +163,7 @@ void HUD::drawGPSlocation(float latitude, float longitude)
 
 void HUD::drawCircle(float cx, float cy, float r) {
     glBegin(GL_LINE_LOOP);
-    glColor3f(1.0 , 0.7f , 0.0);
+    glColor3f(0 , 0 , 1.0);
     for(int ii = 0; ii < 10; ii++)
     {
         float theta = 2.0f * 3.1415926f * float(ii) / float(10);//get the current angle
