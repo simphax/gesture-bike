@@ -49,7 +49,7 @@ bool splitviewEnabled = false;
 #define DEPTHCAMERA 0
 #define DEBUG 0
 #define ENABLEGPS 1
-
+#define TESTGPS 1
 
 
 // General headers
@@ -566,9 +566,13 @@ void gpsRead()
         nmea_parse(&parser, &c[0], sizet, &info);
         nmea_info2pos(&info, &dpos);
         
+        if(!TESTGPS)
         GPSSpeed = info.speed;
+        
         GPSLongitude = decimalToDecimalDegrees(info.lon);
         GPSLatitude = decimalToDecimalDegrees(info.lat);
+
+        
         
         /*printf(
                "Speed: %f, LonD: %f, , LonI: %f, Sig: %d, Fix: %d\n",
@@ -692,9 +696,15 @@ void gl_DisplayCallback()
     drawSafetyEnvelope();
     
     //Draw HUD
+    if(TESTGPS){
+        GPSLatitude = 57.6871977;
+        GPSLongitude = 11.9930511;
+    }
+    
     hud->draw(isUserDetected  ||  !gesturesEnabled, GPSSpeed, GPSLatitude, GPSLongitude);
-    
-    
+        
+   
+
     
     if(debugGestures){
         for(IGesture *gesture : gestures)

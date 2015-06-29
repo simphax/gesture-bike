@@ -33,7 +33,8 @@ private:
     int currentMap;
     
     int loadingRotationAngle;
-    float radiusMultiplier;
+    float opacityMultiplier;
+    int opacityDirection;
     
     float lastFrameTime;
     

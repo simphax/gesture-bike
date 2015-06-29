@@ -27,7 +27,8 @@ HUD::HUD(int width, int height, bool splitView)
     
     currentMap = 3;
     loadingRotationAngle = 0;
-    radiusMultiplier = 1;
+    opacityMultiplier = 0;
+    opacityDirection = 1;
     lastFrameTime = 0;
 
 
@@ -134,10 +135,6 @@ void HUD::drawMessage(const char *string)
 void HUD::drawGPSlocation(float latitude, float longitude, float speed)
 {
     
-    //Testing
-    latitude = 57.6871977;
-    longitude = 11.9930511;
-    
     //Get x and y from lon and lat
     int x = (int)((mapData[currentMap][1] - longitude) / (mapData[currentMap][1] - mapData[currentMap][0]) * mapData[currentMap][4]);
     int y = (int)((mapData[currentMap][2] - latitude) / (mapData[currentMap][2] - mapData[currentMap][3]) * mapData[currentMap][5]);
@@ -152,7 +149,11 @@ void HUD::drawGPSlocation(float latitude, float longitude, float speed)
     float radius = mapData[currentMap][4] / 40;
     
     //printf("X position: %f: \n",radiusMultiplier);
-    float gpsLagWithSpeed = speed / 10;
+    float gpsLagWithSpeed = speed / 15;
+    
+    if(gpsLagWithSpeed < 1)
+        gpsLagWithSpeed = 1;
+        
     
     this->drawCircle(x, y,radius * gpsLagWithSpeed);
     this->drawCircle(x, y,radius/2 *gpsLagWithSpeed);
@@ -164,7 +165,7 @@ void HUD::drawGPSlocation(float latitude, float longitude, float speed)
 
 void HUD::drawCircle(float cx, float cy, float r) {
     glBegin(GL_LINE_LOOP);
-    glColor3f(0 , 0 , 1.0);
+    glColor4f(0 , 0 , 1.0, opacityMultiplier);
     for(int ii = 0; ii < 10; ii++)
     {
         float theta = 2.0f * 3.1415926f * float(ii) / float(10);//get the current angle
@@ -318,6 +319,18 @@ void HUD::animate()
      if(lastFrameTime + FRAMETIME < glutGet(GLUT_ELAPSED_TIME) ) {
         
         
+         if(opacityDirection == 1){
+             opacityMultiplier += 0.02;
+         }else{
+             opacityMultiplier -= 0.02;
+         }
+         
+         if(opacityMultiplier > 1){
+             opacityDirection = 0;
+         }else if (opacityMultiplier <0){
+             opacityDirection = 1;
+         }
+         
         loadingRotationAngle += 2;
          
         lastFrameTime = glutGet(GLUT_ELAPSED_TIME);
