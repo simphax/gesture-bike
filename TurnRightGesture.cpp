@@ -12,10 +12,10 @@
 #include "GLHelper.h"
 
 #define ARROW_IMG_WIDTH 808
-#define ARROW_IMG_HEIGHT 460
+#define ARROW_IMG_HEIGHT 440
 
 #define ARROW_HUD_IMG_WIDTH 540
-#define ARROW_HUD_IMG_HEIGHT 460
+#define ARROW_HUD_IMG_HEIGHT 440
 
 TurnRightGesture::TurnRightGesture() : TurnGesture(nite::JointType::JOINT_RIGHT_HAND, nite::JointType::JOINT_RIGHT_ELBOW, nite::JointType::JOINT_RIGHT_SHOULDER, false)
 {
@@ -36,9 +36,9 @@ void TurnRightGesture::draw()
     GLHelper::DrawTexture(arrow3, ARROW_IMG_WIDTH/2, ARROW_IMG_HEIGHT/2, 854-ARROW_IMG_WIDTH/2, 0, opacity3, true, false);
     
     //HUD Small version
-    GLHelper::DrawTexture(arrowHUD1, ARROW_HUD_IMG_WIDTH/3, ARROW_HUD_IMG_HEIGHT/3, 674, 300, opacity1, true, false);
-    GLHelper::DrawTexture(arrowHUD2, ARROW_HUD_IMG_WIDTH/3, ARROW_HUD_IMG_HEIGHT/3, 674, 300, opacity2, true, false);
-    GLHelper::DrawTexture(arrowHUD3, ARROW_HUD_IMG_WIDTH/3, ARROW_HUD_IMG_HEIGHT/3, 674, 300, opacity3, true, false);
+    GLHelper::DrawTexture(arrowHUD1, ARROW_HUD_IMG_WIDTH/3, ARROW_HUD_IMG_HEIGHT/3, 594, 300, opacity1, true, false);
+    GLHelper::DrawTexture(arrowHUD2, ARROW_HUD_IMG_WIDTH/3, ARROW_HUD_IMG_HEIGHT/3, 594, 300, opacity2, true, false);
+    GLHelper::DrawTexture(arrowHUD3, ARROW_HUD_IMG_WIDTH/3, ARROW_HUD_IMG_HEIGHT/3, 594, 300, opacity3, true, false);
     
     this->animate();
 }

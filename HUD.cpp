@@ -25,7 +25,7 @@ HUD::HUD(int width, int height, bool splitView)
     this->HUDheight = height;
     this->splitView = splitView;
     
-    currentMap = 3;
+    currentMap = 0;
     loadingRotationAngle = 0;
     opacityMultiplier = 0;
     opacityDirection = 1;
@@ -37,8 +37,8 @@ HUD::HUD(int width, int height, bool splitView)
     mapData[0][1] = 11.9710527; //East Longitude
     mapData[0][2] = 57.7010824; //North Latitude
     mapData[0][3] = 57.6973903; //South Latitude
-    mapData[0][4] = 280; //Width
-    mapData[0][5] = 280; //Height
+    mapData[0][4] = 260; //Width
+    mapData[0][5] = 260; //Height
     
     
     //route_2_proj
@@ -49,7 +49,7 @@ HUD::HUD(int width, int height, bool splitView)
     mapData[1][4] = 260; //Width
     mapData[1][5] = 260; //Height
     
-    //route_1_hud
+   /* //route_1_hud
     mapData[2][0] = 11.9641433; //West Longitude
     mapData[2][1] = 11.9710527; //East Longitude
     mapData[2][2] = 57.7010824; //North Latitude
@@ -64,22 +64,22 @@ HUD::HUD(int width, int height, bool splitView)
     mapData[3][3] = 57.6985083; //South Latitude
     mapData[3][4] = 480; //Width
     mapData[3][5] = 480; //Height
-    
+    */
     
     //testmap
-    mapData[4][0] = 11.9915276; //West Longitude
-    mapData[4][1] = 11.9967204; //East Longitude
-    mapData[4][2] = 57.6886429; //North Latitude
-    mapData[4][3] = 57.6857983; //South Latitude
-    mapData[4][4] = 480; //Width
-    mapData[4][5] = 480; //Height
+    mapData[2][0] = 11.9915276; //West Longitude
+    mapData[2][1] = 11.9967204; //East Longitude
+    mapData[2][2] = 57.6886429; //North Latitude
+    mapData[2][3] = 57.6857983; //South Latitude
+    mapData[2][4] = 480; //Width
+    mapData[2][5] = 480; //Height
     
     //Load Map textures
     mapTextures[0] = GLHelper::LoadTexture( "route1_proj.bmp", mapData[0][4], mapData[0][5] );
     mapTextures[1] = GLHelper::LoadTexture( "route2_proj.bmp", mapData[1][4], mapData[1][5] );
-    mapTextures[2] = GLHelper::LoadTexture( "route1_hud.bmp", mapData[2][4], mapData[2][5] );
-    mapTextures[3] = GLHelper::LoadTexture( "route2_hud.bmp", mapData[3][4], mapData[3][5] );
-    mapTextures[4] = GLHelper::LoadTexture( "route_test.bmp", mapData[4][4], mapData[4][5] );
+    //mapTextures[2] = GLHelper::LoadTexture( "route1_hud.bmp", mapData[2][4], mapData[2][5] );
+    //mapTextures[3] = GLHelper::LoadTexture( "route2_hud.bmp", mapData[3][4], mapData[3][5] );
+    mapTextures[2] = GLHelper::LoadTexture( "route_test.bmp", mapData[2][4], mapData[2][5] );
 
     texture_loading = GLHelper::LoadTexture( "loading.bmp", LOADING_IMG_WIDTH, LOADING_IMG_HEIGHT );
     texture_recognizing = GLHelper::LoadTexture( "recognizing.bmp", RECOGNIZING_IMG_WIDTH, RECOGNIZING_IMG_HEIGHT );
@@ -93,7 +93,6 @@ void HUD::draw(bool userDetected, float speed, float latitude, float longitude)
     
     
     if(userDetected){
-        this->drawFlashligh();
         this->drawMap();
         this->drawGPSlocation(latitude, longitude, speed);
     }else{
@@ -212,7 +211,7 @@ void HUD::drawStoppingLines(float speed)
     glEnd();
     
     glBegin( GL_POLYGON );
-    glColor3f(0, 0.0, 0);
+    glColor3f(1.0, 1.0, 1.0);
     glVertex3f(0, 480.0f  - heightStart + height , 0.0f);
     glVertex3f(0+width, 480.0f  - heightStart + height , 0.0f);
     glVertex3f(0+width, 480.0f - heightStart, 0.0f);
@@ -231,7 +230,7 @@ void HUD::drawStoppingLines(float speed)
     glEnd();
     
     glBegin( GL_POLYGON );
-    glColor3f(0, 0.0, 0);
+    glColor3f(1.0, 1.0, 1.0);
     glVertex3f(this->HUDwidth, 480.0f  - heightStart + height , 0.0f);
     glVertex3f(this->HUDwidth-width, 480.0f  - heightStart + height , 0.0f);
     glVertex3f(this->HUDwidth-width, 480.0f - heightStart, 0.0f);
@@ -257,16 +256,16 @@ void HUD::drawMap()
     
 }
 
-void HUD::drawFlashligh()
+void HUD::drawFlashlight()
 {
     
     //Draw flashlight
     glBegin( GL_POLYGON );
     glColor3f(1.0, 1.0, 1.0);
-    glVertex3f(187, this->HUDheight , 0.0f);
-    glVertex3f(187+480, this->HUDheight , 0.0f);
-    glVertex3f(187+480, this->HUDheight - 280, 0.0f);
-    glVertex3f(187,  this->HUDheight- 280 , 0.0f);
+    glVertex3f(0, this->HUDheight , 0.0f);
+    glVertex3f(0+this->HUDwidth, this->HUDheight , 0.0f);
+    glVertex3f(0+this->HUDwidth, this->HUDheight - 260, 0.0f);
+    glVertex3f(0,  this->HUDheight- 260 , 0.0f);
     glEnd();
 
 }
@@ -301,7 +300,7 @@ void HUD::switchMap()
 
     currentMap ++;
     
-    if (currentMap > 4){
+    if (currentMap > 2){
         currentMap = 0;
     }
     

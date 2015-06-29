@@ -44,6 +44,9 @@
 		5C2BD2231B3DC47D0026E688 /* route_test.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5C2BD2221B3DC47C0026E688 /* route_test.bmp */; };
 		5C3BA8C21A3F9C0500FE4860 /* img_test.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5C3BA8BF1A3F9B2A00FE4860 /* img_test.bmp */; };
 		5C3BA8C61A3F9DB800FE4860 /* map_lindholmen.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5C3BA8C51A3F9DB100FE4860 /* map_lindholmen.bmp */; };
+		5C920B451B41C36B00A8C06D /* stop-left.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5C920B421B41C2E500A8C06D /* stop-left.bmp */; };
+		5C920B461B41C36F00A8C06D /* stop-right.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5C920B431B41C2E500A8C06D /* stop-right.bmp */; };
+		5C920B471B41C37000A8C06D /* stop.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5C920B441B41C2E500A8C06D /* stop.bmp */; };
 		5C94B08E1A810EFA008C642A /* HazardGesture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5C94B08C1A810EFA008C642A /* HazardGesture.cpp */; };
 		5C94B08F1A810FD5008C642A /* hazard-hud.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5C7550F61A810AD200722FC0 /* hazard-hud.bmp */; };
 		5C94B0901A810FD7008C642A /* hazard.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5C7550F71A810AD200722FC0 /* hazard.bmp */; };
@@ -68,9 +71,6 @@
 		F499353D1A3F496F00EF31C9 /* CircularBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F499353B1A3F496F00EF31C9 /* CircularBuffer.cpp */; };
 		F49935401A3F526B00EF31C9 /* TurnGesture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F499353E1A3F526B00EF31C9 /* TurnGesture.cpp */; };
 		F4A00B361A6FDFF8005468F7 /* GLHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F4A00B341A6FDFF8005468F7 /* GLHelper.cpp */; };
-		F4A00B371A6FE247005468F7 /* stop.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = F4A00B331A6FDF2D005468F7 /* stop.bmp */; };
-		F4DCBDA01A7509520027788E /* stop-left.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = F4DCBD9E1A7509260027788E /* stop-left.bmp */; };
-		F4DCBDA11A7509520027788E /* stop-right.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = F4DCBD9F1A7509260027788E /* stop-right.bmp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -146,17 +146,17 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				5C920B471B41C37000A8C06D /* stop.bmp in CopyFiles */,
+				5C920B461B41C36F00A8C06D /* stop-right.bmp in CopyFiles */,
+				5C920B451B41C36B00A8C06D /* stop-left.bmp in CopyFiles */,
 				5CD7FB371B31B3E2002DDB9E /* gpslog.txt in CopyFiles */,
 				5C2BD2231B3DC47D0026E688 /* route_test.bmp in CopyFiles */,
 				5C2BD2211B39F5A90026E688 /* route2_hud.bmp in CopyFiles */,
 				5C2BD2201B39F5A70026E688 /* route1_hud.bmp in CopyFiles */,
 				5C2BD21D1B39F3C20026E688 /* route2_proj.bmp in CopyFiles */,
 				5C2BD21B1B39ED690026E688 /* route1_proj.bmp in CopyFiles */,
-				F4DCBDA01A7509520027788E /* stop-left.bmp in CopyFiles */,
-				F4DCBDA11A7509520027788E /* stop-right.bmp in CopyFiles */,
 				5C9E3FCC1A751EB700C43B69 /* loading.bmp in CopyFiles */,
 				5C2B31361A7543630047C58C /* recognizing.bmp in CopyFiles */,
-				F4A00B371A6FE247005468F7 /* stop.bmp in CopyFiles */,
 				5C3BA8C21A3F9C0500FE4860 /* img_test.bmp in CopyFiles */,
 				5C3BA8C61A3F9DB800FE4860 /* map_lindholmen.bmp in CopyFiles */,
 				5CEE76A81A801E2400BBFC18 /* arrow-1.bmp in CopyFiles */,
@@ -241,6 +241,9 @@
 		5C7550F71A810AD200722FC0 /* hazard.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = hazard.bmp; path = Assets/hazard.bmp; sourceTree = "<group>"; };
 		5C7550F81A810AD200722FC0 /* passing-hud.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = "passing-hud.bmp"; path = "Assets/passing-hud.bmp"; sourceTree = "<group>"; };
 		5C7550F91A810AD200722FC0 /* passing.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = passing.bmp; path = Assets/passing.bmp; sourceTree = "<group>"; };
+		5C920B421B41C2E500A8C06D /* stop-left.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = "stop-left.bmp"; path = "Assets/stop-left.bmp"; sourceTree = "<group>"; };
+		5C920B431B41C2E500A8C06D /* stop-right.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = "stop-right.bmp"; path = "Assets/stop-right.bmp"; sourceTree = "<group>"; };
+		5C920B441B41C2E500A8C06D /* stop.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = stop.bmp; path = Assets/stop.bmp; sourceTree = "<group>"; };
 		5C94B08C1A810EFA008C642A /* HazardGesture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HazardGesture.cpp; sourceTree = "<group>"; };
 		5C94B08D1A810EFA008C642A /* HazardGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HazardGesture.h; sourceTree = "<group>"; };
 		5C94B0931A8111CA008C642A /* PassingGesture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PassingGesture.cpp; sourceTree = "<group>"; };
@@ -298,11 +301,8 @@
 		F499353C1A3F496F00EF31C9 /* CircularBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircularBuffer.h; sourceTree = "<group>"; };
 		F499353E1A3F526B00EF31C9 /* TurnGesture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TurnGesture.cpp; sourceTree = "<group>"; };
 		F499353F1A3F526B00EF31C9 /* TurnGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TurnGesture.h; sourceTree = "<group>"; };
-		F4A00B331A6FDF2D005468F7 /* stop.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = stop.bmp; sourceTree = "<group>"; };
 		F4A00B341A6FDFF8005468F7 /* GLHelper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLHelper.cpp; sourceTree = "<group>"; };
 		F4A00B351A6FDFF8005468F7 /* GLHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLHelper.h; sourceTree = "<group>"; };
-		F4DCBD9E1A7509260027788E /* stop-left.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = "stop-left.bmp"; sourceTree = "<group>"; };
-		F4DCBD9F1A7509260027788E /* stop-right.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = "stop-right.bmp"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -533,6 +533,9 @@
 		5C3BA8C01A3F9B9500FE4860 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				5C920B421B41C2E500A8C06D /* stop-left.bmp */,
+				5C920B431B41C2E500A8C06D /* stop-right.bmp */,
+				5C920B441B41C2E500A8C06D /* stop.bmp */,
 				5C2BD2221B3DC47C0026E688 /* route_test.bmp */,
 				5C2BD21F1B39F59A0026E688 /* route1_hud.bmp */,
 				5C2BD21E1B39F5940026E688 /* route2_hud.bmp */,
@@ -550,9 +553,6 @@
 				5CEE76A71A80159200BBFC18 /* arrow-hud-3.bmp */,
 				5CAF35C21A795038001F849C /* kuggen_route_01.bmp */,
 				5CAF35C31A795038001F849C /* kuggen_route_02.bmp */,
-				F4DCBD9E1A7509260027788E /* stop-left.bmp */,
-				F4DCBD9F1A7509260027788E /* stop-right.bmp */,
-				F4A00B331A6FDF2D005468F7 /* stop.bmp */,
 				5C2B31351A75435F0047C58C /* recognizing.bmp */,
 				5CBD38AE1A40802600B1368C /* course-lindholmen.bmp */,
 				5C3BA8C51A3F9DB100FE4860 /* map_lindholmen.bmp */,

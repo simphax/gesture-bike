@@ -38,9 +38,9 @@
 
 
 // EXPERIMENT TOGGLES
-bool envelopeEnabled = false;
-bool gesturesEnabled = false;
-bool splitviewEnabled = false;
+bool envelopeEnabled = true;
+bool gesturesEnabled = true;
+bool splitviewEnabled = true;
 
 
 
@@ -462,14 +462,7 @@ void drawSafetyEnvelope()
     
     frame++;
     
-    //Black box to cover up the lines
-    glBegin( GL_POLYGON );
-    glColor3f(0, 0, 0);
-    glVertex3f(0.0f, 190.0f, 0.0f);
-    glVertex3f(854, 190.0f, 0.0f);
-    glVertex3f(854, 480.0f, 0.0f);
-    glVertex3f(0.0f, 480.0f, 0.0f);
-    glEnd();
+
     
 }
 
@@ -609,6 +602,8 @@ void gl_DisplayCallback()
     glBindTexture(GL_TEXTURE_2D, 1);
     
     
+
+
     
     //START USER DETECT
     if (uTracker.isValid())
@@ -618,11 +613,15 @@ void gl_DisplayCallback()
         status = uTracker.readFrame(&usersFrame);
         if (status == nite::STATUS_OK && usersFrame.isValid())
         {
+
+            
             gl_depthTextureSetup(usersFrame);
             
             if(debugSkeleton) {
                 drawDepthTexture();
             }
+            
+           
             
             const nite::Array<nite::UserData>& users = usersFrame.getUsers();
             //Loop through all detected users
@@ -671,6 +670,8 @@ void gl_DisplayCallback()
                     if(activeGesture) {
                         activeGesture->draw();
                         activeGesture->hudMessage(hud);
+                    }else{
+                        drawSafetyEnvelope();
                     }
                     
 
@@ -691,15 +692,17 @@ void gl_DisplayCallback()
     }
     //END USER DETECT
     
-    //Draw Safety Envelope
-    if(envelopeEnabled && activeGesture == NULL && splitviewEnabled)
-    drawSafetyEnvelope();
+   
+    
     
     //Draw HUD
     if(TESTGPS){
         GPSLatitude = 57.6871977;
         GPSLongitude = 11.9930511;
     }
+    
+    
+    hud->drawFlashlight();
     
     hud->draw(isUserDetected  ||  !gesturesEnabled, GPSSpeed, GPSLatitude, GPSLongitude);
         
@@ -736,6 +739,7 @@ void gl_DisplayCallback()
         glLineWidth(10.0);
         
     }
+    
     
     glColor3f( 1.f, 1.f, 1.f );
     glutSwapBuffers();

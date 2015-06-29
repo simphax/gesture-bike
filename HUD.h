@@ -47,7 +47,6 @@ private:
     float mapData [5][6];
 
     void drawCircle(float x, float y, float radius);
-    void drawFlashligh();
     
     
     
@@ -58,6 +57,8 @@ public:
     void drawStoppingLines(float speed);
     void drawGPSlocation(float latitude, float longitude, float speed);
     void drawRecognizing();
+    void drawFlashlight();
+
     void drawMessage(const char* string);
     void switchMap();
     void switchView();

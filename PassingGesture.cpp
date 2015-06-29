@@ -19,10 +19,10 @@
 #define HAND_Z_MIN 700
 
 #define Passing_IMG_WIDTH 808
-#define Passing_IMG_HEIGHT 460
+#define Passing_IMG_HEIGHT 440
 
 #define Passing_IMG_HUD_WIDTH 540
-#define Passing_IMG_HUD_HEIGHT 460
+#define Passing_IMG_HUD_HEIGHT 440
 
 PassingGesture::PassingGesture()
 {

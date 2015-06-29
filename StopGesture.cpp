@@ -19,10 +19,10 @@
 #define HAND_Z_MIN 700
 
 #define STOP_IMG_WIDTH 808
-#define STOP_IMG_HEIGHT 460
+#define STOP_IMG_HEIGHT 440
 
 #define STOP_IMG_NORMAL_WIDTH 540
-#define STOP_IMG_NORMAL_HEIGHT 460
+#define STOP_IMG_NORMAL_HEIGHT 440
 
 StopGesture::StopGesture()
 {
@@ -100,9 +100,9 @@ void StopGesture::draw()
     GLHelper::DrawTexture(this->textureRight, STOP_IMG_WIDTH/2, STOP_IMG_HEIGHT/2, 854 - STOP_IMG_WIDTH/2, 0, opacityTotal, false, false);
 
     //HUD small stop signs
-    GLHelper::DrawTexture(this->textureNormal, STOP_IMG_NORMAL_WIDTH/3, STOP_IMG_NORMAL_HEIGHT/3, 0, 300, opacityTotal, false, false);
+    GLHelper::DrawTexture(this->textureNormal, STOP_IMG_NORMAL_WIDTH/3, STOP_IMG_NORMAL_HEIGHT/3, 80, 300, opacityTotal, false, false);
     
-    GLHelper::DrawTexture(this->textureNormal, STOP_IMG_NORMAL_WIDTH/3, STOP_IMG_NORMAL_HEIGHT/3, 674, 300, opacityTotal, false, false);
+    GLHelper::DrawTexture(this->textureNormal, STOP_IMG_NORMAL_WIDTH/3, STOP_IMG_NORMAL_HEIGHT/3, 594, 300, opacityTotal, false, false);
     
     this->animate();
     
