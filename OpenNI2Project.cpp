@@ -45,11 +45,11 @@ bool splitviewEnabled = true;
 
 
 //DEBUG TOGGLES
-#define FULLSCREEN 0
-#define DEPTHCAMERA 0
+#define FULLSCREEN 1
+#define DEPTHCAMERA 1
 #define DEBUG 0
 #define ENABLEGPS 1
-#define TESTGPS 1
+#define TESTGPS 0
 
 
 // General headers
@@ -221,7 +221,7 @@ void gl_KeyboardCallback(unsigned char key, int x, int y)
     
     if(key == 's')
     {
-        hud->switchView();
+        //hud->switchView();
         envelopeEnabled = !envelopeEnabled;
     }
     
@@ -602,8 +602,10 @@ void gl_DisplayCallback()
     glBindTexture(GL_TEXTURE_2D, 1);
     
     
-
-
+    if(envelopeEnabled)
+    drawSafetyEnvelope();
+    
+    hud->drawFlashlight();
     
     //START USER DETECT
     if (uTracker.isValid())
@@ -671,7 +673,7 @@ void gl_DisplayCallback()
                         activeGesture->draw();
                         activeGesture->hudMessage(hud);
                     }else{
-                        drawSafetyEnvelope();
+                        
                     }
                     
 
@@ -702,7 +704,7 @@ void gl_DisplayCallback()
     }
     
     
-    hud->drawFlashlight();
+    
     
     hud->draw(isUserDetected  ||  !gesturesEnabled, GPSSpeed, GPSLatitude, GPSLongitude);
         

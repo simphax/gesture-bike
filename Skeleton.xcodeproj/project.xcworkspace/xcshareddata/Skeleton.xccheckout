@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>2188D429-A468-4CA9-869E-5D8DF2FBCAA0</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>Skeleton</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>8EBC1FEC3FEBC6FBE4528B6B7BFA327718F8BB62</key>
 		<string>https://github.com/simphax/gesture-bike.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Skeleton.xcodeproj/project.xcworkspace</string>
+	<string>Skeleton.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>8EBC1FEC3FEBC6FBE4528B6B7BFA327718F8BB62</key>

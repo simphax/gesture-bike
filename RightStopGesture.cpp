@@ -76,7 +76,7 @@ bool RightStopGesture::gestureDetect(nite::Skeleton *skeleton, nite::UserTracker
                 float handElbowDeltaY = handElbowDeltaYBuffer->getAvg();
                 float elbowShoulderDeltaX = elbowShoulderDeltaXBuffer->getAvg();
                 float elbowShoulderDeltaY = elbowShoulderDeltaYBuffer->getAvg();
-                printf("DeltaX: %f\n", elbowShoulderDeltaX);
+                //printf("DeltaX: %f\n", elbowShoulderDeltaX);
                 
                 if(handElbowDeltaX < HAND_ELBOW_DELTA_X && elbowShoulderDeltaY < ELBOW_SHOULDER_DELTA_Y && elbowShoulderDeltaX > ELBOW_SHOULDER_DELTA_X && handElbowDeltaY > HAND_ELBOW_DELTA_Y && leftHandZ > HAND_Z_MIN) {
                     stopGestureCount++;

@@ -264,8 +264,8 @@ void HUD::drawFlashlight()
     glColor3f(1.0, 1.0, 1.0);
     glVertex3f(0, this->HUDheight , 0.0f);
     glVertex3f(0+this->HUDwidth, this->HUDheight , 0.0f);
-    glVertex3f(0+this->HUDwidth, this->HUDheight - 260, 0.0f);
-    glVertex3f(0,  this->HUDheight- 260 , 0.0f);
+    glVertex3f(0+this->HUDwidth, this->HUDheight - 280, 0.0f);
+    glVertex3f(0,  this->HUDheight- 280 , 0.0f);
     glEnd();
 
 }
