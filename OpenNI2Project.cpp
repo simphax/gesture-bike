@@ -829,8 +829,8 @@ int main(int argc, char* argv[])
     if(gesturesEnabled)
     {
         //Add Gestures in order of priority
-        gestures.push_back(new StopGesture());
-        gestures.push_back(new RightStopGesture());
+        //gestures.push_back(new StopGesture());
+        //gestures.push_back(new RightStopGesture());
         //gestures.push_back(new HazardGesture());
         //gestures.push_back(new PassingGesture());
         gestures.push_back(new TurnLeftGesture());
