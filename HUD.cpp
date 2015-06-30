@@ -319,9 +319,9 @@ void HUD::animate()
         
         
          if(opacityDirection == 1){
-             opacityMultiplier += 0.02;
+             opacityMultiplier += 0.03;
          }else{
-             opacityMultiplier -= 0.02;
+             opacityMultiplier -= 0.03;
          }
          
          if(opacityMultiplier > 1){
