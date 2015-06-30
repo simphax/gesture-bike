@@ -37,8 +37,8 @@ HUD::HUD(int width, int height, bool splitView)
     mapData[0][1] = 11.9710527; //East Longitude
     mapData[0][2] = 57.7010824; //North Latitude
     mapData[0][3] = 57.6973903; //South Latitude
-    mapData[0][4] = 260; //Width
-    mapData[0][5] = 260; //Height
+    mapData[0][4] = 280; //Width
+    mapData[0][5] = 280; //Height
     
     
     //route_2_proj

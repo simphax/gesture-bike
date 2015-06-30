@@ -45,8 +45,8 @@ bool splitviewEnabled = true;
 
 
 //DEBUG TOGGLES
-#define FULLSCREEN 1
-#define DEPTHCAMERA 1
+#define FULLSCREEN 0
+#define DEPTHCAMERA 0
 #define DEBUG 0
 #define ENABLEGPS 1
 #define TESTGPS 0
